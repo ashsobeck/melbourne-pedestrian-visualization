@@ -8,6 +8,67 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
-  <div class="container">Hello, World!</div>
+  <nav class="navbar is-primary has-text-is-dark" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand ">
+      <a class="navbar-item" href="https://bulma.io">
+        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+      </a>
+  
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMelbourne">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarMelbourne" class="navbar-menu is-centered">
+      <div class="navbar-start">
+        <a class="navbar-item">
+          Home
+        </a>
+  
+        <a class="navbar-item">
+          Natural Disaster Visualization
+        </a>
+  
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            More
+          </a>
+  
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              About
+            </a>
+            <a class="navbar-item">
+              Inspiration
+            </a>
+            <a class="navbar-item">
+              Contact
+            </a>
+            
+          </div>
+        </div>
+      </div>
+  
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-light" href="https://github.com/ashsobeck/melbourne-pedestrian-visualization">
+              <strong>View the Code</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="hero is-fullheight-with-navbar">
+    <div class="hero-body is-primary is-fluid has-text-centered mt-1">
+      <p class="is-primary">Visualization Here</p> 
+      <svg ></svg>
+    </div>  
+  </section>
+  
+  
 </body>
 </html>
