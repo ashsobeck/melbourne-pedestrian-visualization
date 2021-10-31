@@ -13,29 +13,46 @@ const deckgl = new DeckGL({
   controller: true
 });
 
-const novData = d3.csv('data/nov_2019.csv').then((dataset) => dataset)
-const sensorLoc = d3.csv('data/sensor_locations.csv').then((data) => data)
+const data = d3.csv('data/joined_data.csv')
 
-console.log(novData)
-console.log(sensorLoc)
-console.log(novData)
-console.log(sensorLoc)
-console.log(novData)
-console.log(sensorLoc)
-console.log(novData)
-console.log(sensorLoc)
-console.log(novData)
-console.log(sensorLoc)
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
   .range(d3.schemeDark2)
-
+// const COLOR_RANGE = [
+//   [1, 152, 189],
+//   [73, 227, 206],
+//   [216, 254, 181],
+//   [254, 237, 177],
+//   [254, 173, 84],
+//   [209, 55, 78]
+// ];
+console.log(colorScale)
 renderLayer()
+console.log(colorScale(345))
 
 function renderLayer () {
   const hexLayer = new HexagonLayer({
-    id: 'heatmap',
-    colorRange: colorScale,
+    id: 'melbourne-pedestrian-density',
+    data,
+    // getColorValue: d => +d.hourly_counts,
+    elevationRange: [0, 10],
+    elevationScale: 250,
+    getElevationValue: points => +points[0].hourly_counts,
+    extruded: true,
+    getPosition: d => {
+      console.log(d)
+      console.log(+d.hourly_counts)
+      console.log(d.mdate)
+      console.log(d.mdate === "0")
+      return [+d.longitude, +d.latitude]
+    },
+    opacity: 1,
+    radius: 100,
+    coverage: 1,
+    upperPercentile: 90
+  })
 
+  deckgl.setProps({
+    layers: [hexLayer]
   })
 }
