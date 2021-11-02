@@ -10,6 +10,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+    <!-- <script type = "text/javascript" src="index.js"></script> -->
     <!-- optional if mapbox base map is needed -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
@@ -88,30 +89,9 @@
     </section>
     <div id="control-panel">
       <div>
-        <form action="/action_page.php">
+        <form action="form" onsubmit="return false;">
           <label for="birthday">Pick a Date:</label>
-          <input type="date" id="date" name="date", min="2020-01-01", max="2020-12-31">
-        </form>
-        <!-- <form action="/action_page.php">
-          <label for="month">Choose a month:</label>
-          <select id="month" name="month">
-            <option value="January">January</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="October">October</option>
-            <option value="November">November</option>
-            <option value="December">December</option> -->
-          </select>
-        </form>
-      </div>
-      <div>
-        <form action="/action_page.php">
+          <input type="date" id="date" name="date", min="2020-01-01", max="2020-12-31"><br>
           <label for="hour">Pick a Hour:</label>
           <select id="hour" name="hour">
             <option value=0>12am - 1am</option>
@@ -138,7 +118,11 @@
             <option value=20>9pm - 10pm</option>
             <option value=21>10pm - 11pm</option>
             <option value=22>11pm - 12pm</option>
-            <option value=23>11pm - 12am</option>
+            <option value=23>11pm - 12am</option></select><br>
+            <input type="submit" onclick="filter_data();">
+        </form>
+      </div>
+      <div>            
       </div>
     </div>
 
