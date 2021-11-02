@@ -6,6 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Melbourne Pedestrian Data Visualization</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="index.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
@@ -85,7 +86,61 @@
         <!-- <svg ></svg> -->
       </div>
     </section>
-
+    <div id="control-panel">
+      <div>
+        <form action="/action_page.php">
+          <label for="birthday">Pick a Date:</label>
+          <input type="date" id="date" name="date", min="2020-01-01", max="2020-12-31">
+        </form>
+        <!-- <form action="/action_page.php">
+          <label for="month">Choose a month:</label>
+          <select id="month" name="month">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option> -->
+          </select>
+        </form>
+      </div>
+      <div>
+        <form action="/action_page.php">
+          <label for="hour">Pick a Hour:</label>
+          <select id="hour" name="hour">
+            <option value=0>12am - 1am</option>
+            <option value=1>1am - 2am</option>
+            <option value=2>2am - 3am</option>
+            <option value=3>3am - 4am</option>
+            <option value=4>4am - 5am</option>
+            <option value=5>5am - 6am</option>
+            <option value=6>6am - 7am</option>
+            <option value=7>7am - 8am</option>
+            <option value=8>8am - 9am</option>
+            <option value=9>9am - 10am</option>
+            <option value=10>10am - 11am</option>
+            <option value=11>11am - 12pm</option>
+            <option value=11>12pm - 1pm</option>
+            <option value=12>1pm - 2pm</option>
+            <option value=13>2pm - 3pm</option>
+            <option value=14>3pm - 4pm</option>
+            <option value=15>4pm - 5pm</option>
+            <option value=16>5pm - 6pm</option>
+            <option value=17>6pm - 7pm</option>
+            <option value=18>7pm - 8pm</option>
+            <option value=19>8pm - 9pm</option>
+            <option value=20>9pm - 10pm</option>
+            <option value=21>10pm - 11pm</option>
+            <option value=22>11pm - 12pm</option>
+            <option value=23>11pm - 12am</option>
+      </div>
+    </div>
 
   </body>
   <script src="index.js"></script>

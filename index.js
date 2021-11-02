@@ -5,9 +5,9 @@ const deckgl = new DeckGL({
   initialViewState: {
     longitude: 144.9631,
     latitude: -37.8136,
-    zoom: 6,
+    zoom: 12,
     minZoom: 5,
-    maxZoom: 15,
+    maxZoom: 20,
     pitch: 55
   },
   controller: true
@@ -47,7 +47,7 @@ function renderLayer () {
       return [+d.longitude, +d.latitude]
     },
     opacity: 1,
-    radius: 100,
+    radius: 50,
     coverage: 1,
     upperPercentile: 90
   })
