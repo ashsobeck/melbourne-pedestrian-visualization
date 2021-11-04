@@ -14,6 +14,10 @@
     <!-- optional if mapbox base map is needed -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        p {text-align: center;}
+        div {text-align: center;}
+    </style>
   </head>
 
   <body>
@@ -42,7 +46,7 @@
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
+              <a class="navbar-link ">
                 <strong>More</strong>
               </a>
 
@@ -79,54 +83,30 @@
     </nav>
 
 
-    
-    <section class="hero is-fullheight-with-navbar is-light">
-      <div class="hero-body has-text-centered">
-        <div class="container">
-          <p class="title has-text-centered">UrbanMotion-like Visualization Here</p>
-          <p class="subtitle has-text-centered">SVG Elements will be entered later</p>
-        </div>
-        <!-- <svg ></svg> -->
-      </div>
-    </section>
-    <div id="control-panel">
-      <div>
-        <form action="form" onsubmit="return false;">
-          <label for="birthday">Pick a Date:</label>
-          <input type="date" id="date" name="date", min="2020-01-01", max="2020-12-31"><br>
-          <label for="hour">Pick a Hour:</label>
-          <select id="hour" name="hour">
-            <option value=0>12am - 1am</option>
-            <option value=1>1am - 2am</option>
-            <option value=2>2am - 3am</option>
-            <option value=3>3am - 4am</option>
-            <option value=4>4am - 5am</option>
-            <option value=5>5am - 6am</option>
-            <option value=6>6am - 7am</option>
-            <option value=7>7am - 8am</option>
-            <option value=8>8am - 9am</option>
-            <option value=9>9am - 10am</option>
-            <option value=10>10am - 11am</option>
-            <option value=11>11am - 12pm</option>
-            <option value=12>12pm - 1pm</option>
-            <option value=13>1pm - 2pm</option>
-            <option value=14>2pm - 3pm</option>
-            <option value=15>3pm - 4pm</option>
-            <option value=16>4pm - 5pm</option>
-            <option value=17>5pm - 6pm</option>
-            <option value=18>6pm - 7pm</option>
-            <option value=19>7pm - 8pm</option>
-            <option value=20>8pm - 9pm</option>
-            <option value=21>9pm - 10pm</option>
-            <option value=22>10pm - 11pm</option>
-            <option value=23>11pm - 12am</option></select><br>
-            <input type="submit" onclick="filter_data();">
-        </form>
-      </div>
-      <div>            
-      </div>
-    </div>
 
-  </body>
-  <script src="index.js"></script>
+    <div class='content'>
+        <br><p class="title has-text-centered">About this Visualization</p>
+        
+        <p>By using a dataset of pedestrian sensors that count the number of pedestrians we are seeking to understand the trends of pedestrian movement in Melbourne, Australia.</p>
+        <p>There are two primary questions we would like to answer with our visualization:</p>
+
+        <ol>
+        <li><strong>How can the knowledge of massive human movement in Melbourne contribute to optimizing infrastructures such as energy, traffic, and urban planning?</strong></li>
+        <li><strong>Is pedestrian movement influenced by a deviation in weather (e.g. rain, extreme heat) or a natural disaster (e.g. earthquake, flood)?</strong></li>
+        </ol><br>
+
+        <p>Multiple benefits arise from answering these two questions that are interrelated to each other. By visualizing our pedestrian dataset we would like to visualize mass movement of pedestrians.<br>
+         This will allow us to focus city infrastructure efforts toward the most heavily populated routes of pedestrians, avoiding unnecessary costs as well as improving infrastructure that is the most important to pedestrians. By seeing how deviations in weather or a natural disaster influence pedestrian movement, we will be able to see what areas of Melbourne need infrastructure improvements to prevent mass pedestrian movement to a specific area of Melbourne (e.g., adding more shade in areas where pedestrians move away from because of extreme heat). 
+        </p>
+
+        <p>We are applying our sensor pedestrian count to a map of melbourne and visualizing the density of pedestrians <br> at a certain time using using a hexagon layer with a color spectrum.</p>
+
+        <br><p class="title has-text-centered">Melbourne Pedestrian Dataset</p>
+        <p>We are using a dataset collected by the city of Melbourne, Australia that shows the number of pedestrians identified by sensors in different areas of Melbourne. Currently, there are 3.86 million rows <br> of data for this dataset. The data starts in 2009, and is updated every month.</p>
+        <p>Our data has 13 columns. In each row, there is a unique ID, the date and time of the reading in the format: dd/mm/yyyy hh:mm:ss, the year of the sensor reading, the month, the day of the year in number format, the day of the week, the time of day in 24 hour format, the sensor ID, the sensor name, the hourly counts for that sensor, and the latitude and longitude location of the sensor. </p>
+    </div>
+   
+
+    </body>
 </html>
+  

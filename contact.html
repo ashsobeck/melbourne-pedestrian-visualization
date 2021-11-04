@@ -14,6 +14,10 @@
     <!-- optional if mapbox base map is needed -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        p {text-align: center;}
+        div {text-align: center;}
+    </style>
   </head>
 
   <body>
@@ -42,7 +46,7 @@
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
+              <a class="navbar-link ">
                 <strong>More</strong>
               </a>
 
@@ -79,54 +83,19 @@
     </nav>
 
 
-    
-    <section class="hero is-fullheight-with-navbar is-light">
-      <div class="hero-body has-text-centered">
-        <div class="container">
-          <p class="title has-text-centered">UrbanMotion-like Visualization Here</p>
-          <p class="subtitle has-text-centered">SVG Elements will be entered later</p>
-        </div>
-        <!-- <svg ></svg> -->
-      </div>
-    </section>
-    <div id="control-panel">
-      <div>
-        <form action="form" onsubmit="return false;">
-          <label for="birthday">Pick a Date:</label>
-          <input type="date" id="date" name="date", min="2020-01-01", max="2020-12-31"><br>
-          <label for="hour">Pick a Hour:</label>
-          <select id="hour" name="hour">
-            <option value=0>12am - 1am</option>
-            <option value=1>1am - 2am</option>
-            <option value=2>2am - 3am</option>
-            <option value=3>3am - 4am</option>
-            <option value=4>4am - 5am</option>
-            <option value=5>5am - 6am</option>
-            <option value=6>6am - 7am</option>
-            <option value=7>7am - 8am</option>
-            <option value=8>8am - 9am</option>
-            <option value=9>9am - 10am</option>
-            <option value=10>10am - 11am</option>
-            <option value=11>11am - 12pm</option>
-            <option value=12>12pm - 1pm</option>
-            <option value=13>1pm - 2pm</option>
-            <option value=14>2pm - 3pm</option>
-            <option value=15>3pm - 4pm</option>
-            <option value=16>4pm - 5pm</option>
-            <option value=17>5pm - 6pm</option>
-            <option value=18>6pm - 7pm</option>
-            <option value=19>7pm - 8pm</option>
-            <option value=20>8pm - 9pm</option>
-            <option value=21>9pm - 10pm</option>
-            <option value=22>10pm - 11pm</option>
-            <option value=23>11pm - 12am</option></select><br>
-            <input type="submit" onclick="filter_data();">
-        </form>
-      </div>
-      <div>            
-      </div>
-    </div>
+    <div class='content'>
+        <br><p class="title has-text-centered">Ashton Sobeck</p>
 
-  </body>
-  <script src="index.js"></script>
-</html>
+        <p>Senior Computer Science Major at Clemson University</p>
+        <p>Email: asobeck@g.clemson.edu </p>
+
+        <br><p class="title has-text-centered">Richard Garcia</p>
+        <p>Senior Computer Science Major at Clemson University</p>
+        <p>Email: rgarci3@clemson.edu </p>
+
+        
+       
+    </div>
+    </body>
+  </html>
+  
