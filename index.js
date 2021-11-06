@@ -32,8 +32,12 @@ const deckgl = new DeckGL({
     maxZoom: 20,
     pitch: 55
   },
-  getTooltip: ({object}) => object && `${object.position.join(', ')}
-  Count: ${object.points.length}`,
+  getTooltip: ({object}) => {
+    console.log(object)
+    return object && `${object.points[0].source.sensor_description}
+    ${object.position.join(', ')} 
+    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+},
   controller: true
 });
 
