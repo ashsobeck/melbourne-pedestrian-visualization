@@ -32,6 +32,8 @@ const deckgl = new DeckGL({
     maxZoom: 20,
     pitch: 55
   },
+  getTooltip: ({object}) => object && `${object.position.join(', ')}
+  Count: ${object.points.length}`,
   controller: true
 });
 
@@ -54,13 +56,17 @@ function renderLayer () {
   const hexLayer = new HexagonLayer({
     id: 'melbourne-pedestrian-density',
     data,
+    pickable: true,
     //getColorValue: d => +d.hourly_counts,
     elevationRange: [0, 10],
     elevationScale: 250,
-    getElevationValue: (d, points) => {
-      if (+d.time === hour && date === currDate) {
-        return points[0].hourly_counts
-      }
+    getElevationValue: d => {
+      console.log(d[0].hourly_counts)
+      return +d[0].hourly_counts
+      // if (+d.time == hour) {
+      //   return +d[0].hourly_counts
+      // }
+      // else return 0
     },
     // getElevationValue: (d) => {
     //   // console.log(points)?
@@ -72,22 +78,26 @@ function renderLayer () {
     extruded: true,
     getPosition: (d, i) => {
       // console.log(d)
+      // console.log(+d.time)
       // console.log(hour)
-      if (+d.time === hour ) {
-        console.log(i)
+      // console.log(+d.time == hour)
+      if (+d.time == hour) {
+        // console.log(i)
+        console.log(d)
         return [+d.longitude, +d.latitude]
       }
-      else return [0,0]
+      else return []
       // return [+d.longitude, +d.latitude]
 
     },
     opacity: 1,
     radius: 50,
     coverage: 1,
-    upperPercentile: 90
+    upperPercentile: 90,
   })
 
   deckgl.setProps({
     layers: [hexLayer]
   })
+  console.log(deck)
 }
