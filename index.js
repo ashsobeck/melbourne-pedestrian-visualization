@@ -41,7 +41,8 @@ const deckgl = new DeckGL({
   controller: true
 });
 
-const data = d3.csv('data/joined_data.csv')
+const data = d3.csv('data/2019_pedestrian.csv')
+console.log(data)
 
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
@@ -65,8 +66,7 @@ function renderLayer () {
       console.log(d[0].hourly_counts)
       return +d[0].hourly_counts
     },
-    elevationRange: [0, 10],
-    elevationScale: 250,
+
     getElevationValue: d => {
       console.log(d[0].hourly_counts)
       return +d[0].hourly_counts

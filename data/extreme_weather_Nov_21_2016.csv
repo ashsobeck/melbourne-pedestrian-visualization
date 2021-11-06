@@ -1,4 +1,4 @@
-,ID,Date_Time,Year,Month,Mdate,Day,Time,sensor_id,Sensor_Name,Hourly_Counts,sensor_description,sensor_name,installation_date,status,note,direction_1,direction_2,latitude,longitude,location
+,id,date_time,year,month,mdate,day,time,sensor_id,sensor_name,hourly_counts,sensor_description,sensor_name,installation_date,status,note,direction_1,direction_2,latitude,longitude,location
 0,1682998,11,2016,November,21,Monday,0,1,Bourke Street Mall (North),108,Bourke Street Mall (North),Bou292_T,2009/03/24,A,,West,East,-37.8134944,144.96515324,"(-37.8134944, 144.96515324)"
 1,1682999,11,2016,November,21,Monday,0,2,Bourke Street Mall (South),52,Bourke Street Mall (South),Bou283_T,2009/03/30,A,,East,West,-37.81380667,144.96516719,"(-37.81380667, 144.96516719)"
 2,1683000,11,2016,November,21,Monday,0,5,Princes Bridge,285,Princes Bridge,PriNW_T,2009/03/26,A,,North,South,-37.81874249,144.96787656,"(-37.81874249, 144.96787656)"
