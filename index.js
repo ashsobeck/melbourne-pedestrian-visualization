@@ -61,7 +61,10 @@ function renderLayer () {
     id: 'melbourne-pedestrian-density',
     data,
     pickable: true,
-    //getColorValue: d => +d.hourly_counts,
+    getColorValue: d => {
+      console.log(d[0].hourly_counts)
+      return +d[0].hourly_counts
+    },
     elevationRange: [0, 10],
     elevationScale: 250,
     getElevationValue: d => {
