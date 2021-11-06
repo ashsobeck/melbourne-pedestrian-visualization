@@ -1,8 +1,10 @@
 var date
-var hour = document.getElementById("hour").value;
+var hour
+
+//this function gets the date from the filter box, the date is in the format 2012-12-01
+//Year, Month, Day
 function filter_data() {
-  //this function gets the date from the filter box, the date is in the format 2012-12-01
-  //Year, Month, Day
+
   date = document.getElementById("date").value;
   hour = document.getElementById("hour").value;
 
@@ -12,6 +14,11 @@ function filter_data() {
 }
 
 
+//when window loads, js gets the default filter values
+window.onload = function()
+{
+  filter_data();
+}
 
 const {DeckGL, HexagonLayer} = deck;
 
@@ -47,14 +54,14 @@ function renderLayer () {
   const hexLayer = new HexagonLayer({
     id: 'melbourne-pedestrian-density',
     data,
-    // getColorValue: d => +d.hourly_counts,
+    //getColorValue: d => +d.hourly_counts,
     elevationRange: [0, 10],
     elevationScale: 250,
-    // getElevationValue: (d, points) => {
-    //   if (+d.time === hour && date === currDate) {
-    //     return points[0].hourly_counts
-    //   }
-    // },
+    getElevationValue: (d, points) => {
+      if (+d.time === hour && date === currDate) {
+        return points[0].hourly_counts
+      }
+    },
     // getElevationValue: (d) => {
     //   // console.log(points)?
     //   // console.log(points[0])
@@ -64,8 +71,8 @@ function renderLayer () {
     // },
     extruded: true,
     getPosition: (d, i) => {
-      console.log(d)
-      console.log(hour)
+      // console.log(d)
+      // console.log(hour)
       if (+d.time === hour ) {
         console.log(i)
         return [+d.longitude, +d.latitude]
