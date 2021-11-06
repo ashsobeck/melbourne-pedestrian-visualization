@@ -1,0 +1,201 @@
+,id,date_time,year,month,mdate,day,time,sensor_id,sensor_name,hourly_counts
+0,2887628,2019-11-01T17:00:00.000,2019,November,1,Friday,17,34,Flinders St-Spark La,300
+1,2887629,2019-11-01T17:00:00.000,2019,November,1,Friday,17,39,Alfred Place,604
+2,2887630,2019-11-01T17:00:00.000,2019,November,1,Friday,17,37,Lygon St (East),216
+3,2887631,2019-11-01T17:00:00.000,2019,November,1,Friday,17,40,Lonsdale St-Spring St (West),627
+4,2887632,2019-11-01T17:00:00.000,2019,November,1,Friday,17,36,Queen St (West),774
+5,2887633,2019-11-01T17:00:00.000,2019,November,1,Friday,17,29,St Kilda Rd-Alexandra Gardens,644
+6,2887634,2019-11-01T17:00:00.000,2019,November,1,Friday,17,42,Grattan St-Swanston St (West),453
+7,2887635,2019-11-01T17:00:00.000,2019,November,1,Friday,17,43,Monash Rd-Swanston St (West),387
+8,2887636,2019-11-01T17:00:00.000,2019,November,1,Friday,17,44,Tin Alley-Swanston St (West),27
+9,2887637,2019-11-01T17:00:00.000,2019,November,1,Friday,17,35,Southbank,2691
+10,2887638,2019-11-01T17:00:00.000,2019,November,1,Friday,17,45,Little Collins St-Swanston St (East),2173
+11,2887639,2019-11-01T17:00:00.000,2019,November,1,Friday,17,46,Pelham St (S),203
+12,2887640,2019-11-01T17:00:00.000,2019,November,1,Friday,17,47,Melbourne Central-Elizabeth St (East),2354
+13,2887641,2019-11-01T17:00:00.000,2019,November,1,Friday,17,48,QVM-Queen St (East),358
+14,2887642,2019-11-01T17:00:00.000,2019,November,1,Friday,17,49,QVM-Therry St (South),161
+15,2887643,2019-11-01T17:00:00.000,2019,November,1,Friday,17,50,Faraday St-Lygon St (West),502
+16,2887644,2019-11-01T17:00:00.000,2019,November,1,Friday,17,51,QVM-Franklin St (North),159
+17,2887645,2019-11-01T17:00:00.000,2019,November,1,Friday,17,52,Elizabeth St-Lonsdale St (South),914
+18,2887646,2019-11-01T17:00:00.000,2019,November,1,Friday,17,54,Lincoln-Swanston(West),276
+19,2887647,2019-11-01T17:00:00.000,2019,November,1,Friday,17,55,Elizabeth St-La Trobe St (East),2070
+20,2887648,2019-11-01T17:00:00.000,2019,November,1,Friday,17,56,Lonsdale St - Elizabeth St (North),789
+21,2887649,2019-11-01T17:00:00.000,2019,November,1,Friday,17,57,Bourke St Bridge,2122
+22,2887650,2019-11-01T17:00:00.000,2019,November,1,Friday,17,58,Bourke St - Spencer St (North),2528
+23,2887651,2019-11-01T17:00:00.000,2019,November,1,Friday,17,59,Swanston St - RMIT Building 80,485
+24,2887652,2019-11-01T17:00:00.000,2019,November,1,Friday,17,61,Swanston St - RMIT Building 14,1240
+25,2887653,2019-11-01T17:00:00.000,2019,November,1,Friday,17,62,La Trobe St (North),229
+26,2887654,2019-11-01T18:00:00.000,2019,November,1,Friday,18,4,Town Hall (West),2950
+27,2887655,2019-11-01T18:00:00.000,2019,November,1,Friday,18,17,Collins Place (South),646
+28,2887656,2019-11-01T18:00:00.000,2019,November,1,Friday,18,18,Collins Place (North),626
+29,2887657,2019-11-01T18:00:00.000,2019,November,1,Friday,18,53,Collins St (North),1153
+30,2887658,2019-11-01T18:00:00.000,2019,November,1,Friday,18,2,Bourke Street Mall (South),2226
+31,2887659,2019-11-01T18:00:00.000,2019,November,1,Friday,18,1,Bourke Street Mall (North),3183
+32,2887660,2019-11-01T18:00:00.000,2019,November,1,Friday,18,3,Melbourne Central,2802
+33,2887661,2019-11-01T18:00:00.000,2019,November,1,Friday,18,15,State Library,1904
+34,2887662,2019-11-01T18:00:00.000,2019,November,1,Friday,18,9,Southern Cross Station,1310
+35,2887663,2019-11-01T18:00:00.000,2019,November,1,Friday,18,10,Victoria Point,147
+36,2887664,2019-11-01T18:00:00.000,2019,November,1,Friday,18,12,New Quay,424
+37,2887665,2019-11-01T18:00:00.000,2019,November,1,Friday,18,11,Waterfront City,90
+38,2887666,2019-11-01T18:00:00.000,2019,November,1,Friday,18,8,Webb Bridge,301
+39,2887667,2019-11-01T18:00:00.000,2019,November,1,Friday,18,7,Birrarung Marr,1010
+40,2887668,2019-11-01T18:00:00.000,2019,November,1,Friday,18,5,Princes Bridge,3084
+41,2887669,2019-11-01T18:00:00.000,2019,November,1,Friday,18,6,Flinders Street Station Underpass,3462
+42,2887670,2019-11-01T18:00:00.000,2019,November,1,Friday,18,14,Sandridge Bridge,43
+43,2887671,2019-11-01T18:00:00.000,2019,November,1,Friday,18,26,QV Market-Elizabeth St (West),744
+44,2887672,2019-11-01T18:00:00.000,2019,November,1,Friday,18,24,Spencer St-Collins St (North),2552
+45,2887673,2019-11-01T18:00:00.000,2019,November,1,Friday,18,23,Spencer St-Collins St (South),496
+46,2887674,2019-11-01T18:00:00.000,2019,November,1,Friday,18,25,Melbourne Convention Exhibition Centre,2355
+47,2887675,2019-11-01T18:00:00.000,2019,November,1,Friday,18,21,Bourke St-Russell St (West),1071
+48,2887676,2019-11-01T18:00:00.000,2019,November,1,Friday,18,20,Chinatown-Lt Bourke St (South),816
+49,2887677,2019-11-01T18:00:00.000,2019,November,1,Friday,18,19,Chinatown-Swanston St (North),1362
+50,2887678,2019-11-01T18:00:00.000,2019,November,1,Friday,18,22,Flinders St-Elizabeth St (East),3005
+51,2887679,2019-11-01T18:00:00.000,2019,November,1,Friday,18,27,QV Market-Peel St,159
+52,2887680,2019-11-01T18:00:00.000,2019,November,1,Friday,18,28,The Arts Centre,1565
+53,2887681,2019-11-01T18:00:00.000,2019,November,1,Friday,18,31,Lygon St (West),418
+54,2887682,2019-11-01T18:00:00.000,2019,November,1,Friday,18,30,Lonsdale St (South),1129
+55,2887683,2019-11-01T18:00:00.000,2019,November,1,Friday,18,34,Flinders St-Spark La,240
+56,2887684,2019-11-01T18:00:00.000,2019,November,1,Friday,18,39,Alfred Place,384
+57,2887685,2019-11-01T18:00:00.000,2019,November,1,Friday,18,37,Lygon St (East),210
+58,2887686,2019-11-01T18:00:00.000,2019,November,1,Friday,18,40,Lonsdale St-Spring St (West),387
+59,2887687,2019-11-01T18:00:00.000,2019,November,1,Friday,18,36,Queen St (West),496
+60,2887688,2019-11-01T18:00:00.000,2019,November,1,Friday,18,29,St Kilda Rd-Alexandra Gardens,754
+61,2887689,2019-11-01T18:00:00.000,2019,November,1,Friday,18,42,Grattan St-Swanston St (West),447
+62,2887690,2019-11-01T18:00:00.000,2019,November,1,Friday,18,43,Monash Rd-Swanston St (West),145
+63,2887691,2019-11-01T18:00:00.000,2019,November,1,Friday,18,44,Tin Alley-Swanston St (West),25
+64,2887692,2019-11-01T18:00:00.000,2019,November,1,Friday,18,35,Southbank,2292
+65,2887693,2019-11-01T18:00:00.000,2019,November,1,Friday,18,45,Little Collins St-Swanston St (East),1927
+66,2887694,2019-11-01T18:00:00.000,2019,November,1,Friday,18,46,Pelham St (S),201
+67,2887695,2019-11-01T18:00:00.000,2019,November,1,Friday,18,47,Melbourne Central-Elizabeth St (East),1933
+68,2887696,2019-11-01T18:00:00.000,2019,November,1,Friday,18,48,QVM-Queen St (East),273
+69,2887697,2019-11-01T18:00:00.000,2019,November,1,Friday,18,49,QVM-Therry St (South),150
+70,2887698,2019-11-01T18:00:00.000,2019,November,1,Friday,18,50,Faraday St-Lygon St (West),624
+71,2887699,2019-11-01T18:00:00.000,2019,November,1,Friday,18,51,QVM-Franklin St (North),181
+72,2887700,2019-11-01T18:00:00.000,2019,November,1,Friday,18,52,Elizabeth St-Lonsdale St (South),806
+73,2887701,2019-11-01T18:00:00.000,2019,November,1,Friday,18,54,Lincoln-Swanston(West),178
+74,2887702,2019-11-01T18:00:00.000,2019,November,1,Friday,18,55,Elizabeth St-La Trobe St (East),1972
+75,2887703,2019-11-01T18:00:00.000,2019,November,1,Friday,18,56,Lonsdale St - Elizabeth St (North),598
+76,2887704,2019-11-01T18:00:00.000,2019,November,1,Friday,18,57,Bourke St Bridge,870
+77,2887705,2019-11-01T18:00:00.000,2019,November,1,Friday,18,58,Bourke St - Spencer St (North),1499
+78,2887706,2019-11-01T18:00:00.000,2019,November,1,Friday,18,59,Swanston St - RMIT Building 80,396
+79,2887707,2019-11-01T18:00:00.000,2019,November,1,Friday,18,61,Swanston St - RMIT Building 14,1080
+80,2887708,2019-11-01T18:00:00.000,2019,November,1,Friday,18,62,La Trobe St (North),262
+81,2887709,2019-11-01T19:00:00.000,2019,November,1,Friday,19,4,Town Hall (West),2345
+82,2887710,2019-11-01T19:00:00.000,2019,November,1,Friday,19,17,Collins Place (South),367
+83,2887711,2019-11-01T19:00:00.000,2019,November,1,Friday,19,18,Collins Place (North),294
+84,2887712,2019-11-01T19:00:00.000,2019,November,1,Friday,19,53,Collins St (North),784
+85,2887713,2019-11-01T19:00:00.000,2019,November,1,Friday,19,2,Bourke Street Mall (South),1639
+86,2887714,2019-11-01T19:00:00.000,2019,November,1,Friday,19,1,Bourke Street Mall (North),2533
+87,2887715,2019-11-01T19:00:00.000,2019,November,1,Friday,19,3,Melbourne Central,2512
+88,2887716,2019-11-01T19:00:00.000,2019,November,1,Friday,19,15,State Library,1562
+89,2887717,2019-11-01T19:00:00.000,2019,November,1,Friday,19,9,Southern Cross Station,522
+90,2887718,2019-11-01T19:00:00.000,2019,November,1,Friday,19,10,Victoria Point,126
+91,2887719,2019-11-01T19:00:00.000,2019,November,1,Friday,19,12,New Quay,385
+92,2887720,2019-11-01T19:00:00.000,2019,November,1,Friday,19,11,Waterfront City,123
+93,2887721,2019-11-01T19:00:00.000,2019,November,1,Friday,19,8,Webb Bridge,221
+94,2887722,2019-11-01T19:00:00.000,2019,November,1,Friday,19,7,Birrarung Marr,436
+95,2887723,2019-11-01T19:00:00.000,2019,November,1,Friday,19,5,Princes Bridge,2530
+96,2887724,2019-11-01T19:00:00.000,2019,November,1,Friday,19,6,Flinders Street Station Underpass,2467
+97,2887725,2019-11-01T19:00:00.000,2019,November,1,Friday,19,14,Sandridge Bridge,38
+98,2887726,2019-11-01T19:00:00.000,2019,November,1,Friday,19,26,QV Market-Elizabeth St (West),698
+99,2887727,2019-11-01T19:00:00.000,2019,November,1,Friday,19,24,Spencer St-Collins St (North),1566
+100,2887728,2019-11-01T19:00:00.000,2019,November,1,Friday,19,23,Spencer St-Collins St (South),235
+101,2887729,2019-11-01T19:00:00.000,2019,November,1,Friday,19,25,Melbourne Convention Exhibition Centre,1741
+102,2887730,2019-11-01T19:00:00.000,2019,November,1,Friday,19,21,Bourke St-Russell St (West),1117
+103,2887731,2019-11-01T19:00:00.000,2019,November,1,Friday,19,20,Chinatown-Lt Bourke St (South),1013
+104,2887732,2019-11-01T19:00:00.000,2019,November,1,Friday,19,19,Chinatown-Swanston St (North),1404
+105,2887733,2019-11-01T19:00:00.000,2019,November,1,Friday,19,22,Flinders St-Elizabeth St (East),2647
+106,2887734,2019-11-01T19:00:00.000,2019,November,1,Friday,19,27,QV Market-Peel St,187
+107,2887735,2019-11-01T19:00:00.000,2019,November,1,Friday,19,28,The Arts Centre,1342
+108,2887736,2019-11-01T19:00:00.000,2019,November,1,Friday,19,31,Lygon St (West),512
+109,2887737,2019-11-01T19:00:00.000,2019,November,1,Friday,19,30,Lonsdale St (South),1184
+110,2887738,2019-11-01T19:00:00.000,2019,November,1,Friday,19,34,Flinders St-Spark La,158
+111,2887739,2019-11-01T19:00:00.000,2019,November,1,Friday,19,39,Alfred Place,289
+112,2887740,2019-11-01T19:00:00.000,2019,November,1,Friday,19,37,Lygon St (East),293
+113,2887741,2019-11-01T19:00:00.000,2019,November,1,Friday,19,40,Lonsdale St-Spring St (West),384
+114,2887742,2019-11-01T19:00:00.000,2019,November,1,Friday,19,36,Queen St (West),420
+115,2887743,2019-11-01T19:00:00.000,2019,November,1,Friday,19,29,St Kilda Rd-Alexandra Gardens,502
+116,2887744,2019-11-01T19:00:00.000,2019,November,1,Friday,19,42,Grattan St-Swanston St (West),303
+117,2887745,2019-11-01T19:00:00.000,2019,November,1,Friday,19,43,Monash Rd-Swanston St (West),42
+118,2887746,2019-11-01T19:00:00.000,2019,November,1,Friday,19,44,Tin Alley-Swanston St (West),41
+119,2887747,2019-11-01T19:00:00.000,2019,November,1,Friday,19,35,Southbank,2058
+120,2887748,2019-11-01T19:00:00.000,2019,November,1,Friday,19,45,Little Collins St-Swanston St (East),1647
+121,2887749,2019-11-01T19:00:00.000,2019,November,1,Friday,19,46,Pelham St (S),134
+122,2887750,2019-11-01T19:00:00.000,2019,November,1,Friday,19,47,Melbourne Central-Elizabeth St (East),1600
+123,2887751,2019-11-01T19:00:00.000,2019,November,1,Friday,19,48,QVM-Queen St (East),256
+124,2887752,2019-11-01T19:00:00.000,2019,November,1,Friday,19,49,QVM-Therry St (South),190
+125,2887753,2019-11-01T19:00:00.000,2019,November,1,Friday,19,50,Faraday St-Lygon St (West),572
+126,2887754,2019-11-01T19:00:00.000,2019,November,1,Friday,19,51,QVM-Franklin St (North),184
+127,2887755,2019-11-01T19:00:00.000,2019,November,1,Friday,19,52,Elizabeth St-Lonsdale St (South),773
+128,2887756,2019-11-01T19:00:00.000,2019,November,1,Friday,19,54,Lincoln-Swanston(West),182
+129,2887757,2019-11-01T19:00:00.000,2019,November,1,Friday,19,55,Elizabeth St-La Trobe St (East),1748
+130,2887758,2019-11-01T19:00:00.000,2019,November,1,Friday,19,56,Lonsdale St - Elizabeth St (North),569
+131,2887759,2019-11-01T19:00:00.000,2019,November,1,Friday,19,57,Bourke St Bridge,379
+132,2887760,2019-11-01T19:00:00.000,2019,November,1,Friday,19,58,Bourke St - Spencer St (North),953
+133,2887761,2019-11-01T19:00:00.000,2019,November,1,Friday,19,59,Swanston St - RMIT Building 80,179
+134,2887762,2019-11-01T19:00:00.000,2019,November,1,Friday,19,61,Swanston St - RMIT Building 14,832
+135,2887763,2019-11-01T19:00:00.000,2019,November,1,Friday,19,62,La Trobe St (North),280
+136,2887764,2019-11-01T20:00:00.000,2019,November,1,Friday,20,4,Town Hall (West),2051
+137,2887765,2019-11-01T20:00:00.000,2019,November,1,Friday,20,17,Collins Place (South),320
+138,2887766,2019-11-01T20:00:00.000,2019,November,1,Friday,20,18,Collins Place (North),182
+139,2887767,2019-11-01T20:00:00.000,2019,November,1,Friday,20,53,Collins St (North),589
+140,2887768,2019-11-01T20:00:00.000,2019,November,1,Friday,20,2,Bourke Street Mall (South),1204
+141,2887769,2019-11-01T20:00:00.000,2019,November,1,Friday,20,1,Bourke Street Mall (North),2070
+142,2887770,2019-11-01T20:00:00.000,2019,November,1,Friday,20,3,Melbourne Central,2822
+143,2887771,2019-11-01T20:00:00.000,2019,November,1,Friday,20,15,State Library,1444
+144,2887772,2019-11-01T20:00:00.000,2019,November,1,Friday,20,9,Southern Cross Station,277
+145,2887773,2019-11-01T20:00:00.000,2019,November,1,Friday,20,10,Victoria Point,142
+146,2887774,2019-11-01T20:00:00.000,2019,November,1,Friday,20,12,New Quay,476
+147,2887775,2019-11-01T20:00:00.000,2019,November,1,Friday,20,11,Waterfront City,154
+148,2887776,2019-11-01T20:00:00.000,2019,November,1,Friday,20,8,Webb Bridge,204
+149,2887777,2019-11-01T20:00:00.000,2019,November,1,Friday,20,7,Birrarung Marr,203
+150,2887778,2019-11-01T20:00:00.000,2019,November,1,Friday,20,5,Princes Bridge,1882
+151,2887779,2019-11-01T20:00:00.000,2019,November,1,Friday,20,6,Flinders Street Station Underpass,2097
+152,2887780,2019-11-01T20:00:00.000,2019,November,1,Friday,20,14,Sandridge Bridge,25
+153,2887781,2019-11-01T20:00:00.000,2019,November,1,Friday,20,26,QV Market-Elizabeth St (West),672
+154,2887782,2019-11-01T20:00:00.000,2019,November,1,Friday,20,24,Spencer St-Collins St (North),1043
+155,2887783,2019-11-01T20:00:00.000,2019,November,1,Friday,20,23,Spencer St-Collins St (South),200
+156,2887784,2019-11-01T20:00:00.000,2019,November,1,Friday,20,25,Melbourne Convention Exhibition Centre,1652
+157,2887785,2019-11-01T20:00:00.000,2019,November,1,Friday,20,21,Bourke St-Russell St (West),997
+158,2887786,2019-11-01T20:00:00.000,2019,November,1,Friday,20,20,Chinatown-Lt Bourke St (South),974
+159,2887787,2019-11-01T20:00:00.000,2019,November,1,Friday,20,19,Chinatown-Swanston St (North),1362
+160,2887788,2019-11-01T20:00:00.000,2019,November,1,Friday,20,22,Flinders St-Elizabeth St (East),2314
+161,2887789,2019-11-01T20:00:00.000,2019,November,1,Friday,20,27,QV Market-Peel St,135
+162,2887790,2019-11-01T20:00:00.000,2019,November,1,Friday,20,28,The Arts Centre,594
+163,2887791,2019-11-01T20:00:00.000,2019,November,1,Friday,20,31,Lygon St (West),687
+164,2887792,2019-11-01T20:00:00.000,2019,November,1,Friday,20,30,Lonsdale St (South),1064
+165,2887793,2019-11-01T20:00:00.000,2019,November,1,Friday,20,34,Flinders St-Spark La,118
+166,2887794,2019-11-01T20:00:00.000,2019,November,1,Friday,20,39,Alfred Place,158
+167,2887795,2019-11-01T20:00:00.000,2019,November,1,Friday,20,37,Lygon St (East),325
+168,2887796,2019-11-01T20:00:00.000,2019,November,1,Friday,20,40,Lonsdale St-Spring St (West),245
+169,2887797,2019-11-01T20:00:00.000,2019,November,1,Friday,20,36,Queen St (West),367
+170,2887798,2019-11-01T20:00:00.000,2019,November,1,Friday,20,29,St Kilda Rd-Alexandra Gardens,299
+171,2887799,2019-11-01T20:00:00.000,2019,November,1,Friday,20,42,Grattan St-Swanston St (West),198
+172,2887800,2019-11-01T20:00:00.000,2019,November,1,Friday,20,43,Monash Rd-Swanston St (West),27
+173,2887801,2019-11-01T20:00:00.000,2019,November,1,Friday,20,44,Tin Alley-Swanston St (West),42
+174,2887802,2019-11-01T20:00:00.000,2019,November,1,Friday,20,35,Southbank,1695
+175,2887803,2019-11-01T20:00:00.000,2019,November,1,Friday,20,45,Little Collins St-Swanston St (East),1471
+176,2887804,2019-11-01T20:00:00.000,2019,November,1,Friday,20,46,Pelham St (S),132
+177,2887805,2019-11-01T20:00:00.000,2019,November,1,Friday,20,47,Melbourne Central-Elizabeth St (East),1414
+178,2887806,2019-11-01T20:00:00.000,2019,November,1,Friday,20,48,QVM-Queen St (East),186
+179,2887807,2019-11-01T20:00:00.000,2019,November,1,Friday,20,49,QVM-Therry St (South),100
+180,2887808,2019-11-01T20:00:00.000,2019,November,1,Friday,20,50,Faraday St-Lygon St (West),605
+181,2887809,2019-11-01T20:00:00.000,2019,November,1,Friday,20,51,QVM-Franklin St (North),151
+182,2887810,2019-11-01T20:00:00.000,2019,November,1,Friday,20,52,Elizabeth St-Lonsdale St (South),693
+183,2887811,2019-11-01T20:00:00.000,2019,November,1,Friday,20,54,Lincoln-Swanston(West),216
+184,2887812,2019-11-01T20:00:00.000,2019,November,1,Friday,20,55,Elizabeth St-La Trobe St (East),1673
+185,2887813,2019-11-01T20:00:00.000,2019,November,1,Friday,20,56,Lonsdale St - Elizabeth St (North),560
+186,2887814,2019-11-01T20:00:00.000,2019,November,1,Friday,20,57,Bourke St Bridge,249
+187,2887815,2019-11-01T20:00:00.000,2019,November,1,Friday,20,58,Bourke St - Spencer St (North),662
+188,2887816,2019-11-01T20:00:00.000,2019,November,1,Friday,20,59,Swanston St - RMIT Building 80,11
+189,2887817,2019-11-01T20:00:00.000,2019,November,1,Friday,20,61,Swanston St - RMIT Building 14,741
+190,2887818,2019-11-01T20:00:00.000,2019,November,1,Friday,20,62,La Trobe St (North),273
+191,2887819,2019-11-01T21:00:00.000,2019,November,1,Friday,21,4,Town Hall (West),1715
+192,2887820,2019-11-01T21:00:00.000,2019,November,1,Friday,21,17,Collins Place (South),191
+193,2887821,2019-11-01T21:00:00.000,2019,November,1,Friday,21,18,Collins Place (North),145
+194,2887822,2019-11-01T21:00:00.000,2019,November,1,Friday,21,53,Collins St (North),485
+195,2887823,2019-11-01T21:00:00.000,2019,November,1,Friday,21,2,Bourke Street Mall (South),588
+196,2887824,2019-11-01T21:00:00.000,2019,November,1,Friday,21,1,Bourke Street Mall (North),1450
+197,2887825,2019-11-01T21:00:00.000,2019,November,1,Friday,21,3,Melbourne Central,2662
+198,2887826,2019-11-01T21:00:00.000,2019,November,1,Friday,21,15,State Library,1267
+199,2887827,2019-11-01T21:00:00.000,2019,November,1,Friday,21,9,Southern Cross Station,167
