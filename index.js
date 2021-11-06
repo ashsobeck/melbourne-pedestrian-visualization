@@ -1,4 +1,5 @@
-var date, hour
+var date
+var hour = document.getElementById("hour").value;
 function filter_data() {
   //this function gets the date from the filter box, the date is in the format 2012-12-01
   //Year, Month, Day
@@ -40,9 +41,7 @@ let colorScale = d3.scaleLinear()
 //   [254, 173, 84],
 //   [209, 55, 78]
 // ];
-//console.log(colorScale)
 renderLayer()
-//console.log(colorScale(345))
 
 function renderLayer () {
   const hexLayer = new HexagonLayer({
@@ -51,14 +50,29 @@ function renderLayer () {
     // getColorValue: d => +d.hourly_counts,
     elevationRange: [0, 10],
     elevationScale: 250,
-    getElevationValue: points => +points[0].hourly_counts,
+    // getElevationValue: (d, points) => {
+    //   if (+d.time === hour && date === currDate) {
+    //     return points[0].hourly_counts
+    //   }
+    // },
+    // getElevationValue: (d) => {
+    //   // console.log(points)?
+    //   // console.log(points[0])
+    //   console.log(d)
+    //   //  points[0].hourly_counts
+    //   return +d.hourly_counts
+    // },
     extruded: true,
-    getPosition: d => {
-      // console.log(d)
-      // console.log(+d.hourly_counts)
-      // console.log(d.mdate)
-      // console.log(d.mdate === "0")
-      return [+d.longitude, +d.latitude]
+    getPosition: (d, i) => {
+      console.log(d)
+      console.log(hour)
+      if (+d.time === hour ) {
+        console.log(i)
+        return [+d.longitude, +d.latitude]
+      }
+      else return [0,0]
+      // return [+d.longitude, +d.latitude]
+
     },
     opacity: 1,
     radius: 50,
