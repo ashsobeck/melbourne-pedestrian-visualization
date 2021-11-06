@@ -45,7 +45,7 @@ const data = d3.csv('data/joined_data.csv')
 
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
-  .range(d3.schemeDark2)
+  .range(d3.schemeCategory10)
 // const COLOR_RANGE = [
 //   [1, 152, 189],
 //   [73, 227, 206],
