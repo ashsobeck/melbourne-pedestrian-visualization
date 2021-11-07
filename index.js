@@ -185,11 +185,3 @@ function renderLayer () {
   console.log(deck)
 }
 
-
-// function filter ()
-// {
-
-
-
-//   | 
-// }
