@@ -8,13 +8,13 @@ function filter_data() {
 
   date = document.getElementById("date").value;
   hour = document.getElementById("hour").value;
-  dayData = data.then((dataset) => dataset.filter(d => {
-    // const dDate = d.date_time.split('/')
-    // const dateSplit = date.split('-')
-    (d.date_time.split('/')[0] == date.split('-')[1]) 
-    && (+d.date_time.split('/')[1] == +date.split('-')[2]) 
-  }))
-  // renderLayer()
+  // dayData = data.then((dataset) => dataset.filter(d => {
+  //   // const dDate = d.date_time.split('/')
+  //   // const dateSplit = date.split('-')
+  //   (d.date_time.split('/')[0] == date.split('-')[1]) 
+  //   && (+d.date_time.split('/')[1] == +date.split('-')[2]) 
+  // }))
+  renderLayer()
   //will probably need to clear data?
   console.log(date)
   console.log(hour)
@@ -28,28 +28,32 @@ window.onload = function()
 
 let generateTooltipChart = (object, date) => {
   data.then(dataset => {
-    console.log(dataset)
-    console.log(object)
+    let dimensions = {
+      width: 600,
+      height: 600, 
+      margin: {
+       top: 10, 
+       bottom: 10,
+       right: 10,
+       left: 40 
+      }
+    }
     let sensorId = object.points[0].source.sensor_id
-    console.log(sensorId)
-    console.log("date", date)
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) && (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1]))
-    console.log("sensor data", sensorData)
 
     let svg = d3.select("#barchart")
       .style('width', 600)
-      .style('height', 500)
+      .style('height', 700)
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
-    console.log(hours)
     let xScale = d3.scaleBand()
-      .domain(hours)
-      .range([0, 500])
+      .domain(hours.sort((a,b) => a - b))
+      .range([dimensions.margin.left, dimensions.width - dimensions.margin.right])
       .padding(0.1)
     
     let yScale = d3.scaleLinear()
       .domain([0, d3.max(sensorData, d => +d.hourly_counts.replace(/,/g,''))])
-      .range([500, 0])
+      .range([dimensions.height - dimensions.margin.bottom, dimensions.margin.top])
     
     let barColor = d3.scaleOrdinal()
       .domain(hours)
@@ -62,7 +66,7 @@ let generateTooltipChart = (object, date) => {
       .attr('x', d => xScale(+d.time))
       .attr('y', d => yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('width', xScale.bandwidth())
-      .attr('height', d => yScale(+d.hourly_counts.replace(/,/g,'')))
+      .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('fill', d => barColor(+d.time))
 
     let xAxisgen = d3.axisBottom().scale(xScale)
@@ -70,8 +74,25 @@ let generateTooltipChart = (object, date) => {
 
     let xAxis = svg.append('g')
       .call(xAxisgen)
+      .style('transform', `translateY(${dimensions.height - dimensions.margin.bottom}px)`)
+      .append('text')
+      .attr('x', dimensions.width)
+      .attr('y', dimensions.margin.bottom + 15)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .attr('fill', 'black')
+      .text('Hour of the Day (24h Format)')
     let yAxis = svg.append('g')
       .call(yAxisgen)
+      .style('transform', `translateX(${dimensions.margin.left}px)`)
+      .append('text')
+      // .attr('transform', 'rotate(-90)')
+      .attr('x', dimensions.margin.left + dimensions.margin.right)
+      .attr('y', 0)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .attr('fill', 'black')
+      .text('# of Pedestrians')
   })   
 }
 console.log(dayData)
@@ -150,7 +171,7 @@ function renderLayer () {
     },
     extruded: true,
     getPosition: (d, i) => {
-      if (+d.time == hour ) {
+      if (+d.time == +hour && +d.mdate == +date.split('-')[2] ) {
       // console.log(d.time)
       return [+d.longitude, +d.latitude]
       }
@@ -163,17 +184,18 @@ function renderLayer () {
     onHover: (({object, x, y}) => {
       const el = document.getElementById('tooltip')
       if (object) {
+        console.log(object)
         el.innerHTML = `<div>
                           <h2>${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
-                              Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians
+                              Hourly Count for ${object.points[0].source.time}00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
                           <svg id="barchart"></svg>
                         </div>`
         el.style.display = 'block'
         el.style.opacity = 0.9
         el.style.left = x + 'px'
-        el.style.top = y + 'px'
+        el.style.top = y/3 + 'px'
 
         generateTooltipChart(object, date)
       }
