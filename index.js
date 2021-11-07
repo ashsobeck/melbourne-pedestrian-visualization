@@ -33,7 +33,7 @@ const deckgl = new DeckGL({
     pitch: 55
   },
   getTooltip: ({object}) => {
-    console.log(object)
+    //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
     Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
@@ -41,7 +41,7 @@ const deckgl = new DeckGL({
   controller: true
 });
 
-const data = d3.csv('data/2019_pedestrian.csv').get((dataset) => dataset)
+const data = d3.csv('data/2019_pedestrian.csv')//.get((dataset) => dataset)
 // console.log(data)
 
 let colorScale = d3.scaleLinear()
@@ -88,3 +88,12 @@ function renderLayer () {
   })
   console.log(deck)
 }
+
+
+// function filter ()
+// {
+
+
+
+//   | 
+// }

@@ -78,17 +78,18 @@
       </div>
     </nav>
 
-
     
-    <section class="hero is-fullheight-with-navbar is-light">
+    
+    <!-- <section class="hero is-fullheight-with-navbar is-light">
       <div class="hero-body has-text-centered">
         <div class="container">
-          <!-- <p class="title has-text-centered">UrbanMotion-like Visualization Here</p>
-          <p class="subtitle has-text-centered">SVG Elements will be entered later</p> -->
+          <p class="title has-text-centered">UrbanMotion-like Visualization Here</p>
+          <p class="subtitle has-text-centered">SVG Elements will be entered later</p>
         </div>
-        <!-- <svg ></svg> -->
+         <svg ></svg>
       </div>
-    </section>
+    </section> -->
+
     <div id="control-panel">
       <div>
         <form action="form" onsubmit="return false;">
@@ -127,6 +128,43 @@
       </div>
     </div>
 
+    <!-- <div class="notification is-primary">
+      <button class="delete"></button>
+      Lorem ipsum dolor sit amet, consectetur
+      adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
+    </div>
+  
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+      const $notification = $delete.parentNode;
+      $delete.addEventListener('click', () => {
+        $notification.parentNode.removeChild($notification);
+         });
+        });
+      });
+    </script> -->
+    
   </body>
   <script src="index.js"></script>
+
+  <div class="notification", style="margin-top: 592px; margin-right: 15px; margin-left: 10px;">
+    <button class="delete"></button>
+    This visualization shows the hourly pedestrian density on a certain street, day, and hour in Melbourne, Australia.
+    The hexagon layer hovers over a street and its height and color presents the pedestrian count for that specific street.
+    By <strong>hovering</strong> over a hexagon you will be greeted with more information for that street.
+    You can also filter by date and hour using the filter box.
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+    const $notification = $delete.parentNode;
+    $delete.addEventListener('click', () => {
+      $notification.parentNode.removeChild($notification);
+       });
+      });
+    });
+  </script>
+
 </html>

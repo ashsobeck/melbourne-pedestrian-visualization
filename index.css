@@ -1,23 +1,26 @@
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
   }
   
-  #control-panel {
-    font-family: Helvetica, Arial, sans-serif;
-    position: absolute;
-    background: #fff;
-    top: 0;
-    left: 0;
-    margin: 100px;
-    padding: 20px;
-    z-index: 1;
+#control-panel {
+  font-family: Helvetica, Arial, sans-serif;
+  position: absolute;
+  background: #fff;
+  top: 0;
+  left: 0;
+  margin: 100px;
+  padding: 20px;
+  z-index: 1;
   }
   
-  label {
-    display: inline-block;
-    width: 100px;
-    margin: .4rem 0;
+label {
+  display: inline-block;
+  width: 100px;
+  margin: .4rem 0;
   }
 
+.notification {
+  margin-top: 10px;
+}
