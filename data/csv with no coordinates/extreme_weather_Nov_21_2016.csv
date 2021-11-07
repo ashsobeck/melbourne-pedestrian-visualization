@@ -1,4 +1,4 @@
-ID,Date_Time,Year,Month,Mdate,Day,Time,sensor_id,Sensor_Name,Hourly_Counts
+id,date_time,year,month,mdate,day,time,sensor_id,sensor_name,hourly_counts
 1682998,11/21/2016 0:00,2016,November,21,Monday,0,1,Bourke Street Mall (North),108
 1682999,11/21/2016 0:00,2016,November,21,Monday,0,2,Bourke Street Mall (South),52
 1683000,11/21/2016 0:00,2016,November,21,Monday,0,5,Princes Bridge,285
