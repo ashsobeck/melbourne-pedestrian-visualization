@@ -173,7 +173,7 @@ function renderLayer () {
     getPosition: (d, i) => {
       if (+d.time == +hour && +d.mdate == +date.split('-')[2] ) {
       // console.log(d.time)
-      return [+d.longitude, +d.latitude]
+        return [+d.longitude, +d.latitude]
       }
       else return []
     },
@@ -181,6 +181,14 @@ function renderLayer () {
     radius: 50,
     coverage: 1,
     upperPercentile: 90,
+    updateTriggers: {
+      getPosition: date,
+      getPosition: hour,
+      getElevationValue: date, 
+      getElevationValue: hour,
+      getColorValue: date,
+      getColorValue: hour
+    },
     onHover: (({object, x, y}) => {
       const el = document.getElementById('tooltip')
       if (object) {
