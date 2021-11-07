@@ -27,49 +27,53 @@ window.onload = function()
 }
 
 let generateTooltipChart = (object, date) => {
-  console.log(object)
-  let sensorId = object.points[0].source.sensor_id
-  console.log(date)
-  let sensorData = object.points.filter(p => p.source.mdate == date.split('-')[2])
-  console.log(sensorData)
+  data.then(dataset => {
+    console.log(dataset)
+    console.log(object)
+    let sensorId = object.points[0].source.sensor_id
+    console.log(sensorId)
+    console.log("date", date)
+    let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) && (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1]))
+    console.log("sensor data", sensorData)
 
-  let svg = d3.select("barchart")
-    .style('width', 500)
-    .style('height', 500)
-  let xAccessor = d => +d.time
-  let hours = [... new Set(sensorData.map(xAccessor))]
-  console.log(hours)
-  let xScale = d3.scaleBand()
-    .domain(hours)
-    .range([0, 500])
-    .padding(0.1)
-  
-  let yScale = d3.scaleLinear()
-    .domain([0, d3.max(sensorData, d => +d.source.hourly_counts)])
-    .range([500, 0])
-  
-  let barColor = d3.scaleOrdinal()
-    .domain(hours)
-    .range(d3.schemeDark2)
-  
-  let bars = svg.selectAll('rect')
-    .data(sensorData)
-    .enter()
-    .append('rect')
-    .attr('x', d => xScale(+d.source.time))
-    .attr('y', d => yScale(+d.source.hourly_counts))
-    .attr('width', xScale.bandwidth())
-    .attr('height', d => yScale(+d.source.hourly_counts))
-    .attr('fill', d => barColor(+d.source.time))
+    let svg = d3.select("#barchart")
+      .style('width', 600)
+      .style('height', 500)
+    let xAccessor = d => +d.time
+    let hours = [... new Set(sensorData.map(xAccessor))]
+    console.log(hours)
+    let xScale = d3.scaleBand()
+      .domain(hours)
+      .range([0, 500])
+      .padding(0.1)
+    
+    let yScale = d3.scaleLinear()
+      .domain([0, d3.max(sensorData, d => +d.hourly_counts.replace(/,/g,''))])
+      .range([500, 0])
+    
+    let barColor = d3.scaleOrdinal()
+      .domain(hours)
+      .range(d3.schemeDark2)
+    
+    let bars = svg.selectAll('rect')
+      .data(sensorData)
+      .enter()
+      .append('rect')
+      .attr('x', d => xScale(+d.time))
+      .attr('y', d => yScale(+d.hourly_counts.replace(/,/g,'')))
+      .attr('width', xScale.bandwidth())
+      .attr('height', d => yScale(+d.hourly_counts.replace(/,/g,'')))
+      .attr('fill', d => barColor(+d.time))
 
-  let xAxisgen = d3.axisBottom().scale(xScale)
-  let yAxisgen = d3.axisLeft().scale(yScale)
+    let xAxisgen = d3.axisBottom().scale(xScale)
+    let yAxisgen = d3.axisLeft().scale(yScale)
 
-  let xAxis = svg.append('g')
-    .call(xAxisgen)
-  let yAxis = svg.append('g')
-    .call(yAxisgen)
-  }
+    let xAxis = svg.append('g')
+      .call(xAxisgen)
+    let yAxis = svg.append('g')
+      .call(yAxisgen)
+  })   
+}
 console.log(dayData)
 // console.log(data)
 const {DeckGL, HexagonLayer} = deck;
