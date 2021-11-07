@@ -41,8 +41,8 @@ const deckgl = new DeckGL({
   controller: true
 });
 
-const data = d3.csv('data/2019_pedestrian.csv')
-console.log(data)
+const data = d3.csv('data/2019_pedestrian.csv').get((dataset) => dataset)
+// console.log(data)
 
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
@@ -63,39 +63,19 @@ function renderLayer () {
     data,
     pickable: true,
     getColorValue: d => {
-      console.log(d[0].hourly_counts)
-      return +d[0].hourly_counts
+      return +d[0].hourly_counts.replace(/,/g,'')
     },
 
     getElevationValue: d => {
-      console.log(d[0].hourly_counts)
-      return +d[0].hourly_counts
-      // if (+d.time == hour) {
-      //   return +d[0].hourly_counts
-      // }
-      // else return 0
+      console.log(d[0].hourly_counts.replace(/,/g,''))
+      return +d[0].hourly_counts.replace(/,/g,'')
     },
-    // getElevationValue: (d) => {
-    //   // console.log(points)?
-    //   // console.log(points[0])
-    //   console.log(d)
-    //   //  points[0].hourly_counts
-    //   return +d.hourly_counts
-    // },
     extruded: true,
     getPosition: (d, i) => {
-      // console.log(d)
-      // console.log(+d.time)
-      // console.log(hour)
-      // console.log(+d.time == hour)
-      if (+d.time == hour) {
-        // console.log(i)
-        console.log(d)
+      if (+d.time == hour ) {
         return [+d.longitude, +d.latitude]
       }
       else return []
-      // return [+d.longitude, +d.latitude]
-
     },
     opacity: 1,
     radius: 50,
