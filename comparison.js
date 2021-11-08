@@ -1,6 +1,9 @@
 var date
 var hour
 const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
+const normal_day_data = d3.csv('data/may_2nd_2019.csv')
+console.log(normal_day_data)
+
 
 
 
@@ -143,7 +146,7 @@ const deckgl2 = new DeckGL({
 renderLayer()
 
 function renderLayer () {
-  const hexLayer = new HexagonLayer({
+  const hexLayer_weather = new HexagonLayer({
     data: extreme_weather_data,
     id: 'melbourne-pedestrian-density',
     pickable: true,
@@ -176,82 +179,53 @@ function renderLayer () {
       //getColorValue: date,
       getColorValue: hour
     },
-    // onHover: (({object, x, y}) => {
-    //   const el = document.getElementById('tooltip')
-    //   if (object) {
-    //     console.log(object)
-    //     el.innerHTML = `<div>
-    //                       <h2>${object.points[0].source.sensor_description} <br/>
-    //                           ${object.position.join(', ')} <br/>
-    //                           Hourly Count for ${object.points[0].source.time}00: ${object.points[0].source.hourly_counts} Pedestrians
-    //                       </h2> 
-    //                       <svg id="barchart"></svg>
-    //                     </div>`
-    //     el.style.display = 'block'
-    //     el.style.opacity = 0.9
-    //     el.style.left = x + 'px'
-    //     el.style.top = y/3 + 'px'
-
-    //     generateTooltipChart(object, date)
-    //   }
-    //   else {
-    //     el.style.opacity = 0.0
-    //   }
-    //})
   })
 
-  // const columnLayer = new ColumnLayer({
-  //   data: normal_day_data,
-  //   id: 'melbourne-pedestrian-density',
-  //   pickable: true,
-  //   getColorValue: d => {
-  //     return +d[0].hourly_counts.replace(/,/g,'')
-  //   },
-
-  //   getElevationValue: d => {
-  //     // console.log(d)
-  //     // console.log(d[0].hourly_counts.replace(/,/g,''))
-  //     return +d[0].hourly_counts.replace(/,/g,'')
-  //   },
-  //   extruded: true,
-  //   getPosition: (d, i) => {
-  //     if (+d.time == hour ) {
-  //     // console.log(d.time)
-  //     return [+d.longitude, +d.latitude]
-  //     }
-  //     else return []
-  //   },
-  //   opacity: 1,
-  //   radius: 50,
-  //   coverage: 1,
-  //   upperPercentile: 90,
-  //   // onHover: (({object, x, y}) => {
-  //   //   const el = document.getElementById('tooltip')
-  //   //   if (object) {
-  //   //     el.innerHTML = `<div>
-  //   //                       <h2>${object.points[0].source.sensor_description} <br/>
-  //   //                           ${object.position.join(', ')} <br/>
-  //   //                           Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians
-  //   //                       </h2> 
-  //   //                       <svg id="barchart"></svg>
-  //   //                     </div>`
-  //   //     el.style.display = 'block'
-  //   //     el.style.opacity = 0.9
-  //   //     el.style.left = x + 'px'
-  //   //     el.style.top = y + 'px'
-
-  //   //     generateTooltipChart(object, date)
-  //   //   }
-  //   //   else {
-  //   //     el.style.opacity = 0.0
-  //   //   }
-  //   // })
- // })
+  
 
   deckgl.setProps({
-    layers: [hexLayer]
+    layers: [hexLayer_weather]
   })
-  console.log(deck)
+
+  const hexLayer_normal= new HexagonLayer({
+    data: normal_day_data,
+    id: 'melbourne-pedestrian-density',
+    pickable: true,
+    getColorValue: d => {
+      return +d[0].hourly_counts.replace(/,/g,'')
+    },
+
+    getElevationValue: d => {
+      // console.log(d)
+      // console.log(d[0].hourly_counts.replace(/,/g,''))
+      return +d[0].hourly_counts.replace(/,/g,'')
+    },
+    extruded: true,
+    getPosition: (d, i) => {
+      if (+d.time == hour ) {
+      // console.log(d.time)
+      return [+d.longitude, +d.latitude]
+      }
+      else return []
+    },
+    opacity: 1,
+    radius: 50,
+    coverage: 1,
+    upperPercentile: 90,
+    updateTriggers: {
+      //getPosition: date,
+      getPosition: hour,
+      //getElevationValue: date, 
+      getElevationValue: hour,
+      //getColorValue: date,
+      getColorValue: hour
+    },
+  })
+
+
+  deckgl2.setProps({
+    layers: [hexLayer_normal]
+  })
 }
 
 
