@@ -1,6 +1,6 @@
 var date
 var hour
-const data = d3.csv('data/2019_pedestrian.csv')
+const data = d3.csv('data/nov_2019.csv')
 let dayData = data
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
