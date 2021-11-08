@@ -8,13 +8,8 @@ function filter_data() {
 
   date = document.getElementById("date").value;
   hour = document.getElementById("hour").value;
-  // dayData = data.then((dataset) => dataset.filter(d => {
-  //   // const dDate = d.date_time.split('/')
-  //   // const dateSplit = date.split('-')
-  //   (d.date_time.split('/')[0] == date.split('-')[1]) 
-  //   && (+d.date_time.split('/')[1] == +date.split('-')[2]) 
-  // }))
-  renderLayer()
+  
+  filterChange(date, hour)
   //will probably need to clear data?
   console.log(date)
   console.log(hour)
@@ -96,11 +91,18 @@ let generateTooltipChart = (object, date) => {
   })   
 }
 console.log(dayData)
-// console.log(data)
+
+function filterChange(date, hour) {
+  dayData = data.then((dataset) => dataset.filter(d => {
+    return (+d.date_time.split('/')[0] == +date.split('-')[1]) 
+    && (+d.date_time.split('/')[1] == +date.split('-')[2]) 
+  }))
+  console.log(dayData)
+  renderLayer()
+}
 const {DeckGL, HexagonLayer} = deck;
 
-// renderLayer()
-// console.log(data)
+
 
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
@@ -123,24 +125,11 @@ const deckgl = new DeckGL({
     maxZoom: 20,
     pitch: 55
   },
-  // getTooltip: ({object}) => object && {
-  //   // console.log(object)
-  //   html: `<div>
-  //     <h2>${object.points[0].source.sensor_description}
-  //         ${object.position.join(', ')} 
-  //         Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians
-  //     </h2> 
-  //     <svg id="barchart"></svg>
-  //   </div>`
-    //  <script ></script>${generateTooltipChart(object)}
-    // return object && 
-// },
   controller: true
 });
 
 
-// const data = d3.csv('data/2019_pedestrian.csv')//.get((dataset) => dataset)
-// console.log(data)
+
 
 // let colorScale = d3.scaleLinear()
 //   .domain([0, 300])
@@ -192,11 +181,12 @@ function renderLayer () {
     onHover: (({object, x, y}) => {
       const el = document.getElementById('tooltip')
       if (object) {
-        console.log(object)
+        // console.log(object)
         el.innerHTML = `<div>
                           <h2>${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
-                              Hourly Count for ${object.points[0].source.time}00: ${object.points[0].source.hourly_counts} Pedestrians
+                              ${object.points[0].source.date_time} <br/>
+                              Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
                           <svg id="barchart"></svg>
                         </div>`
