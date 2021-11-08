@@ -199,6 +199,7 @@ function renderLayer () {
       }
       else {
         el.style.opacity = 0.0
+        el.innerHTML = `<div></div>`
       }
     })
   })
