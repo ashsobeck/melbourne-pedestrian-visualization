@@ -118,6 +118,27 @@ const deckgl = new DeckGL({
   controller: true
 });
 
+const deckgl2 = new DeckGL({
+  container: "map2",
+  mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+  initialViewState: {
+    longitude: 144.9631,
+    latitude: -37.8136,
+    zoom: 12,
+    minZoom: 5,
+    maxZoom: 20,
+    pitch: 55,
+  },
+
+  getTooltip: ({object}) => {
+    //console.log(object)
+    return object && `${object.points[0].source.sensor_description}
+    ${object.position.join(', ')} 
+    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+},
+  controller: true
+});
+
 
 renderLayer()
 
