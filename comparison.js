@@ -254,7 +254,7 @@ function renderLayer () {
       if (object) {
         // console.log(object)
         el.innerHTML = `<div>
-                          <h2>Extreme Day <br/>
+                          <h2>Normal Day <br/>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
                               ${object.points[0].source.date_time} <br/>
@@ -267,7 +267,7 @@ function renderLayer () {
         el.style.left = x + 'px'
         el.style.top = y/3 + 'px'
 
-        extremeTooltipChart(object, date)
+        normalTooltipChart(object, date)
       }
       else {
         el.style.opacity = 0.0
