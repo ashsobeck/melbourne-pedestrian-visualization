@@ -1,6 +1,6 @@
 var date
 var hour
-const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
+const normal_day_data = d3.csv('data/one_day_2019.csv')
 
 
 
@@ -98,7 +98,7 @@ let colorScale = d3.scaleLinear()
 
 
 const deckgl = new DeckGL({
-  container: "map1",
+  container: "map2",
   mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   initialViewState: {
     longitude: 144.9631,
@@ -119,11 +119,13 @@ const deckgl = new DeckGL({
 });
 
 
+
+
 renderLayer()
 
 function renderLayer () {
   const hexLayer = new HexagonLayer({
-    data: extreme_weather_data,
+    data: normal_day_data,
     id: 'melbourne-pedestrian-density',
     pickable: true,
     getColorValue: d => {
@@ -232,7 +234,3 @@ function renderLayer () {
   })
   console.log(deck)
 }
-
-
-  
-
