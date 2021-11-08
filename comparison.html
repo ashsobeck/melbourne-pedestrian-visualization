@@ -78,7 +78,6 @@
       </div>
     </nav>
 
-
     <div id="control-panel">
       <div>
         <form action="form" onsubmit="return false;">
@@ -113,24 +112,23 @@
       </div>
       </div>
     </div>
-  
+
+
+
+    
   </body>
-  <div id="map1", style="height:50%;"></div>
-  <hr style="margin: .5rem 0">
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-       });
-      });
-    });
-  </script>
-  <div id="map2", style="height:50%; position: relative"> </div>
+  
+    <div id="map1", style="height:45%; position: relative;"></div>
+    <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1>
+    <hr style="margin: .5rem 0">
+    <h1"> <strong>Normal Weather Day (May 2nd, 2019) ↓</strong></h1>
+
+    <div id="map2", style="height:50%; position: relative; "> </div>
+  
+ 
   <script src="comparison.js"></script>
-    <div id="tooltip"></div>
-    <div class="notification", style="margin-top: 700px; margin-right: 25px; margin-left: 10px; z-index: 1;">
+  <div id="tooltip"></div>
+    <div class="notification", style="margin-top: -580px; margin-right: 30px; margin-left: 10px; z-index: 1;">
       <button class="delete"></button>
       This visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
       November 21st, 2016 as our extreme weather day. <br><br> On November 21st, 2016 an asthma thunderstorm kills 9 and hospitalises hundreds, high heat and humidity 
