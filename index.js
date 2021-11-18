@@ -62,7 +62,7 @@ let generateTooltipChart = (object, date) => {
       .attr('y', d => yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
-      .attr('fill', d => barColor(+d.time))
+      .attr('fill', "steelblue")
 
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
