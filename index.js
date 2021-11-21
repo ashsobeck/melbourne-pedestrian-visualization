@@ -2,6 +2,7 @@ var date
 var hour
 const data = d3.csv('data/nov_2019.csv')
 let dayData = data
+let chartCount = 0
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
 function filter_data() {
@@ -23,9 +24,10 @@ window.onload = function()
 
 let generateTooltipChart = (object, date) => {
   data.then(dataset => {
+    console.log("hi")
     let dimensions = {
-      width: 600,
-      height: 600, 
+      width: window.screen.availWidth / 6,
+      height: window.screen.availHeight / 6, 
       margin: {
        top: 10, 
        bottom: 10,
@@ -35,10 +37,10 @@ let generateTooltipChart = (object, date) => {
     }
     let sensorId = object.points[0].source.sensor_id
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) && (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1]))
-
-    let svg = d3.select("#barchart")
-      .style('width', 600)
-      .style('height', 700)
+    let svgId = chartCount === 1 ? "#barchart" : "#barchart2"
+    let svg = d3.select(svgId)
+      .style('width', dimensions.width + 10)
+      .style('height', dimensions.height + 10)
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
     let xScale = d3.scaleBand()
@@ -178,28 +180,99 @@ function renderLayer () {
       getColorValue: date,
       getColorValue: hour
     },
-    onHover: (({object, x, y}) => {
-      const el = document.getElementById('tooltip')
-      if (object) {
-        // console.log(object)
-        el.innerHTML = `<div>
-                          <h2>${object.points[0].source.sensor_description} <br/>
-                              ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
-                          </h2> 
-                          <svg id="barchart"></svg>
-                        </div>`
-        el.style.display = 'block'
-        el.style.opacity = 0.9
-        el.style.left = x + 'px'
-        el.style.top = y/3 + 'px'
-
-        generateTooltipChart(object, date)
+    onClick: (({object, x, y}) => {
+      if (chartCount === 0)
+      {
+        chartCount = 1
+        const el = document.getElementById('tooltip')
+        const availHeight = window.screen.availHeight
+        const availWidth = window.screen.availWidth
+        if (object) {
+          // console.log(object)
+          el.innerHTML = `<div>
+                            <h2>${object.points[0].source.sensor_description} <br/>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
+                            </h2> 
+                            <svg id="barchart"></svg>
+                          </div>`
+          el.style.display = 'block'
+          el.style.opacity = 0.9
+          // el.style.width = availWidth / 6 + 10
+          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
+          // el.style.top = (availHeight - (availHeight / 2)) + 'px'
+  
+          generateTooltipChart(object, date)
+        }
+        else {
+          el.style.opacity = 0.0
+          el.innerHTML = `<div></div>`
+        }
       }
-      else {
-        el.style.opacity = 0.0
-        el.innerHTML = `<div></div>`
+      else if (chartCount === 1) 
+      {
+        chartCount = 2
+        const el = document.getElementById('tooltip2')
+        const availHeight = window.screen.availHeight
+        const availWidth = window.screen.availWidth
+        if (object) {
+          // console.log(object)
+          el.innerHTML = `<div>
+                            <h2>${object.points[0].source.sensor_description} <br/>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
+                            </h2> 
+                            <svg id="barchart2"></svg>
+                          </div>`
+          // el.style.display = 'float'
+          // el.style.position = 'absolute'
+          el.style.display = 'block'
+          el.style.opacity = 0.9
+          // el.style.width = availWidth / 6 + 10
+          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
+          // el.style.top = ((availHeight / 6) + 10) + 'px'
+  
+          generateTooltipChart(object, date)
+        }
+        else {
+          el.style.opacity = 0.0
+          el.innerHTML = `<div></div>`
+        }
+      }
+      else if (chartCount === 2)
+      {
+        chartCount = 1
+        const el = document.getElementById('tooltip')
+        const availHeight = window.screen.availHeight
+        const availWidth = window.screen.availWidth
+        if (object) {
+          // console.log(object)
+          el.innerHTML = `<div>
+                            <h2>${object.points[0].source.sensor_description} <br/>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
+                            </h2> 
+                            <svg id="barchart"></svg>
+                          </div>`
+          // el.style.display = 'block'
+          el.style.display = 'block'
+          el.style.opacity = 0.9
+          // el.style.width = availWidth / 6 + 10
+          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
+          // el.style.top = (availHeight - (availHeight / 2)) + 'px'
+  
+          generateTooltipChart(object, date)
+        }
+        else {
+          el.style.opacity = 0.0
+          el.innerHTML = `<div></div>`
+        }
+        const el2 = document.getElementById('tooltip2')
+        el2.style.opacity = 0.0
+        el2.innerHTML = `<div></div>`
       }
     })
   })
