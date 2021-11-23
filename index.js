@@ -122,10 +122,10 @@ const deckgl = new DeckGL({
   initialViewState: {
     longitude: 144.9631,
     latitude: -37.8136,
-    zoom: 12,
+    zoom: 15,
     minZoom: 5,
     maxZoom: 20,
-    pitch: 55
+    pitch: 0
   },
   controller: true
 });
@@ -160,7 +160,8 @@ function renderLayer () {
       // console.log(d[0].hourly_counts.replace(/,/g,''))
       return +d[0].hourly_counts.replace(/,/g,'')
     },
-    extruded: true,
+    extruded: false,
+    autoHighlight: true,
     getPosition: (d, i) => {
       if (+d.time == +hour && +d.mdate == +date.split('-')[2] ) {
       // console.log(d.time)
@@ -179,6 +180,7 @@ function renderLayer () {
       getElevationValue: hour,
       getColorValue: date,
       getColorValue: hour
+      
     },
     onClick: (({object, x, y}) => {
       if (chartCount === 0)

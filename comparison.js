@@ -176,10 +176,10 @@ const deckgl = new DeckGL({
   initialViewState: {
     longitude: 144.9631,
     latitude: -37.8136,
-    zoom: 12,
+    zoom: 15,
     minZoom: 5,
     maxZoom: 20,
-    pitch: 55,
+    pitch: 0,
   },
 
   getTooltip: ({object}) => {
@@ -197,10 +197,10 @@ const deckgl2 = new DeckGL({
   initialViewState: {
     longitude: 144.9631,
     latitude: -37.8136,
-    zoom: 12,
+    zoom: 15,
     minZoom: 5,
     maxZoom: 20,
-    pitch: 55,
+    pitch: 0,
   },
 
 //   getTooltip: ({object}) => {
@@ -229,7 +229,8 @@ function renderLayer () {
       // console.log(d[0].hourly_counts.replace(/,/g,''))
       return +d[0].hourly_counts.replace(/,/g,'')
     },
-    extruded: true,
+    extruded: false,
+    autoHighlight: true,
     getPosition: (d, i) => {
       if (+d.time == hour ) {
       // console.log(d.time)
@@ -295,7 +296,8 @@ function renderLayer () {
       // console.log(d[0].hourly_counts.replace(/,/g,''))
       return +d[0].hourly_counts.replace(/,/g,'')
     },
-    extruded: true,
+    extruded: false,
+    autoHighlight: true,
     getPosition: (d, i) => {
       if (+d.time == hour ) {
       // console.log(d.time)
