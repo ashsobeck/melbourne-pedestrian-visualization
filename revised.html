@@ -59,12 +59,12 @@
               </a>
 
             <!-- CHANGE COLORS IF BETTER COLORS AVAILABLE -->
-            <a class="navbar-item" href="index.html">
-                <strong style="color:red">Main Visualization</strong>
+            <a class="button is-success" style="position:sticky; top:9px" href="index.html">
+                <strong>Main Visualization</strong>
               </a>
 
-            <a class="navbar-item" href="comparison.html">
-                <strong style="color:red">Natural Disaster Visualization</strong>
+            <a class="button is-success" style="position:relative; left:5px; top:9px" href="comparison.html">
+                <strong>Natural Disaster Visualization</strong>
               </a>
           </div>
 
@@ -85,7 +85,7 @@
       </div>
     </nav>
     <body>
-        <div class ="content" style ="position:absolute; left:10px; top:70px">
+        <div class ="content" style ="position:relative; left:10px; top:70px">
             <h1 id="Inspiration" style="text-align: center; color: blue;">Inspiration</h1>
             <p>
                 As 6030 students, we focused on relating our problem to state-of-the-art research. 
@@ -103,6 +103,10 @@
             <figure>
                 <img src="UrbanMotion_Dashboard.gif"  width="500" height="333" style ="position:relative; left:0px">
                 <figcaption>Figure 1: UrbanMotion Dashboard</figcaption>
+                <figcaption>
+                  UrbanMotion user interface: (a) movement visualization showing five major regions in Beijing during commute time; 
+                  (b) time/date selection panel, the morning (7AM-10AM) of July 12th is selected; 
+                  (c) algorithm configuration menu for flow generation; (d) visualization control panel.</figcaption>
             </figure>
 
             <p>
@@ -114,7 +118,7 @@
             <h1 style="text-align: center; color: blue;">About This Visualization</h1>
             <p> By using a dataset of pedestrian sensors that count the number of pedestrians at certain streets, 
                 we are seeking to understand the trends of pedestrian movement in Melbourne, Australia.
-            </p>
+            </p><br>
 
             <h4 id="Dataset" style="text-align: center; color: blue;"> Melbourne, Australia Pedestrian Dataset</h4>
             <p>
@@ -126,7 +130,7 @@
                 Our data has 13 columns. In each row, there is a unique ID, the date and time of the reading in the format: dd/mm/yyyy hh:mm:ss,
                 the year of the sensor reading, the month, the day of the year in number format, the day of the week, the time of day in 24 hour format, the sensor ID,
                 the sensor name, the hourly counts for that sensor, and the latitude and longitude location of the sensor.
-            </p>
+            </p><br>
 
             <h4 id="Our Questions" style="text-align: center; color: blue;">Our Questions</h4>
 
@@ -147,11 +151,33 @@
                 By seeing how deviations in weather or a natural disaster influence pedestrian movement, we will be able to see 
                 what areas of Melbourne need infrastructure improvements to prevent mass pedestrian movement to a specific area 
                 of Melbourne (e.g., adding more shade in areas where pedestrians move away from because of extreme heat).
-            </p>
+            </p><br>
 
             <h4 id="Visuals" style="text-align: center; color: blue;">Visuals Explanation</h4>
+            
+            <p>
+              In order to complete our desired visualization we utlized the Deck.gl framework, designed to simplify visual exploratory
+               data analysis of large datasets. By using deck.gl we are able to visual a base map (using cartomap)
+               and create a layer to visual data based on certain longitude and latitude coordinates. In our case 
+               we used a hexagon shaped layer over a map of Melbourne Australia. Each hexagon is located on a specific street in
+               Melbourne and a color spectrum is utilized the showcase the density of pedestrians at that certain date and hour.
+               The more red a hexagon is, the more pedestrians past through that street at that specific time interval.
+
+            </p>
+
+            <h5>Main Visualization</h5>
+            <h5>Natural Disaster Visualization</h5>
+
+
  
             <h1 id="Contact" style="text-align: center; color: blue;">Contact</h1>
+            <h4>Ashton Sobeck</h4>
+            <p>Senior Computer Science Major at Clemson University</p>
+            <p>Email: asobeck@g.clemson.edu</p>
+
+            <h4>Richard Garcia</h4>
+            <p>Senior Computer Science Major at Clemson University</p>
+            <p>Email: rgarci3@clemson.edu</p>
             
         </div>
     </body>
