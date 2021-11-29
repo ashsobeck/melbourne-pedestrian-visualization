@@ -1,5 +1,6 @@
 var date
-var hour
+var startHour
+let endHour
 const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
 const normal_day_data = d3.csv('data/may_2nd_2019.csv')
 console.log(normal_day_data)
@@ -9,11 +10,12 @@ console.log(normal_day_data)
 
 function filter_data() {
 
-  hour = document.getElementById("hour").value;
+  startHour = document.getElementById("hour1").value;
+  endHour = document.getElementById('hour2').value
   //date = document.getElementById("date").value;
 
   renderLayer()
-  console.log(hour)
+  console.log(startHour, endHour)
 }
 
 //when window loads, js gets the default filter values
@@ -22,11 +24,11 @@ window.onload = function()
   filter_data();
 }
 
-let extremeTooltipChart = (object, date) => {
+let extremeTooltipChart = (sensorId, date) => {
   extreme_weather_data.then(dataset => {
     let dimensions = {
-      width: 600,
-      height: 600, 
+      width: document.documentElement.clientWidth / 4,
+      height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
        bottom: 10,
@@ -34,10 +36,9 @@ let extremeTooltipChart = (object, date) => {
        left: 40 
       }
     }
-    let sensorId = object.points[0].source.sensor_id
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) )
 
-    let svg = d3.select("#barchart")
+    let svg = d3.select("#barchart2")
       .style('width', 600)
       .style('height', 700)
     let xAccessor = d => +d.time
@@ -92,11 +93,11 @@ let extremeTooltipChart = (object, date) => {
   })   
 }
 
-let normalTooltipChart = (object, date) => {
+let normalTooltipChart = (sensorId, date) => {
   normal_day_data.then(dataset => {
     let dimensions = {
-      width: 600,
-      height: 600, 
+      width: document.documentElement.clientWidth / 4,
+      height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
        bottom: 10,
@@ -104,12 +105,11 @@ let normalTooltipChart = (object, date) => {
        left: 40 
       }
     }
-    let sensorId = object.points[0].source.sensor_id
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) )
 
     let svg = d3.select("#barchart")
-      .style('width', 600)
-      .style('height', 700)
+      .style('width', dimensions.width + 10)
+      .style('height', dimensions.height + 10)
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
     let xScale = d3.scaleBand()
@@ -227,12 +227,16 @@ function renderLayer () {
     getElevationValue: d => {
       // console.log(d)
       // console.log(d[0].hourly_counts.replace(/,/g,''))
-      return +d[0].hourly_counts.replace(/,/g,'')
+      return d.reduce(
+        (accumulator, currentValue) => {
+          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+        }, 0
+      )
     },
     extruded: false,
     autoHighlight: true,
     getPosition: (d, i) => {
-      if (+d.time == hour ) {
+      if (+d.time >= startHour && +d.time < endHour ) {
       // console.log(d.time)
       return [+d.longitude, +d.latitude]
       }
@@ -244,13 +248,16 @@ function renderLayer () {
     upperPercentile: 90,
     updateTriggers: {
       //getPosition: date,
-      getPosition: hour,
+      getPosition: startHour,
+      getPosition: endHour,
       //getElevationValue: date, 
-      getElevationValue: hour,
+      getElevationValue: startHour,
+      getElevationValue: endHour,
       //getColorValue: date,
-      getColorValue: hour
+      getColorValue: startHour,
+      getColorValue: endHour
     },
-    onHover: (({object, x, y}) => {
+    onClick: (({object, x, y}) => {
       const el = document.getElementById('tooltip')
       if (object) {
         // console.log(object)
@@ -261,14 +268,21 @@ function renderLayer () {
                               ${object.points[0].source.date_time} <br/>
                               Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
+                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
                           <svg id="barchart"></svg>
+                          <br>
+                          <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
+                          <svg id="barchart2"></svg>
                         </div>`
-        el.style.display = 'block'
+        // el.style.display = 'block'
         el.style.opacity = 0.9
-        el.style.left = x + 'px'
-        el.style.top = y/3 + 'px'
+        // el.style.left = x + 'px'
+        // el.style.top = y/3 + 'px'
 
-        normalTooltipChart(object, date)
+        normalTooltipChart(object.points[0].source.sensor_id, date)
+        extremeTooltipChart(object.points[0].source.sensor_id, date)
       }
       else {
         el.style.opacity = 0.0
@@ -288,18 +302,26 @@ function renderLayer () {
     id: 'melbourne-pedestrian-density',
     pickable: true,
     getColorValue: d => {
-      return +d[0].hourly_counts.replace(/,/g,'')
+      return d.reduce(
+        (accumulator, currentValue) => {
+          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+        }, 0
+      )
     },
 
     getElevationValue: d => {
       // console.log(d)
       // console.log(d[0].hourly_counts.replace(/,/g,''))
-      return +d[0].hourly_counts.replace(/,/g,'')
+      return d.reduce(
+        (accumulator, currentValue) => {
+          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+        }, 0
+      )
     },
     extruded: false,
     autoHighlight: true,
     getPosition: (d, i) => {
-      if (+d.time == hour ) {
+      if ((+d.time >= +startHour && +d.time < +endHour)) {
       // console.log(d.time)
       return [+d.longitude, +d.latitude]
       }
@@ -311,13 +333,16 @@ function renderLayer () {
     upperPercentile: 90,
     updateTriggers: {
       //getPosition: date,
-      getPosition: hour,
+      getPosition: startHour,
+      getPosition: endHour,
       //getElevationValue: date, 
-      getElevationValue: hour,
+      getElevationValue: startHour,
+      getElevationValue: endHour,
       //getColorValue: date,
-      getColorValue: hour
+      getColorValue: startHour,
+      getColorValue: endHour
     },
-    onHover: (({object, x, y}) => {
+    onClick: (({object, x, y}) => {
       const el = document.getElementById('tooltip')
       if (object) {
         // console.log(object)
@@ -328,14 +353,22 @@ function renderLayer () {
                               ${object.points[0].source.date_time} <br/>
                               Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
+                          <br>
+                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
                           <svg id="barchart"></svg>
+                          <br>
+                          <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
+                          <svg id="barchart2"></svg>
                         </div>`
-        el.style.display = 'block'
+        // el.style.display = 'block'
         el.style.opacity = 0.9
-        el.style.left = x + 'px'
-        el.style.top = y/3 + 'px'
+        // el.style.left = x + 'px'
+        // el.style.top = y/3 + 'px'
 
-        normalTooltipChart(object, date)
+        normalTooltipChart(object.points[0].source.sensor_id, date)
+        extremeTooltipChart(object.points[0].source.sensor_id, date)
       }
       else {
         el.style.opacity = 0.0

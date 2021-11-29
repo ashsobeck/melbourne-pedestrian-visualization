@@ -1,5 +1,6 @@
 var date
-var hour
+var startHour
+let endHour
 const data = d3.csv('data/nov_2019.csv')
 let dayData = data
 let chartCount = 0
@@ -8,12 +9,12 @@ let chartCount = 0
 function filter_data() {
 
   date = document.getElementById("date").value;
-  hour = document.getElementById("hour").value;
-  
-  filterChange(date, hour)
+  startHour = document.getElementById("hour1").value;
+  endHour = document.getElementById("hour2").value
+  filterChange(date, startHour, endHour)
   //will probably need to clear data?
   console.log(date)
-  console.log(hour)
+  console.log(startHour, endHour)
 }
 
 //when window loads, js gets the default filter values
@@ -26,8 +27,8 @@ let generateTooltipChart = (object, date) => {
   data.then(dataset => {
     console.log("hi")
     let dimensions = {
-      width: window.screen.availWidth / 6,
-      height: window.screen.availHeight / 6, 
+      width: document.documentElement.clientWidth / 4,
+      height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
        bottom: 10,
@@ -94,7 +95,7 @@ let generateTooltipChart = (object, date) => {
 }
 console.log(dayData)
 
-function filterChange(date, hour) {
+function filterChange(date, startHour, endHour) {
   dayData = data.then((dataset) => dataset.filter(d => {
     return (+d.date_time.split('/')[0] == +date.split('-')[1]) 
     && (+d.date_time.split('/')[1] == +date.split('-')[2]) 
@@ -125,7 +126,7 @@ const deckgl = new DeckGL({
     zoom: 15,
     minZoom: 5,
     maxZoom: 20,
-    pitch: 0
+    pitch: 0,
   },
   controller: true
 });
@@ -152,19 +153,24 @@ function renderLayer () {
     id: 'melbourne-pedestrian-density',
     pickable: true,
     getColorValue: d => {
-      return +d[0].hourly_counts.replace(/,/g,'')
+      return d.reduce(
+        (accumulator, currentValue) => {
+          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+        }, 0
+      )
     },
 
     getElevationValue: d => {
-      // console.log(d)
-      // console.log(d[0].hourly_counts.replace(/,/g,''))
-      return +d[0].hourly_counts.replace(/,/g,'')
+      return d.reduce(
+        (accumulator, currentValue) => {
+          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+        }, 0
+      )
     },
     extruded: false,
     autoHighlight: true,
     getPosition: (d, i) => {
-      if (+d.time == +hour && +d.mdate == +date.split('-')[2] ) {
-      // console.log(d.time)
+      if ((+d.time >= +startHour && +d.time < +endHour) && +d.mdate == +date.split('-')[2] ) {
         return [+d.longitude, +d.latitude]
       }
       else return []
@@ -173,13 +179,20 @@ function renderLayer () {
     radius: 50,
     coverage: 1,
     upperPercentile: 90,
+    transitions: {
+      getPositions: 2000,
+      getColors: 5000
+    },
     updateTriggers: {
       getPosition: date,
-      getPosition: hour,
+      getPosition: startHour,
+      getPosition: endHour,
       getElevationValue: date, 
-      getElevationValue: hour,
+      getElevationValue: startHour,
+      getElevationValue: endHour,
       getColorValue: date,
-      getColorValue: hour
+      getColorValue: startHour,
+      getColorValue: endHour
       
     },
     onClick: (({object, x, y}) => {
@@ -191,19 +204,17 @@ function renderLayer () {
         const availWidth = window.screen.availWidth
         if (object) {
           // console.log(object)
+          // using elevation value for aggregation metrics
           el.innerHTML = `<div>
-                            <h2>${object.points[0].source.sensor_description} <br/>
+                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
                                 ${object.position.join(', ')} <br/>
                                 ${object.points[0].source.date_time} <br/>
-                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
-                            </h2> 
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+                            </h2>  
                             <svg id="barchart"></svg>
                           </div>`
           el.style.display = 'block'
           el.style.opacity = 0.9
-          // el.style.width = availWidth / 6 + 10
-          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
-          // el.style.top = (availHeight - (availHeight / 2)) + 'px'
   
           generateTooltipChart(object, date)
         }
@@ -221,20 +232,15 @@ function renderLayer () {
         if (object) {
           // console.log(object)
           el.innerHTML = `<div>
-                            <h2>${object.points[0].source.sensor_description} <br/>
+                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
                                 ${object.position.join(', ')} <br/>
                                 ${object.points[0].source.date_time} <br/>
-                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
                             </h2> 
                             <svg id="barchart2"></svg>
                           </div>`
-          // el.style.display = 'float'
-          // el.style.position = 'absolute'
           el.style.display = 'block'
           el.style.opacity = 0.9
-          // el.style.width = availWidth / 6 + 10
-          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
-          // el.style.top = ((availHeight / 6) + 10) + 'px'
   
           generateTooltipChart(object, date)
         }
@@ -252,19 +258,15 @@ function renderLayer () {
         if (object) {
           // console.log(object)
           el.innerHTML = `<div>
-                            <h2>${object.points[0].source.sensor_description} <br/>
+                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
                                 ${object.position.join(', ')} <br/>
                                 ${object.points[0].source.date_time} <br/>
-                                Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
                             </h2> 
                             <svg id="barchart"></svg>
                           </div>`
-          // el.style.display = 'block'
           el.style.display = 'block'
           el.style.opacity = 0.9
-          // el.style.width = availWidth / 6 + 10
-          // el.style.left = (availWidth - (availWidth / 2)) + 'px'
-          // el.style.top = (availHeight - (availHeight / 2)) + 'px'
   
           generateTooltipChart(object, date)
         }

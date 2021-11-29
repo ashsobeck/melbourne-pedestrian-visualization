@@ -21,3 +21,15 @@ label {
   width: 100px;
   margin: 0.4rem 0;
 }
+
+#tooltip {
+  background: white;
+  /* margin: 10px; */
+  /* padding: 10px; */
+}
+
+#charts {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
