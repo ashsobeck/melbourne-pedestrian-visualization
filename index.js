@@ -41,7 +41,7 @@ let generateTooltipChart = (object, date) => {
     let svgId = chartCount === 1 ? "#barchart" : "#barchart2"
     let svg = d3.select(svgId)
       .style('width', dimensions.width + 10)
-      .style('height', dimensions.height + 10)
+      .style('height', dimensions.height + 30)
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
     let xScale = d3.scaleBand()
@@ -127,6 +127,12 @@ const deckgl = new DeckGL({
     minZoom: 5,
     maxZoom: 20,
     pitch: 0,
+  },
+  getTooltip: ({object}) => {
+    //console.log(object)
+    return object && `${object.points[0].source.sensor_description}
+    ${object.position.join(', ')} 
+    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
   },
   controller: true
 });

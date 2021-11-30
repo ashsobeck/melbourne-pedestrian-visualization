@@ -202,13 +202,12 @@ const deckgl2 = new DeckGL({
     maxZoom: 20,
     pitch: 0,
   },
-
-//   getTooltip: ({object}) => {
-//     //console.log(object)
-//     return object && `${object.points[0].source.sensor_description}
-//     ${object.position.join(', ')} 
-//     Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
-// },
+  getTooltip: ({object}) => {
+    //console.log(object)
+    return object && `${object.points[0].source.sensor_description}
+    ${object.position.join(', ')} 
+    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+  },
   controller: true
 });
 
@@ -347,6 +346,7 @@ function renderLayer () {
       if (object) {
         // console.log(object)
         el.innerHTML = `<div>
+                          <button></button>
                           <h2>Normal Day <br/>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
