@@ -144,11 +144,7 @@
     </div>
     <div id="charts">
       <div class="box" id="tooltip"></div> 
-    </div>
-
-
-
-    
+    </div>   
   
     <div id="map1", style="height:45%; position: relative;"></div>
     <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1>
@@ -160,7 +156,8 @@
   
  
   <script src="comparison.js"></script>
-    <div class="notification", style="margin-top: -580px; margin-right: 30px; margin-left: 10px; z-index: 1;">
+  <div class="columns is-centered">
+    <div class="column is-half notification", style="margin-top: -580px; z-index: 1; width: 60%; height: fit-content;">
       <button class="delete"></button>
       This visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
       November 21st, 2016 as our extreme weather day. <br><br> On November 21st, 2016 an asthma thunderstorm kills 9 and hospitalises hundreds, high heat and humidity 
@@ -168,6 +165,8 @@
       and its suburbs raising pollen counts and triggering thousands of severe asthma attacks. The massive number of attacks overloaded emergency services and contributed to the fatalities.
       <br><br> We will compare the pedestrian density of this specific day to a normal weather day, May 2nd, 2019.
     </div>
+  </div>
+    
   
     <script>
       document.addEventListener('DOMContentLoaded', () => {
