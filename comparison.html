@@ -6,6 +6,7 @@
     <title>Melbourne Pedestrian Data Visualization</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="comparison.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
@@ -18,10 +19,6 @@
     <nav class="navbar is-link " role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand ">
-          <!-- <a class="navbar-item" href="https://bulma.io">
-            <img src="Australia_Outline.svg" height="28" width="28" class="australia-svg">
-          </a>
-         -->
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMelbourne">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -142,20 +139,25 @@
       </div>
       </div>
     </div>
-    <div id="charts">
-      <div class="box" id="tooltip"></div> 
-    </div>   
-  
-    <div id="map1", style="height:45%; position: relative;"></div>
-    <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1>
-    <hr style="margin: .5rem 0">
-    <h1"> <strong>Normal Weather Day (May 2nd, 2019) ↓</strong></h1>
 
-    <div id="map2", style="height:50%; position: relative; "> </div>
+
+      <div id="map1", style="height:45%; position: relative;">
+        <div id="charts", style="position: absolute; z-index: 1; height: 600px;">
+          <!-- style="height:600px" -->
+          <div class="box" id="tooltip"></div> 
+        </div>   
+      </div>
+      <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1>
+      <hr style="margin: .5rem 0">
+      <h1"> <strong>Normal Weather Day (May 2nd, 2019) ↓</strong></h1>
+      <div id="map2", style="height:50%; position: relative; "></div>
+   
+
   </body>
   
  
   <script src="comparison.js"></script>
+  
   <div class="columns is-centered">
     <div class="column is-half notification", style="margin-top: -580px; z-index: 1; width: 60%; height: fit-content;">
       <button class="delete"></button>
@@ -166,7 +168,7 @@
       <br><br> We will compare the pedestrian density of this specific day to a normal weather day, May 2nd, 2019.
     </div>
   </div>
-    
+  
   
     <script>
       document.addEventListener('DOMContentLoaded', () => {
