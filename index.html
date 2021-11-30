@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -10,20 +9,14 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
-    <!-- <script type = "text/javascript" src="index.js"></script> -->
     <!-- optional if mapbox base map is needed -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
   </head>
-
   <body>
     <nav class="navbar is-link " role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand ">
-          <!-- <a class="navbar-item" href="https://bulma.io">
-            <img src="Australia_Outline.svg" height="28" width="28" class="australia-svg">
-          </a>
-         -->
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMelbourne">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -32,39 +25,44 @@
         </div>
 
         <div id="navbarMelbourne" class="navbar-menu">
-          
-            
           <div class="navbar-start">
+
             <a class="navbar-item " href="index.html">
               <strong>Home</strong>
             </a>
 
-            <a class="navbar-item " href="revised.html">
-              <strong>New</strong>
-            </a>
-
-            <a class="navbar-item" href="comparison.html">
-              <strong>Natural Disaster Visualization</strong>
+            <a class="navbar-item" href="#Inspiration">
+              <strong>Inspiration</strong>
             </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <strong>More</strong>
+              <a class="navbar-link ">
+                <strong>About this Visual</strong>
               </a>
-
               <div class="navbar-dropdown">
-                <a class="navbar-item "  href="about.html">
-                  About
+                <a class="navbar-item "  href="#Dataset">
+                  Melbourne, Australia Pedestrian Dataset
                 </a>
-                <a class="navbar-item "  href="inspiration.html">
-                  Inspiration
+                <a class="navbar-item " a href="#Our Questions">
+                  Our Questions
                 </a>
-                <a class="navbar-item " href="contact.html">
-                  Contact
+                <a class="navbar-item " href="#Visuals">
+                  Visuals Explanation
                 </a>
-
               </div>
             </div>
+
+            <a class="navbar-item" href="#Contact">
+                <strong>Contact</strong>
+              </a>
+
+            <a class="button is-success" style="position:sticky; top:9px" href="main_visual.html">
+                <strong>Main Visualization</strong>
+              </a>
+
+            <a class="button is-success" style="position:relative; left:5px; top:9px" href="comparison.html">
+                <strong>Natural Disaster Visualization</strong>
+              </a>
           </div>
 
           <div class="navbar-end">
@@ -83,109 +81,103 @@
         </div>
       </div>
     </nav>
+      <body>
+        <div class ="content" style="word-wrap: break-word; margin-left: 10px; margin-right: 15px;">
+            <h1 id="Inspiration" style="text-align: center; color: blue;">Inspiration</h1>
+            <p>
+                As 6030 students, we focused on relating our problem to state-of-the-art research. 
+                We were interested in new and fresh visualization problems concerning city density and how these visualizations could help solve infrastructure issues. 
+                We found an article on the IEEE Transactions on Visualization and Computer Graphics. The article is titled <a href="https://ieeexplore-ieee-org.libproxy.clemson.edu/document/9086086" target="_blank">“UrbanMotion: Visual Analysis of Metropolitan-Scale Sparse Trajectories.”</a>
+            </p>
 
-    
-    
-    <!-- <section class="hero is-fullheight-with-navbar is-light">
-      <div class="hero-body has-text-centered">
-        <div class="container">
-          <p class="title has-text-centered">UrbanMotion-like Visualization Here</p>
-          <p class="subtitle has-text-centered">SVG Elements will be entered later</p>
+            <p>
+                The main summary of the research article uses smart device data in three major 
+                cities in China (Beijing, Tianjin, and Tangshan) to create a dashboard called UrbanMotion (Figure 1) that visualizes multi-directional population flows of each city. 
+                This visualization was found helpful in “visually analyzing population movement in modern cities and having the potential to help in real-world applications 
+                such as “traffic optimization, urban planning, and business site configuration. We took inspiration from this article to formulate the problems we want to solve using a dataset we found of pedestrian movement in Melbourne, Australia.
+            </p>
+
+            <figure>
+                <img src="UrbanMotion_Dashboard.gif"  width="500" height="333" style ="position:relative; left:0px">
+                <figcaption>Figure 1: UrbanMotion Dashboard</figcaption>
+                <figcaption>
+                  UrbanMotion user interface: (a) movement visualization showing five major regions in Beijing during commute time; 
+                  (b) time/date selection panel, the morning (7AM-10AM) of July 12th is selected; 
+                  (c) algorithm configuration menu for flow generation; (d) visualization control panel.</figcaption>
+            </figure>
+
+            <p>
+                For our visualization design, we want to draw reference and reflect on the paper that we have based our project on. 
+                Because staying close to state-of-the-art research is one of our primary goals. To achieve this
+                goal, we reviewed the main visualizations that the paper showed throughout. Our visualization here is the result of that research.
+            </p><br>
+
+            <h1 style="text-align: center; color: blue;">About This Visualization</h1>
+            <p> By using a dataset of pedestrian sensors that count the number of pedestrians at certain streets, 
+                we are seeking to understand the trends of pedestrian movement in Melbourne, Australia.
+            </p><br>
+
+            <h4 id="Dataset" style="text-align: center; color: blue;"> Melbourne, Australia Pedestrian Dataset</h4>
+            <p>
+                We are using a dataset collected by the city of Melbourne, Australia that shows the number 
+                of pedestrians identified by sensors in different areas of Melbourne. Currently, there are 3.86 million rows
+                of data for this dataset. The data starts in 2009, and is updated every month.
+            </p>
+            <p>
+                Our data has 13 columns. In each row, there is a unique ID, the date and time of the reading in the format: dd/mm/yyyy hh:mm:ss,
+                the year of the sensor reading, the month, the day of the year in number format, the day of the week, the time of day in 24 hour format, the sensor ID,
+                the sensor name, the hourly counts for that sensor, and the latitude and longitude location of the sensor.
+            </p><br>
+
+            <h4 id="Our Questions" style="text-align: center; color: blue;">Our Questions</h4>
+
+            <p>
+                There are two primary questions we would like to answer with our visualization:
+            </p>
+
+            <ol>
+               <li><strong>How can the knowledge of massive human movement in Melbourne contribute to optimizing infrastructures such as energy, traffic, and urban planning?</strong></li> 
+               <li><strong> Is pedestrian movement influenced by a deviation in weather (e.g. rain, extreme heat) or a natural disaster (e.g. earthquake, flood)?</strong></li> 
+            </ol>
+
+            <p>
+                Multiple benefits arise from answering these two questions that are interrelated to each other. 
+                By visualizing our pedestrian dataset we would like to visualize mass movement of pedestrians.
+                This will allow us to focus city infrastructure efforts toward the most heavily populated routes of pedestrians, 
+                avoiding unnecessary costs as well as improving infrastructure that is the most important to pedestrians. 
+                By seeing how deviations in weather or a natural disaster influence pedestrian movement, we will be able to see 
+                what areas of Melbourne need infrastructure improvements to prevent mass pedestrian movement to a specific area 
+                of Melbourne (e.g., adding more shade in areas where pedestrians move away from because of extreme heat).
+            </p><br>
+
+            <h4 id="Visuals" style="text-align: center; color: blue;">Visuals Explanation</h4>
+            
+            <p>
+              In order to complete our desired visualization we utlized the Deck.gl framework, designed to simplify visual exploratory
+               data analysis of large datasets. By using deck.gl we are able to visual a base map (using cartomap)
+               and create a layer to visual data based on certain longitude and latitude coordinates. In our case 
+               we used a hexagon shaped layer over a map of Melbourne Australia. Each hexagon is located on a specific street in
+               Melbourne and a color spectrum is utilized the showcase the density of pedestrians at that certain date and hour.
+               The more red a hexagon is, the more pedestrians past through that street at that specific time interval.
+
+            </p>
+
+            <h5>Main Visualization</h5>
+            <h5>Natural Disaster Visualization</h5>
+
+
+ 
+            <h1 id="Contact" style="text-align: center; color: blue;">Contact</h1>
+            <h4>Ashton Sobeck</h4>
+            <p>Senior Computer Science Major at Clemson University</p>
+            <p>Email: asobeck@g.clemson.edu</p>
+
+            <h4>Richard Garcia</h4>
+            <p>Senior Computer Science Major at Clemson University</p>
+            <p>Email: rgarci3@clemson.edu</p>
+            
         </div>
-         <svg ></svg>
-      </div>
-    </section> -->
+      </body>
 
-    <div id="control-panel" class="box">
-      <div>
-        <form action="form" onsubmit="return false;">
-          <label for="birthday">Pick a Date:</label>
-          <input type="date" id="date" name="date" value="2019-11-01", min="2019-11-01", max="2019-12-01"><br>
-          <label for="hour1">Pick a Starting Hour:</label>
-          <select id="hour1" name="hour1">
-            <option value=0>12am</option>
-            <option value=1>1am</option>
-            <option value=2>2am</option>
-            <option value=3>3am</option>
-            <option value=4>4am</option>
-            <option value=5>5am</option>
-            <option value=6>6am</option>
-            <option value=7>7am</option>
-            <option value=8>8am</option>
-            <option value=9>9am</option>
-            <option value=10>10am</option>
-            <option value=11>11am</option>
-            <option value=12>12pm</option>
-            <option value=13>1pm</option>
-            <option value=14>2pm</option>
-            <option value=15>3pm</option>
-            <option value=16>4pm</option>
-            <option value=17 selected>5pm</option>
-            <option value=18>6pm</option>
-            <option value=19>7pm</option>
-            <option value=20>8pm</option>
-            <option value=21>9pm</option>
-            <option value=22>10pm</option>
-            <option value=23>11pm</option>
-          </select>
-          <br>
-          <label for="hour2">Pick an Ending Hour:</label>
-          <select id="hour2" name="hour2">
-            <option value=0>12am</option>
-            <option value=1>1am</option>
-            <option value=2>2am</option>
-            <option value=3>3am</option>
-            <option value=4>4am</option>
-            <option value=5>5am</option>
-            <option value=6>6am</option>
-            <option value=7>7am</option>
-            <option value=8>8am</option>
-            <option value=9>9am</option>
-            <option value=10>10am</option>
-            <option value=11>11am</option>
-            <option value=12>12pm</option>
-            <option value=13>1pm</option>
-            <option value=14>2pm</option>
-            <option value=15>3pm</option>
-            <option value=16>4pm</option>
-            <option value=17>5pm</option>
-            <option value=18 selected>6pm</option>
-            <option value=19>7pm</option>
-            <option value=20>8pm</option>
-            <option value=21>9pm</option>
-            <option value=22>10pm</option>
-            <option value=23>11pm</option>
-          </select>
-          <br>
-          <input type="submit" onclick="filter_data();">
-        </form>
-      </div>
-      <div>            
-      </div>
-    </div>
-  </body>
-  <script src="index.js"></script>
-  <div id="charts">
-    <div id="tooltip" class="box"></div>
-    <div id="tooltip2" class="box"></div>
-  </div>
-  <div class="notification", style="margin-top: 700px; margin-right: 25px; margin-left: 10px;">
-    <button class="delete"></button>
-    This visualization shows the hourly pedestrian density on a certain street, day, and hour in Melbourne, Australia for the month of<strong> November, 2019</strong>.
-    The hexagon layer hovers over a street and its height and color presents the pedestrian count for that specific street.
-    By <strong>hovering</strong> over a hexagon you will be greeted with more information for that street.
-    You can also filter by date and hour using the filter box.
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
-    const $notification = $delete.parentNode;
-    $delete.addEventListener('click', () => {
-      $notification.parentNode.removeChild($notification);
-       });
-      });
-    });
-  </script>
 
 </html>
