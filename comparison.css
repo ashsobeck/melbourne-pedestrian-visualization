@@ -24,15 +24,20 @@ label {
 
 #tooltip {
   background: white;
-
+  width: fit-content;
   /* margin: 10px; */
   /* padding: 10px; */
 }
 
 #charts {
-  position: absolute;
+  /* position: absolute; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  background: white;
+}
+
+#topTooltip {
   display: flex;
-  flex-direction: column;
-  width: fit-content;
-  height: fit-content;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -6,6 +6,10 @@ const normal_day_data = d3.csv('data/may_2nd_2019.csv')
 console.log(normal_day_data)
 
 
+const delTooltip = () => {
+  const tooltip = document.getElementById('tooltips')
+  tooltip.parentNode.removeChild(tooltip)
+}
 
 
 function filter_data() {
@@ -64,7 +68,7 @@ let extremeTooltipChart = (sensorId, date) => {
       .attr('y', d => yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
-      .attr('fill', "steelblue")
+      .attr('fill', "#F59B00")
 
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
@@ -186,7 +190,7 @@ const deckgl = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count: ${object.points[0].source.hourly_counts} Pedestrians`
 },
   controller: true
 });
@@ -206,7 +210,7 @@ const deckgl2 = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count: ${object.points[0].source.hourly_counts} Pedestrians`
   },
   controller: true
 });
@@ -257,11 +261,17 @@ function renderLayer () {
       getColorValue: endHour
     },
     onClick: (({object, x, y}) => {
-      const el = document.getElementById('tooltip')
+      const el = document.getElementById('charts')
       if (object) {
         // console.log(object)
-        el.innerHTML = `<div>
-                          <h2>Normal Day <br/>
+        el.style.height = document.documentElement.clientHeight / 2
+        el.innerHTML = `<div id="tooltips">
+                          <div id="topTooltip">
+                            <h2>Normal Day </h2> 
+                            <button class="delete" onclick="delTooltip()"></button>
+                          </div>
+                         
+                          <h2>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
                               ${object.points[0].source.date_time} <br/>
@@ -275,8 +285,9 @@ function renderLayer () {
                           <br>
                           <svg id="barchart2"></svg>
                         </div>`
-        // el.style.display = 'block'
-        el.style.opacity = 0.9
+        el.style.display = 'block'
+        el.style.width = document.documentElement.clientWidth / 3
+        // el.style.opacity = 0.9
         // el.style.left = x + 'px'
         // el.style.top = y/3 + 'px'
 
@@ -290,7 +301,6 @@ function renderLayer () {
     })
   })
 
-  
 
   deckgl.setProps({
     layers: [hexLayer_weather]

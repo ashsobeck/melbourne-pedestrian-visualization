@@ -6,6 +6,12 @@ let dayData = data
 let chartCount = 0
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
+const delTooltip = () => {
+  const tooltip = document.getElementById('tooltips')
+  tooltip.parentNode.removeChild(tooltip)
+  tooltip.parentNode.parentNode.style.opacity = 0.0
+}
+
 function filter_data() {
 
   date = document.getElementById("date").value;
@@ -132,7 +138,7 @@ const deckgl = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Hourly Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count: ${object.points[0].source.hourly_counts} Pedestrians`
   },
   controller: true
 });
@@ -211,11 +217,15 @@ function renderLayer () {
         if (object) {
           // console.log(object)
           // using elevation value for aggregation metrics
-          el.innerHTML = `<div id>
-                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
-                                ${object.position.join(', ')} <br/>
-                                ${object.points[0].source.date_time} <br/>
-                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+          el.innerHTML = `<div id="tooltips">
+                            <div id="topTooltip">
+                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                              <button class="delete" onclick="delTooltip()"></button>
+                            </div>
+                            <h2>
+                              ${object.position.join(', ')} <br/>
+                              ${object.points[0].source.date_time} <br/>
+                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
                             </h2>  
                             <svg id="barchart"></svg>
                           </div>`
@@ -240,11 +250,15 @@ function renderLayer () {
         const availWidth = window.screen.availWidth
         if (object) {
           // console.log(object)
-          el.innerHTML = `<div>
-                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
-                                ${object.position.join(', ')} <br/>
-                                ${object.points[0].source.date_time} <br/>
-                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+          el.innerHTML = `<div id="tooltips">
+                            <div id="topTooltip">
+                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                              <button class="delete" onclick="delTooltip()"></button>
+                            </div>
+                            <h2>
+                              ${object.position.join(', ')} <br/>
+                              ${object.points[0].source.date_time} <br/>
+                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
                             </h2> 
                             <svg id="barchart2"></svg>
                           </div>`
@@ -266,11 +280,15 @@ function renderLayer () {
         const availWidth = window.screen.availWidth
         if (object) {
           // console.log(object)
-          el.innerHTML = `<div>
-                            <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
-                                ${object.position.join(', ')} <br/>
-                                ${object.points[0].source.date_time} <br/>
-                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+          el.innerHTML = `<div id="tooltips">
+                            <div id="topTooltip">
+                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                              <button class="delete" onclick="delTooltip()"></button>
+                            </div>
+                            <h2>
+                              ${object.position.join(', ')} <br/>
+                              ${object.points[0].source.date_time} <br/>
+                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
                             </h2> 
                             <svg id="barchart"></svg>
                           </div>`
