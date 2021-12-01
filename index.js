@@ -8,8 +8,8 @@ let chartCount = 0
 //Year, Month, Day
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
-  tooltip.parentNode.removeChild(tooltip)
-  tooltip.parentNode.parentNode.style.opacity = 0.0
+  tooltip.parentNode.style.opacity = 0.0;
+  tooltip.parentNode.innerHTML= "<div></div>"
 }
 
 function filter_data() {

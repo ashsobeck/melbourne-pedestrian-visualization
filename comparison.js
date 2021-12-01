@@ -8,6 +8,7 @@ console.log(normal_day_data)
 
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
+  tooltip.parentNode.style.opacity = 0.0
   tooltip.parentNode.removeChild(tooltip)
 }
 
@@ -287,7 +288,7 @@ function renderLayer () {
                         </div>`
         el.style.display = 'block'
         el.style.width = document.documentElement.clientWidth / 3
-        // el.style.opacity = 0.9
+        el.style.opacity = 0.9
         // el.style.left = x + 'px'
         // el.style.top = y/3 + 'px'
 

@@ -38,3 +38,8 @@ label {
   flex-direction: column;
   width: fit-content;
 }
+#topTooltip {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
