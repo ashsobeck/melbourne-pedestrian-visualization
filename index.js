@@ -211,7 +211,7 @@ function renderLayer () {
         if (object) {
           // console.log(object)
           // using elevation value for aggregation metrics
-          el.innerHTML = `<div>
+          el.innerHTML = `<div id>
                             <h2><strong>${object.points[0].source.sensor_description}</strong> <br/>
                                 ${object.position.join(', ')} <br/>
                                 ${object.points[0].source.date_time} <br/>
@@ -223,6 +223,9 @@ function renderLayer () {
           el.style.opacity = 0.9
   
           generateTooltipChart(object, date)
+
+          
+          
         }
         else {
           el.style.opacity = 0.0
@@ -287,9 +290,12 @@ function renderLayer () {
     })
   })
 
+  
+
   deckgl.setProps({
     layers: [hexLayer]
   })
   console.log(deck)
 }
+
 

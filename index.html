@@ -110,7 +110,7 @@
                 For our visualization design, we want to draw reference and reflect on the paper that we have based our project on. 
                 Because staying close to state-of-the-art research is one of our primary goals. To achieve this
                 goal, we reviewed the main visualizations that the paper showed throughout. Our visualization here is the result of that research.
-            </p><br>
+            </p><br><br><br>
 
             <h1 style="text-align: center; color: blue;">About This Visualization</h1>
             <p> By using a dataset of pedestrian sensors that count the number of pedestrians at certain streets, 
@@ -163,7 +163,85 @@
             </p>
 
             <h5>Main Visualization</h5>
+            <p>
+              This visualization shows the hourly pedestrian density on a certain street, day, and hour in Melbourne, Australia for the month of<strong> November, 2019</strong>.
+              The hexagon layer hovers over a street and its color presents the pedestrian count for that specific street.
+              By <strong>hovering</strong> over a hexagon you will be greeted with the street name, coordinates of that 
+              street sensor and the count of pedestrians for that time range (figure 2).
+
+              <figure>
+                <img src="Hover_over_hexagon.png"  width="500" height="333" style ="position:relative; left:0px">
+                <figcaption>Figure 2: Hovering over Hexagon</figcaption>
+              </figure>
+            </p>
+
+            <p>
+              You can also filter by date and hour range using the filter box on the map. You can pick any day in the month
+              November, 2019. You can choose any time range by picking a starting hour and an ending hour (figure 3).
+
+              <figure>
+                <img src="filter.png"  width="500" height="333" style ="position:relative; left:0px">
+                <figcaption>Figure 3: Filter Box on Visual</figcaption>
+              </figure>
+            </p>
+
+
+            <p>
+              You can click on a hexagon and a tooltip will appear on the left of the screen showing the street name, coordinates
+              of that street sensor, the date, the pedestrian count for the time range, and a barchart that shows the pedestrain 
+              count for each hour of the day. The x-axis presents the time with the labels 0-23 where <strong>0 = midnight-1am, 1 = 1am-2am, 2 = 2am-3am, ..., and 23 = 11pm-midnight </strong>
+              If you click on another hexagon, that hexagon's tooltip will show below the tooltip you first clicked (figure 4).
+
+              <figure>
+                <img src="Tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
+                <figcaption>Figure 4: Tooltip on Visual</figcaption>
+              </figure>
+            </p>
+
+            <p>Here we summarize all the features of how the visualization works.
+            </p>
+            <div style="text-align: center;">
+              <video id="video" width="500" controls autoplay style="right: 500px;">
+                <source src="visual recording.mov" type="video/mp4">
+              </video>
+            </div><br><br><br><br>
+
+
             <h5>Natural Disaster Visualization</h5>
+            <p>
+              Our natural disaster visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
+              <strong>November 21st, 2016 as our extreme weather day</strong>.
+            </p>
+
+            <p>
+              On November 21st, 2016 an asthma thunderstorm kills 9 and hospitalises hundreds, high heat and humidity 
+              cause thunderstorms to form northwest of the city, due to excessive grass growth in the north 
+              and west of Melbourne these storms send pollen into Melbourne 
+              and its suburbs raising pollen counts and triggering thousands of severe asthma attacks. 
+              The massive number of attacks overloaded emergency services and contributed to the fatalities.
+              We will compare the pedestrian density of this specific day to a <strong>normal weather day, May 2nd, 2019</strong>.
+            </p>
+
+            <p> 
+              This visualization functions exactly the same as the main visualization when some changes. We are presenting 
+              both dates we are comparing as side by side visualizations. The top visual concerns the extreme weather day and 
+              the bottom visual shows the normal weather day. We are also utilizing the same filter box and hover information box as 
+              the main visulization (figure 5).
+              
+              <figure>
+                <img src="natural_disaster.png"  width="500" height="333" style ="position:relative; left:0px">
+                <figcaption>Figure 5: Natural Disaster Visual</figcaption>
+              </figure>
+            </p>
+
+            <p> 
+              The tooltip popup is the same as the main visualization except that when you click a hexagon in either
+              visual it will show the barchart of that hexagon you click as well as the bar chart of the equivalent hexagon
+              in the other visual, if it exists.
+
+
+              ADD PICTURE 
+            </p>
 
 
  
