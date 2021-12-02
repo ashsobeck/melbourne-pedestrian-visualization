@@ -33,7 +33,7 @@ let generateTooltipChart = (object, date) => {
   data.then(dataset => {
     console.log("hi")
     let dimensions = {
-      width: document.documentElement.clientWidth / 4,
+      width: document.documentElement.clientWidth / 3,
       height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
