@@ -25,8 +25,8 @@ label {
 #tooltip {
   background: white;
   width: fit-content;
-  /* margin: 10px; */
-  /* padding: 10px; */
+  margin: 10px;
+  padding: 10px;
 }
 
 #charts {
@@ -35,6 +35,8 @@ label {
   /* flex-direction: column; */
   opacity: 0;
   background: white;
+  margin: 10px;
+  padding: 10px;
 }
 
 #topTooltip {
