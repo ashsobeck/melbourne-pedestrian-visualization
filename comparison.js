@@ -44,8 +44,8 @@ let extremeTooltipChart = (sensorId, date) => {
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) )
 
     let svg = d3.select("#barchart2")
-      .style('width', 600)
-      .style('height', 700)
+      .style('width', dimensions.width + 10)
+      .style('height', dimensions.height + 10)
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
     let xScale = d3.scaleBand()
@@ -268,7 +268,7 @@ function renderLayer () {
         el.style.height = document.documentElement.clientHeight / 5
         el.innerHTML = `<div id="tooltips">
                           <div id="topTooltip">
-                            <h2>Normal Day </h2> 
+                            <h2>Extreme Day Clicked</h2> 
                             <button class="delete" onclick="delTooltip()"></button>
                           </div>
                          
@@ -287,7 +287,7 @@ function renderLayer () {
                           <svg id="barchart2"></svg>
                           <br>
                         </div>`
-        el.style.display = 'block'
+        // el.style.display = 'block'
         el.style.width = document.documentElement.clientWidth / 3
         el.style.opacity = 0.9
         // el.style.left = x + 'px'
@@ -354,18 +354,21 @@ function renderLayer () {
       getColorValue: endHour
     },
     onClick: (({object, x, y}) => {
-      const el = document.getElementById('tooltip')
+      const el = document.getElementById('charts')
       if (object) {
         // console.log(object)
-        el.innerHTML = `<div>
-                          <button></button>
-                          <h2>Normal Day <br/>
+        el.innerHTML = `<div id="tooltips">
+                          <div id="topTooltip">
+                            <h2>Normal Day Clicked</h2> 
+                            <button class="delete" onclick="delTooltip()"></button>
+                          </div>
+                        
+                          <h2>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
                               ${object.points[0].source.date_time} <br/>
                               Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
-                          <br>
                           <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
                           <br>
                           <svg id="barchart"></svg>
@@ -373,6 +376,7 @@ function renderLayer () {
                           <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
                           <br>
                           <svg id="barchart2"></svg>
+                          <br>
                         </div>`
         // el.style.display = 'block'
         el.style.opacity = 0.9
