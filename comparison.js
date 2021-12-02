@@ -32,7 +32,7 @@ window.onload = function()
 let extremeTooltipChart = (sensorId, date) => {
   extreme_weather_data.then(dataset => {
     let dimensions = {
-      width: document.documentElement.clientWidth / 4,
+      width: document.documentElement.clientWidth / 3,
       height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
@@ -101,7 +101,7 @@ let extremeTooltipChart = (sensorId, date) => {
 let normalTooltipChart = (sensorId, date) => {
   normal_day_data.then(dataset => {
     let dimensions = {
-      width: document.documentElement.clientWidth / 4,
+      width: document.documentElement.clientWidth / 3,
       height: document.documentElement.clientHeight / 5, 
       margin: {
        top: 10, 
