@@ -191,7 +191,7 @@ const deckgl = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count From ${startHour}:00 to ${endHour}:00 : ${object.elevationValue} Pedestrians`
 },
   controller: true
 });
@@ -211,7 +211,7 @@ const deckgl2 = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count From ${startHour}:00 to ${endHour}:00 : ${object.elevationValue} Pedestrians`
   },
   controller: true
 });
@@ -275,8 +275,6 @@ function renderLayer () {
                           <h2>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
                           <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
                           <br>
@@ -366,8 +364,6 @@ function renderLayer () {
                           <h2>
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Hourly Count for ${object.points[0].source.time}:00: ${object.points[0].source.hourly_counts} Pedestrians
                           </h2> 
                           <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
                           <br>

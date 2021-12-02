@@ -138,7 +138,7 @@ const deckgl = new DeckGL({
     //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
-    Count: ${object.points[0].source.hourly_counts} Pedestrians`
+    Count From ${startHour}:00 to ${endHour}:00 : ${object.elevationValue} Pedestrians`
   },
   controller: true
 });
