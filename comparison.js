@@ -265,7 +265,7 @@ function renderLayer () {
       const el = document.getElementById('charts')
       if (object) {
         // console.log(object)
-        el.style.height = document.documentElement.clientHeight / 2
+        el.style.height = document.documentElement.clientHeight / 5
         el.innerHTML = `<div id="tooltips">
                           <div id="topTooltip">
                             <h2>Normal Day </h2> 
@@ -285,6 +285,7 @@ function renderLayer () {
                           <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
                           <br>
                           <svg id="barchart2"></svg>
+                          <br>
                         </div>`
         el.style.display = 'block'
         el.style.width = document.documentElement.clientWidth / 3

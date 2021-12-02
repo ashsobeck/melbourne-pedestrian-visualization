@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Melbourne Pedestrian Data Visualization</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="index.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
     <link rel="stylesheet" href="comparison.css">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -33,7 +33,7 @@
             </a>
          
 
-            <a class="button is-success" style="position:sticky; top:9px" href="main_visual.html">
+            <a class="button is-success" style="position:relative; top:9px" href="main_visual.html">
               <strong>Main Visualization</strong>
             </a>
 
@@ -130,22 +130,34 @@
 
 
       <div id="map1", style="height:45%; position: relative;">
-        <div class="box" id="charts", style="position: absolute; z-index: 1; ">
+        <div class="box" id="charts", style="position: absolute; z-index: 1; height: 600px; ">
           <!-- <div class="box" id="tooltip"></div>  -->
         </div>   
+        <div class="columns is-centered" style="margin-top: .2px;">
+          <div class="box" style=" position: absolute; z-index: 1;">
+            <p><strong>Extreme Weather Day</strong></p>
+            <p><strong>(November 21st, 2016</strong>)</p>
+          </div>
+        </div>
       </div>
-      <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1>
+      <!-- <h1> <strong>Extreme Weather Day (November 21st, 2016) <strong>↑</strong></h1> -->
       <hr style="margin: .5rem 0">
-      <h1"> <strong>Normal Weather Day (May 2nd, 2019) ↓</strong></h1>
-      <div id="map2", style="height:50%; position: relative; "></div>
-   
-
+      <!-- <h1"> <strong>Normal Weather Day (May 2nd, 2019) ↓</strong></h1> -->
+      <div id="map2", style="height:50%; position: relative; ">
+        <div class="columns is-centered" style="margin-top: .1px;">
+          <div class="box" style=" position: absolute; z-index: 1;">
+            <p><strong>Normal Weather Day</strong></p>
+            <p><strong>(May 2nd, 2019)</strong></p>
+          </div>
+        </div>
+      </div>
+      <script src="comparison.js"></script>
   </body>
   
  
-  <script src="comparison.js"></script>
+  <!-- <script src="comparison.js"></script> -->
   
-  <div class="columns is-centered">
+  <!-- <div class="columns is-centered">
     <div class="column is-half notification", style="margin-top: -580px; z-index: 1; width: 60%; height: fit-content;">
       <button class="delete"></button>
       This visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
@@ -166,7 +178,7 @@
          });
         });
       });
-    </script>
+    </script> -->
 
     
 </html>
