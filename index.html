@@ -83,188 +83,197 @@
       </div>
     </nav>
       <body>
-        <div class="title is-1 has-text-centered ">Melbourne Pedestrian Density</div>
-        <div class ="content" style="word-wrap: break-word; margin-left: 10px; margin-right: 15px;">
-            <h1 class="subtitle is-2" id="Inspiration" style="text-align: center; color: blue;">Inspiration</h1>
-            <p>
-                As 6030 students, we focused on relating our problem to state-of-the-art research. 
-                We were interested in new and fresh visualization problems concerning city density and how these visualizations could help solve infrastructure issues. 
-                We found an article on the IEEE Transactions on Visualization and Computer Graphics. The article is titled <a href="https://ieeexplore-ieee-org.libproxy.clemson.edu/document/9086086" target="_blank">“UrbanMotion: Visual Analysis of Metropolitan-Scale Sparse Trajectories.”</a>
-            </p>
-
-            <p>
-                The main summary of the research article uses smart device data in three major 
-                cities in China (Beijing, Tianjin, and Tangshan) to create a dashboard called UrbanMotion (Figure 1) that visualizes multi-directional population flows of each city. 
-                This visualization was found helpful in “visually analyzing population movement in modern cities and having the potential to help in real-world applications 
-                such as “traffic optimization, urban planning, and business site configuration. We took inspiration from this article to formulate the problems we want to solve using a dataset we found of pedestrian movement in Melbourne, Australia.
-            </p>
-
-            <figure>
-                <img src="UrbanMotion_Dashboard.gif"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 1: UrbanMotion Dashboard</figcaption>
-                <figcaption>
-                  UrbanMotion user interface: (a) movement visualization showing five major regions in Beijing during commute time; 
-                  (b) time/date selection panel, the morning (7AM-10AM) of July 12th is selected; 
-                  (c) algorithm configuration menu for flow generation; (d) visualization control panel.</figcaption>
-            </figure>
-
-            <p>
-                For our visualization design, we want to draw reference and reflect on the paper that we have based our project on. 
-                Because staying close to state-of-the-art research is one of our primary goals. To achieve this
-                goal, we reviewed the main visualizations that the paper showed throughout. Our visualization here is the result of that research.
-            </p><br><br><br>
-
-            <h1 class="subtitle is-2" style="text-align: center; color: blue;">About This Visualization</h1>
-            <p> By using a dataset of pedestrian sensors that count the number of pedestrians at certain streets, 
-                we are seeking to understand the trends of pedestrian movement in Melbourne, Australia.
-            </p><br>
-
-            <h4 class="subtitle is-4"id="Dataset" style="text-align: center; color: blue;"> Melbourne, Australia Pedestrian Dataset</h4>
-            <p>
-                We are using a dataset collected by the city of Melbourne, Australia that shows the number 
-                of pedestrians identified by sensors in different areas of Melbourne. Currently, there are 3.86 million rows
-                of data for this dataset. The data starts in 2009, and is updated every month.
-            </p>
-            <p>
-                Our data has 13 columns. In each row, there is a unique ID, the date and time of the reading in the format: dd/mm/yyyy hh:mm:ss,
-                the year of the sensor reading, the month, the day of the year in number format, the day of the week, the time of day in 24 hour format, the sensor ID,
-                the sensor name, the hourly counts for that sensor, and the latitude and longitude location of the sensor.
-            </p><br>
-
-            <h4 class="subtitle is-4" id="Our Questions" style="text-align: center; color: blue;">Our Questions</h4>
-
-            <p>
-                There are two primary questions we would like to answer with our visualization:
-            </p>
-
-            <ol>
-               <li><strong>How can the knowledge of massive human movement in Melbourne contribute to optimizing infrastructures such as energy, traffic, and urban planning?</strong></li> 
-               <li><strong> Is pedestrian movement influenced by a deviation in weather (e.g. rain, extreme heat) or a natural disaster (e.g. earthquake, flood)?</strong></li> 
-            </ol>
-
-            <p>
-                Multiple benefits arise from answering these two questions that are interrelated to each other. 
-                By visualizing our pedestrian dataset we would like to visualize mass movement of pedestrians.
-                This will allow us to focus city infrastructure efforts toward the most heavily populated routes of pedestrians, 
-                avoiding unnecessary costs as well as improving infrastructure that is the most important to pedestrians. 
-                By seeing how deviations in weather or a natural disaster influence pedestrian movement, we will be able to see 
-                what areas of Melbourne need infrastructure improvements to prevent mass pedestrian movement to a specific area 
-                of Melbourne (e.g., adding more shade in areas where pedestrians move away from because of extreme heat).
-            </p><br>
-
-            <h4 class="subtitle is-4" id="Visuals" style="text-align: center; color: blue;">Visuals Explanation</h4>
+        <div class ="content" style="word-wrap: break-word;text-align: center; background-color:#A6ACAF;">
+          <div class="columns is-centered" style="border-color: 1px solid black;">
+            <div class="column is-three-fifths" style="background-color:#E5E7E9">
+              <div class="title is-1 has-text-centered" style="background-color:#E5E7E9">Melbourne Pedestrian Density</div>
+              <h1 class="subtitle is-2" id="Inspiration" style="text-align: center; color: blue;">Inspiration</h1>
             
-            <p>
-              In order to complete our desired visualization we utlized the Deck.gl framework, designed to simplify visual exploratory
-               data analysis of large datasets. By using deck.gl we are able to visual a base map (using cartomap)
-               and create a layer to visual data based on certain longitude and latitude coordinates. In our case 
-               we used a hexagon shaped layer over a map of Melbourne Australia. Each hexagon is located on a specific street in
-               Melbourne and a color spectrum is utilized the showcase the density of pedestrians at that certain date and hour.
-               The more red a hexagon is, the more pedestrians past through that street at that specific time interval.
+              <p class="is-size-3">
+                  As 6030 students, we focused on relating our problem to state-of-the-art research. 
+                  We were interested in new and fresh visualization problems concerning city density and how these visualizations could help solve infrastructure issues. 
+                  We found an article on the IEEE Transactions on Visualization and Computer Graphics. The article is titled <a href="https://ieeexplore-ieee-org.libproxy.clemson.edu/document/9086086" target="_blank">“UrbanMotion: Visual Analysis of Metropolitan-Scale Sparse Trajectories.”</a>
+              </p>
 
-            </p>
-
-            <h5 class="subtitle is-3">Main Visualization</h5> <a href="main_visual.html" class="button is-success"><strong>Go to Visual</strong></a>
-
-            <p>
-              This visualization shows the hourly pedestrian density on a certain street, day, and hour in Melbourne, Australia for the month of<strong> November, 2019</strong>.
-              The hexagon layer hovers over a street and its color presents the pedestrian count for that specific street.
-              By <strong>hovering</strong> over a hexagon you will be greeted with the street name, coordinates of that 
-              street sensor and the count of pedestrians for that time range (figure 2).
+              <p class="is-size-3">
+                  The main summary of the research article uses smart device data in three major 
+                  cities in China (Beijing, Tianjin, and Tangshan) to create a dashboard called UrbanMotion (Figure 1) that visualizes multi-directional population flows of each city. 
+                  This visualization was found helpful in “visually analyzing population movement in modern cities and having the potential to help in real-world applications 
+                  such as “traffic optimization, urban planning, and business site configuration. We took inspiration from this article to formulate the problems we want to solve using a dataset we found of pedestrian movement in Melbourne, Australia.
+              </p>
 
               <figure>
-                <img src="Hover_over_hexagon.png"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 2: Hovering over Hexagon</figcaption>
+                  <img src="UrbanMotion_Dashboard.gif"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 1: UrbanMotion Dashboard</figcaption>
+                  <figcaption>
+                    UrbanMotion user interface: (a) movement visualization showing five major regions in Beijing during commute time; 
+                    (b) time/date selection panel, the morning (7AM-10AM) of July 12th is selected; 
+                    (c) algorithm configuration menu for flow generation; (d) visualization control panel.</figcaption>
               </figure>
-            </p>
 
-            <p>
-              You can also filter by date and hour range using the filter box on the map. You can pick any day in the month
-              November, 2019. You can choose any time range by picking a starting hour and an ending hour (figure 3).
+              <p class="is-size-3">
+                  For our visualization design, we want to draw reference and reflect on the paper that we have based our project on. 
+                  Because staying close to state-of-the-art research is one of our primary goals. To achieve this
+                  goal, we reviewed the main visualizations that the paper showed throughout. Our visualization here is the result of that research.
+              </p><br><br><br>
 
-              <figure>
-                <img src="filter.png"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 3: Filter Box on Visual</figcaption>
-              </figure>
-            </p>
+              <h1 class="subtitle is-2" style="text-align: center; color: blue;">About This Visualization</h1>
+              <p class="is-size-3"> By using a dataset of pedestrian sensors that count the number of pedestrians at certain streets, 
+                  we are seeking to understand the trends of pedestrian movement in Melbourne, Australia.
+              </p><br>
 
+              <h4 class="subtitle is-4"id="Dataset" style="text-align: center; color: blue;"> Melbourne, Australia Pedestrian Dataset</h4>
+              <p class="is-size-3">
+                  We are using a dataset collected by the city of Melbourne, Australia that shows the number 
+                  of pedestrians identified by sensors in different areas of Melbourne. Currently, there are 3.86 million rows
+                  of data for this dataset. The data starts in 2009, and is updated every month.
+              </p>
+              <p class="is-size-3">
+                  Our data has 13 columns. In each row, there is a unique ID, the date and time of the reading in the format: dd/mm/yyyy hh:mm:ss,
+                  the year of the sensor reading, the month, the day of the year in number format, the day of the week, the time of day in 24 hour format, the sensor ID,
+                  the sensor name, the hourly counts for that sensor, and the latitude and longitude location of the sensor.
+              </p><br>
 
-            <p>
-              You can click on a hexagon and a tooltip will appear on the left of the screen showing the street name, coordinates
-              of that street sensor, the date, the pedestrian count for the time range, and a barchart that shows the pedestrain 
-              count for each hour of the day. The x-axis presents the time with the labels 0-23 where <strong>0 = midnight-1am, 1 = 1am-2am, 2 = 2am-3am, ..., and 23 = 11pm-midnight </strong>
-              If you click on another hexagon, that hexagon's tooltip will show below the tooltip you first clicked (figure 4).
+              <h4 class="subtitle is-4" id="Our Questions" style="text-align: center; color: blue;">Our Questions</h4>
 
-              <figure>
-                <img src="Tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 4: Tooltip on Visual</figcaption>
-              </figure>
-            </p>
+              <p class="is-size-3">
+                  There are two primary questions we would like to answer with our visualization:
+              </p>
 
-            <p>Here we summarize all the features of how the visualization works.
-            </p>
-            <div style="text-align: center;">
-              <video id="video" width="500" controls autoplay style="right: 500px;">
-                <source src="visual recording.mov" type="video/mp4">
-              </video>
-            </div><br><br><br><br>
+              <ol class="is-size-2">
+                <li><strong>How can the knowledge of massive human movement in Melbourne contribute to optimizing infrastructures such as energy, traffic, and urban planning?</strong></li> 
+                <li><strong> Is pedestrian movement influenced by a deviation in weather (e.g. rain, extreme heat) or a natural disaster (e.g. earthquake, flood)?</strong></li> 
+              </ol>
 
+              <p class="is-size-3">
+                  Multiple benefits arise from answering these two questions that are interrelated to each other. 
+                  By visualizing our pedestrian dataset we would like to visualize mass movement of pedestrians.
+                  This will allow us to focus city infrastructure efforts toward the most heavily populated routes of pedestrians, 
+                  avoiding unnecessary costs as well as improving infrastructure that is the most important to pedestrians. 
+                  By seeing how deviations in weather or a natural disaster influence pedestrian movement, we will be able to see 
+                  what areas of Melbourne need infrastructure improvements to prevent mass pedestrian movement to a specific area 
+                  of Melbourne (e.g., adding more shade in areas where pedestrians move away from because of extreme heat).
+              </p><br>
 
-            <h5 class="subtitle is-3">Natural Disaster Visualization</h5> <a href="comparison.html" class="button is-success"><strong>Go to Visual</strong></a>
-            <p>
-              Our natural disaster visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
-              <strong>November 21st, 2016 as our extreme weather day</strong>.
-            </p>
-
-            <p>
-              On November 21st, 2016 an asthma thunderstorm kills 9 and hospitalises hundreds, high heat and humidity 
-              cause thunderstorms to form northwest of the city, due to excessive grass growth in the north 
-              and west of Melbourne these storms send pollen into Melbourne 
-              and its suburbs raising pollen counts and triggering thousands of severe asthma attacks. 
-              <strong>This thunderstorm started at around 5:30 p.m.</strong>
-              The massive number of attacks overloaded emergency services and contributed to the fatalities.
-              We will compare the pedestrian density of this specific day to a <strong>normal weather day, May 2nd, 2019</strong>.
-            </p>
-
-            <p> 
-              This visualization functions exactly the same as the main visualization when some changes. We are presenting 
-              both dates we are comparing as side by side visualizations. The top visual concerns the extreme weather day and 
-              the bottom visual shows the normal weather day. We are also utilizing the same filter box and hover information box as 
-              the main visulization (figure 5).
+              <h4 class="subtitle is-4" id="Visuals" style="text-align: center; color: blue;">Visuals Explanation</h4>
               
-              <figure>
-                <img src="disaster_pic.png"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 5: Natural Disaster Visual</figcaption>
-              </figure>
-            </p>
+              <p class="is-size-3">
+                In order to complete our desired visualization we utlized the Deck.gl framework, designed to simplify visual exploratory
+                data analysis of large datasets. By using deck.gl we are able to visual a base map (using cartomap)
+                and create a layer to visual data based on certain longitude and latitude coordinates. In our case 
+                we used a hexagon shaped layer over a map of Melbourne Australia. Each hexagon is located on a specific street in
+                Melbourne and a color spectrum is utilized the showcase the density of pedestrians at that certain date and hour.
+                The more red a hexagon is, the more pedestrians past through that street at that specific time interval.
 
-            <p> 
-              The tooltip popup is the same as the main visualization except that when you click a hexagon in either
-              visual it will show the barchart of that hexagon you click as well as the bar chart of the equivalent hexagon
-              in the other visual, if it exists (figure 6).
-              
-              <figure>
-                <img src="comparison_tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
-                <figcaption>Figure 6: Natural Disaster Tooltip</figcaption>
-              </figure>
+              </p>
 
-              
-            </p>
+              <h5 class="subtitle is-3">Main Visualization</h5> 
+              <a href="main_visual.html" class="button is-success"><strong>Go to Visual</strong></a>
+
+              <p class="is-size-3" ><br>
+                This visualization shows the hourly pedestrian density on a certain street, day, and hour in Melbourne, Australia for the month of<strong> November, 2019</strong>.
+                The hexagon layer hovers over a street and its color presents the pedestrian count for that specific street.
+                By <strong>hovering</strong> over a hexagon you will be greeted with the street name, coordinates of that 
+                street sensor and the count of pedestrians for that time range (figure 2).
+
+                <figure>
+                  <img src="Hover_over_hexagon.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 2: Hovering over Hexagon</figcaption>
+                </figure>
+              </p>
+
+              <p class="is-size-3">
+                You can also filter by date and hour range using the filter box on the map. You can pick any day in the month
+                November, 2019. You can choose any time range by picking a starting hour and an ending hour (figure 3).
+
+                <figure>
+                  <img src="filter.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 3: Filter Box on Visual</figcaption>
+                </figure>
+              </p>
 
 
- 
-            <h1 class="subtitle is-2"id="Contact" style="text-align: center; color: blue;">Contact</h1>
-            <div  class="has-text-centered">
-              <h4>Ashton Sobeck</h4>
-              <p>Senior Computer Science Major at Clemson University</p>
-              <p>Email: asobeck@g.clemson.edu</p>
+              <p class="is-size-3">
+                You can click on a hexagon and a tooltip will appear on the left of the screen showing the street name, coordinates
+                of that street sensor, the date, the pedestrian count for the time range, and a barchart that shows the pedestrain 
+                count for each hour of the day. The x-axis presents the time with the labels 0-23 where <strong>0 = midnight-1am, 1 = 1am-2am, 2 = 2am-3am, ..., and 23 = 11pm-midnight </strong>
+                If you click on another hexagon, that hexagon's tooltip will show below the tooltip you first clicked (figure 4).
+
+                <figure>
+                  <img src="Tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 4: Tooltip on Visual</figcaption>
+                </figure>
+              </p>
+
+              <p class="is-size-3">Here we summarize all the features of how the visualization works.
+              </p>
+              <div style="text-align: center;">
+                <video id="video" width="500" controls autoplay style="right: 500px;">
+                  <source src="visual recording.mov" type="video/mp4">
+                </video>
+              </div><br><br><br><br>
+
+
+              <h5 class="subtitle is-3">Natural Disaster Visualization</h5> 
+              <a href="comparison.html" class="button is-success"><strong>Go to Visual</strong></a>
+              <p class="is-size-3"><br>
+                Our natural disaster visualization compares the hourly pedestrian density between an extreme weather day and a normal day. We are using 
+                <strong>November 21st, 2016 as our extreme weather day</strong>.
+              </p>
+
+              <p class="is-size-3">
+                On November 21st, 2016 an asthma thunderstorm kills 9 and hospitalises hundreds, high heat and humidity 
+                cause thunderstorms to form northwest of the city, due to excessive grass growth in the north 
+                and west of Melbourne these storms send pollen into Melbourne 
+                and its suburbs raising pollen counts and triggering thousands of severe asthma attacks. 
+                <strong>This thunderstorm started at around 5:30 p.m.</strong>
+                The massive number of attacks overloaded emergency services and contributed to the fatalities.
+                We will compare the pedestrian density of this specific day to a <strong>normal weather day, May 2nd, 2019</strong>.
+              </p>
+
+              <p class="is-size-3"> 
+                This visualization functions exactly the same as the main visualization when some changes. We are presenting 
+                both dates we are comparing as side by side visualizations. The top visual concerns the extreme weather day and 
+                the bottom visual shows the normal weather day. We are also utilizing the same filter box and hover information box as 
+                the main visulization (figure 5).
+                
+                <figure>
+                  <img src="disaster_pic.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 5: Natural Disaster Visual</figcaption>
+                </figure>
+              </p>
+
+              <p class="is-size-3"> 
+                The tooltip popup is the same as the main visualization except that when you click a hexagon in either
+                visual it will show the barchart of that hexagon you click as well as the bar chart of the equivalent hexagon
+                in the other visual, if it exists (figure 6).
+                
+                <figure>
+                  <img src="comparison_tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <figcaption>Figure 6: Natural Disaster Tooltip</figcaption>
+                </figure>
+
+                
+              </p>
+
+
   
-              <h4>Richard Garcia</h4>
-              <p>Senior Computer Science Major at Clemson University</p>
-              <p>Email: rgarci3@clemson.edu</p>
+              <h1 class="subtitle is-2"id="Contact" style="text-align: center; color: blue;">Contact</h1>
+              <div  class="has-text-centered">
+                <div class="is-size-3">
+                  <h4>Ashton Sobeck</h4>
+                  <p>Senior Computer Science Major at Clemson University</p>
+                  <p>Email: asobeck@g.clemson.edu</p>
+      
+                  <h4>Richard Garcia</h4>
+                  <p>Senior Computer Science Major at Clemson University</p>
+                  <p>Email: rgarci3@clemson.edu</p>
+                </div>
+              </div>
             </div>
            
             
+          </div>
         </div>
       </body>
 
