@@ -4,6 +4,14 @@ let endHour
 const data = d3.csv('data/nov_2019.csv')
 let dayData = data
 let chartCount = 0
+let isSecond = false
+let firstObject = null
+let firstBars
+let firstYScale
+let firstYAxis
+let firstYAxisGen
+let firstSvg 
+
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
 const delTooltip = () => {
@@ -31,7 +39,6 @@ window.onload = function()
 
 let generateTooltipChart = (object, date) => {
   data.then(dataset => {
-    console.log("hi")
     let dimensions = {
       width: document.documentElement.clientWidth / 3,
       height: document.documentElement.clientHeight / 5, 
@@ -43,7 +50,18 @@ let generateTooltipChart = (object, date) => {
       }
     }
     let sensorId = object.points[0].source.sensor_id
+    // let maxOfDay = d3.max(dataset.filter(p => (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1])), d => +d.hourly_counts.replace(/,/g,''))
     let sensorData = dataset.filter(p => (+p.sensor_id == +sensorId) && (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1]))
+    let maxOfSensor = d3.max(sensorData,  d => +d.hourly_counts.replace(/,/g,''))
+    let maxOfBothObject = maxOfSensor
+    if (isSecond && firstObject)
+    {
+      let firstSensorData = dataset.filter((p => (+p.sensor_id == +firstObject.points[0].source.sensor_id) && (+p.mdate == +date.split('-')[2]) && (+p.date_time.split('/')[0] == +date.split('-')[1])))
+      maxFirstObj = d3.max(firstSensorData, d => +d.hourly_counts.replace(/,/g,''))
+      maxFirstObj > maxOfSensor ? maxOfBothObject = maxFirstObj : maxOfBothObject = maxOfSensor
+
+      
+    }
     let svgId = chartCount === 1 ? "#barchart" : "#barchart2"
     let svg = d3.select(svgId)
       .style('width', dimensions.width + 10)
@@ -56,12 +74,8 @@ let generateTooltipChart = (object, date) => {
       .padding(0.1)
     
     let yScale = d3.scaleLinear()
-      .domain([0, d3.max(sensorData, d => +d.hourly_counts.replace(/,/g,''))])
+      .domain([0, maxOfBothObject])
       .range([dimensions.height - dimensions.margin.bottom, dimensions.margin.top])
-    
-    let barColor = d3.scaleOrdinal()
-      .domain(hours)
-      .range(d3.schemeDark2)
     
     let bars = svg.selectAll('rect')
       .data(sensorData)
@@ -72,7 +86,7 @@ let generateTooltipChart = (object, date) => {
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('fill', "steelblue")
-
+    
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
 
@@ -90,13 +104,35 @@ let generateTooltipChart = (object, date) => {
       .call(yAxisgen)
       .style('transform', `translateX(${dimensions.margin.left}px)`)
       .append('text')
-      // .attr('transform', 'rotate(-90)')
       .attr('x', dimensions.margin.left + dimensions.margin.right)
       .attr('y', 0)
       .attr('dy', '.71em')
       .style('text-anchor', 'end')
       .attr('fill', 'black')
       .text('# of Pedestrians')
+    if (!isSecond){
+      firstBars = bars
+      firstYScale = yScale
+      firstYAxisGen = yAxisgen
+      firstYAxis = yAxis
+      firstSvg = svg
+    }
+    else {
+      if (maxOfSensor > maxFirstObj)
+      {
+        console.log(maxOfSensor, maxFirstObj, maxOfBothObject)
+        firstYScale.domain([0, maxOfBothObject])
+        
+        firstYAxisGen.scale(firstYScale)
+       
+        firstYAxis.transition().duration(1500).call(firstYAxisGen)
+         
+        firstBars.transition().duration(1500)
+                 .attr('y', d => firstYScale(+d.hourly_counts.replace(/,/g,'')))
+                 .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
+      }
+    }
+
   })   
 }
 console.log(dayData)
@@ -231,7 +267,7 @@ function renderLayer () {
                           </div>`
           el.style.display = 'block'
           el.style.opacity = 0.9
-  
+          firstObject = object;
           generateTooltipChart(object, date)
 
           
@@ -264,7 +300,8 @@ function renderLayer () {
                           </div>`
           el.style.display = 'block'
           el.style.opacity = 0.9
-  
+          isSecond = true
+          console.log(isSecond)
           generateTooltipChart(object, date)
         }
         else {
@@ -294,7 +331,8 @@ function renderLayer () {
                           </div>`
           el.style.display = 'block'
           el.style.opacity = 0.9
-  
+
+          firstObject = object
           generateTooltipChart(object, date)
         }
         else {
