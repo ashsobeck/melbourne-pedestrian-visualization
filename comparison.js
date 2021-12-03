@@ -3,9 +3,7 @@ var startHour
 let endHour
 const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
 const normal_day_data = d3.csv('data/may_2nd_2019.csv')
-console.log(normal_day_data)
-
-
+let yMax
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
   tooltip.parentNode.style.opacity = 0.0
@@ -22,14 +20,28 @@ function filter_data() {
   renderLayer()
   console.log(startHour, endHour)
 }
-
+const createCharts = (sensorId) => {
+  let extremeDayMax 
+  let normalDayMax
+  extreme_weather_data.then(data => {
+    normal_day_data.then(dataset => {
+      extremeDayMax = d3.max(data.filter(p => (+p.sensor_id == +sensorId)),  d => +d.hourly_counts.replace(/,/g,''))
+      normalDayMax = d3.max(dataset.filter(p => (+p.sensor_id == +sensorId)),  d => +d.hourly_counts.replace(/,/g,''))
+      console.log(extremeDayMax, normalDayMax)
+      yMax = extremeDayMax > normalDayMax ? extremeDayMax : normalDayMax
+      extremeTooltipChart(sensorId)
+      normalTooltipChart(sensorId)
+    })
+  })
+  
+}
 //when window loads, js gets the default filter values
 window.onload = function()
 {
   filter_data();
 }
 
-let extremeTooltipChart = (sensorId, date) => {
+let extremeTooltipChart = (sensorId) => {
   extreme_weather_data.then(dataset => {
     let dimensions = {
       width: document.documentElement.clientWidth / 3,
@@ -54,7 +66,7 @@ let extremeTooltipChart = (sensorId, date) => {
       .padding(0.1)
     
     let yScale = d3.scaleLinear()
-      .domain([0, d3.max(sensorData, d => +d.hourly_counts.replace(/,/g,''))])
+      .domain([0, yMax])
       .range([dimensions.height - dimensions.margin.bottom, dimensions.margin.top])
     
     let barColor = d3.scaleOrdinal()
@@ -98,7 +110,7 @@ let extremeTooltipChart = (sensorId, date) => {
   })   
 }
 
-let normalTooltipChart = (sensorId, date) => {
+let normalTooltipChart = (sensorId) => {
   normal_day_data.then(dataset => {
     let dimensions = {
       width: document.documentElement.clientWidth / 3,
@@ -123,7 +135,7 @@ let normalTooltipChart = (sensorId, date) => {
       .padding(0.1)
     
     let yScale = d3.scaleLinear()
-      .domain([0, d3.max(sensorData, d => +d.hourly_counts.replace(/,/g,''))])
+      .domain([0, yMax])
       .range([dimensions.height - dimensions.margin.bottom, dimensions.margin.top])
     
     let barColor = d3.scaleOrdinal()
@@ -276,13 +288,13 @@ function renderLayer () {
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
                           </h2> 
-                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart"></svg>
-                          <br>
                           <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
                           <br>
                           <svg id="barchart2"></svg>
+                          <br>
+                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
+                          <svg id="barchart"></svg>
                           <br>
                         </div>`
         // el.style.display = 'block'
@@ -290,9 +302,7 @@ function renderLayer () {
         el.style.opacity = 0.9
         // el.style.left = x + 'px'
         // el.style.top = y/3 + 'px'
-
-        normalTooltipChart(object.points[0].source.sensor_id, date)
-        extremeTooltipChart(object.points[0].source.sensor_id, date)
+        createCharts(object.points[0].source.sensor_id)
       }
       else {
         el.style.opacity = 0.0
@@ -365,13 +375,13 @@ function renderLayer () {
                               ${object.points[0].source.sensor_description} <br/>
                               ${object.position.join(', ')} <br/>
                           </h2> 
-                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart"></svg>
-                          <br>
                           <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
                           <br>
                           <svg id="barchart2"></svg>
+                          <br>
+                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                          <br>
+                          <svg id="barchart"></svg>
                           <br>
                         </div>`
         // el.style.display = 'block'
@@ -379,8 +389,7 @@ function renderLayer () {
         // el.style.left = x + 'px'
         // el.style.top = y/3 + 'px'
 
-        normalTooltipChart(object.points[0].source.sensor_id, date)
-        extremeTooltipChart(object.points[0].source.sensor_id, date)
+        createCharts(object.points[0].source.sensor_id)
       }
       else {
         el.style.opacity = 0.0

@@ -11,6 +11,8 @@ let firstYScale
 let firstYAxis
 let firstYAxisGen
 let firstSvg 
+let selectedItems = [null, null]
+let highlightedObjectIndex = -1
 
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
@@ -220,6 +222,22 @@ function renderLayer () {
     data: dayData,
     id: 'melbourne-pedestrian-density',
     pickable: true,
+    highlightColor: d => {
+      if (selectedItems[0] && (d.id === selectedItems[0]?.points[0]?.source?.id)){
+        return [152, 251, 152]
+      } 
+      if (selectedItems[1] && (d.id === selectedItems[1]?.points[1]?.source?.id)){ 
+        return [135, 206, 250]
+      }
+    },
+    highlightedObjectIndex: d => {
+      if (selectedItems[0] && (d.id === selectedItems[0]?.points[0]?.source?.id)){
+        return selectedItems[0].index
+      } 
+      if (selectedItems[1] && (d.id === selectedItems[1]?.points[1]?.source?.id)){ 
+        return selectedItems[1].index
+      }
+    },
     getColorValue: d => {
       return d.reduce(
         (accumulator, currentValue) => {
@@ -260,12 +278,35 @@ function renderLayer () {
       getElevationValue: endHour,
       getColorValue: date,
       getColorValue: startHour,
-      getColorValue: endHour
+      getColorValue: endHour,
+      highlightedObjectIndex
+      // getFillColor: selectedItems[0],
+      // getFillColor: selectedItems[1]
+
       
     },
     onClick: (({object, x, y}) => {
       if (chartCount === 0)
       {
+        const highlight = document.createElement("div")
+        highlight.className = "box has-text-centered"
+        highlight.style.width = '4%'
+        highlight.style.height = '1%'
+        highlight.style.position = 'absolute'
+        highlight.style.background = 'white'
+        highlight.style.display = 'block'
+        highlight.style.opacity = 1
+        highlight.style.left = x + 'px'
+        highlight.style.top = y + 'px'
+        const numberText = document.createTextNode('Clicked')
+        highlight.appendChild(numberText)
+        const charts = document.getElementById("charts")
+        document.body.insertBefore(highlight, charts)
+        highlightedObjectIndex = object.index
+        console.log(highlightedObjectIndex)
+        console.log(object)
+        selectedItems[0] = object 
+        console.log(selectedItems)
         chartCount = 1
         const el = document.getElementById('tooltip')
         const availHeight = window.screen.availHeight
@@ -300,7 +341,23 @@ function renderLayer () {
       }
       else if (chartCount === 1) 
       {
+        highlightedObjectIndex = object.index
+        selectedItems[1] = object
         chartCount = 2
+        const highlight = document.createElement("div")
+        highlight.className = "box has-text-centered"
+        highlight.style.width = '4%'
+        highlight.style.height = '1%'
+        highlight.style.position = 'absolute'
+        highlight.style.background = 'white'
+        highlight.style.display = 'block'
+        highlight.style.opacity = 1
+        highlight.style.left = x + 'px'
+        highlight.style.top = y + 'px'
+        const numberText = document.createTextNode('Clicked')
+        highlight.appendChild(numberText)
+        const charts = document.getElementById("charts")
+        document.body.insertBefore(highlight, charts)
         const el = document.getElementById('tooltip2')
         const availHeight = window.screen.availHeight
         const availWidth = window.screen.availWidth
@@ -331,6 +388,23 @@ function renderLayer () {
       }
       else if (chartCount === 2)
       {
+        highlightedObjectIndex = object.index
+        selectedItems[0] = object
+        selectedItems[1] = null
+        const highlight = document.createElement("div")
+        highlight.className = "box has-text-centered"
+        highlight.style.width = '4%'
+        highlight.style.height = '1%'
+        highlight.style.position = 'absolute'
+        highlight.style.background = 'white'
+        highlight.style.display = 'block'
+        highlight.style.opacity = 1
+        highlight.style.left = x + 'px'
+        highlight.style.top = y + 'px'
+        const numberText = document.createTextNode('Clicked')
+        highlight.appendChild(numberText)
+        const charts = document.getElementById("charts")
+        document.body.insertBefore(highlight, charts)
         chartCount = 1
         const el = document.getElementById('tooltip')
         const availHeight = window.screen.availHeight
