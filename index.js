@@ -106,7 +106,7 @@ let generateTooltipChart = (object, date) => {
     {
       firstSvg = svg
       firstYAxisGen = yAxisgen
-      firstYAxis = firstSvg.append('g')
+      firstYAxis = firstSvg.append('g').attr("class", "y axis")
       .call(firstYAxisGen)
       .style('transform', `translateX(${dimensions.margin.left}px)`)
       .append('text')
@@ -144,8 +144,9 @@ let generateTooltipChart = (object, date) => {
         
         firstYAxisGen.scale(firstYScale)
        
+        // firstYAxis.transition().duration(1500).call(firstYAxisGen)
+        firstYAxis = firstSvg.selectAll("g.y.axis")
         firstYAxis.transition().duration(1500).call(firstYAxisGen)
-         
         firstBars.transition().duration(1500)
                  .attr('y', d => firstYScale(+d.hourly_counts.replace(/,/g,'')))
                  .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
