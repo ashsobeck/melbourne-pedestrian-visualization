@@ -63,9 +63,11 @@ let generateTooltipChart = (object, date) => {
       
     }
     let svgId = chartCount === 1 ? "#barchart" : "#barchart2"
+    
     let svg = d3.select(svgId)
       .style('width', dimensions.width + 10)
       .style('height', dimensions.height + 30)
+    
     let xAccessor = d => +d.time
     let hours = [... new Set(sensorData.map(xAccessor))]
     let xScale = d3.scaleBand()
@@ -100,7 +102,23 @@ let generateTooltipChart = (object, date) => {
       .style('text-anchor', 'end')
       .attr('fill', 'black')
       .text('Hour of the Day (24h Format)')
-    let yAxis = svg.append('g')
+    if (chartCount === 1)
+    {
+      firstSvg = svg
+      firstYAxisGen = yAxisgen
+      firstYAxis = firstSvg.append('g')
+      .call(firstYAxisGen)
+      .style('transform', `translateX(${dimensions.margin.left}px)`)
+      .append('text')
+      .attr('x', dimensions.margin.left + dimensions.margin.right)
+      .attr('y', 0)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .attr('fill', 'black')
+      .text('# of Pedestrians')
+    }
+    else{
+      let yAxis = svg.append('g')
       .call(yAxisgen)
       .style('transform', `translateX(${dimensions.margin.left}px)`)
       .append('text')
@@ -110,12 +128,13 @@ let generateTooltipChart = (object, date) => {
       .style('text-anchor', 'end')
       .attr('fill', 'black')
       .text('# of Pedestrians')
+    }
+    
     if (!isSecond){
       firstBars = bars
       firstYScale = yScale
-      firstYAxisGen = yAxisgen
-      firstYAxis = yAxis
-      firstSvg = svg
+      // firstYAxisGen = yAxisgen
+      // firstYAxis = yAxis
     }
     else {
       if (maxOfSensor > maxFirstObj)
@@ -331,7 +350,7 @@ function renderLayer () {
                           </div>`
           el.style.display = 'block'
           el.style.opacity = 0.9
-
+          isSecond = false
           firstObject = object
           generateTooltipChart(object, date)
         }
