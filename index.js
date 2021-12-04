@@ -12,8 +12,9 @@ let firstYAxis
 let firstYAxisGen
 let firstSvg 
 let selectedItems = [null, null]
-let highlightedObjectIndex = -1
-
+const ICON_MAPPING = {
+  marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
+};
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
 const delTooltip = () => {
@@ -167,7 +168,7 @@ function filterChange(date, startHour, endHour) {
   console.log(dayData)
   renderLayer()
 }
-const {DeckGL, HexagonLayer} = deck;
+const {DeckGL, HexagonLayer, IconLayer, ScatterplotLayer} = deck;
 
 
 
@@ -201,249 +202,232 @@ const deckgl = new DeckGL({
   controller: true
 });
 
-
-
-
-// let colorScale = d3.scaleLinear()
-//   .domain([0, 300])
-//   .range(d3.schemeCategory10)
-// const COLOR_RANGE = [
-//   [1, 152, 189],
-//   [73, 227, 206],
-//   [216, 254, 181],
-//   [254, 237, 177],
-//   [254, 173, 84],
-//   [209, 55, 78]
-// ];
 renderLayer()
 
 function renderLayer () {
-  const hexLayer = new HexagonLayer({
-    data: dayData,
-    id: 'melbourne-pedestrian-density',
-    pickable: true,
-    highlightColor: d => {
-      if (selectedItems[0] && (d.id === selectedItems[0]?.points[0]?.source?.id)){
-        return [152, 251, 152]
-      } 
-      if (selectedItems[1] && (d.id === selectedItems[1]?.points[1]?.source?.id)){ 
-        return [135, 206, 250]
-      }
-    },
-    highlightedObjectIndex: d => {
-      if (selectedItems[0] && (d.id === selectedItems[0]?.points[0]?.source?.id)){
-        return selectedItems[0].index
-      } 
-      if (selectedItems[1] && (d.id === selectedItems[1]?.points[1]?.source?.id)){ 
-        return selectedItems[1].index
-      }
-    },
-    getColorValue: d => {
-      return d.reduce(
-        (accumulator, currentValue) => {
-          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
-        }, 0
-      )
-    },
+  const layers = [ 
+    new HexagonLayer({
+      data: dayData,
+      id: 'melbourne-pedestrian-density',
+      pickable: true,
+      getColorValue: d => {
+        return d.reduce(
+          (accumulator, currentValue) => {
+            return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+          }, 0
+        )
+      },
 
-    getElevationValue: d => {
-      return d.reduce(
-        (accumulator, currentValue) => {
-          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
-        }, 0
-      )
-    },
-    extruded: false,
-    autoHighlight: true,
-    getPosition: (d, i) => {
-      if ((+d.time >= +startHour && +d.time < +endHour) && +d.mdate == +date.split('-')[2] ) {
-        return [+d.longitude, +d.latitude]
-      }
-      else return []
-    },
-    opacity: 1,
-    radius: 50,
-    coverage: 1,
-    upperPercentile: 90,
-    transitions: {
-      getPositions: 2000,
-      getColors: 5000
-    },
-    updateTriggers: {
-      getPosition: date,
-      getPosition: startHour,
-      getPosition: endHour,
-      getElevationValue: date, 
-      getElevationValue: startHour,
-      getElevationValue: endHour,
-      getColorValue: date,
-      getColorValue: startHour,
-      getColorValue: endHour,
-      highlightedObjectIndex
-      // getFillColor: selectedItems[0],
-      // getFillColor: selectedItems[1]
+      getElevationValue: d => {
+        return d.reduce(
+          (accumulator, currentValue) => {
+            return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+          }, 0
+        )
+      },
+      extruded: false,
+      autoHighlight: true,
+      getPosition: (d, i) => {
+        if ((+d.time >= +startHour && +d.time < +endHour) && +d.mdate == +date.split('-')[2] ) {
+          return [+d.longitude, +d.latitude]
+        }
+        else return []
+      },
+      opacity: 1,
+      radius: 50,
+      coverage: 1,
+      upperPercentile: 90,
+      transitions: {
+        getPositions: 2000,
+        getColors: 5000
+      },
+      updateTriggers: {
+        getPosition: date,
+        getPosition: startHour,
+        getPosition: endHour,
+        getElevationValue: date, 
+        getElevationValue: startHour,
+        getElevationValue: endHour,
+        getColorValue: date,
+        getColorValue: startHour,
+        getColorValue: endHour,
+      },
+      onClick: (({object, x, y}) => {
+        if (chartCount === 0)
+        {
+          console.log(object)
+          selectedItems[0] = object 
+          renderLayer()
+          console.log(selectedItems)
+          chartCount = 1
+          const el = document.getElementById('tooltip')
+          const availHeight = window.screen.availHeight
+          const availWidth = window.screen.availWidth
+          if (object) {
+            // console.log(object)
+            // using elevation value for aggregation metrics
+            el.innerHTML = `<div id="tooltips">
+                              <div id="topTooltip">
+                                <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                                <button class="delete" onclick="delTooltip()"></button>
+                              </div>
+                              <h2>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+                              </h2>  
+                              <svg id="barchart"></svg>
+                            </div>`
+            el.style.display = 'block'
+            el.style.opacity = 0.9
+            firstObject = object;
+            generateTooltipChart(object, date)
 
+            
+            
+          }
+          else {
+            el.style.opacity = 0.0
+            el.innerHTML = `<div></div>`
+          }
+        }
+        else if (chartCount === 1) 
+        {
+          selectedItems[1] = object
+          renderLayer()
+          chartCount = 2
+          const el = document.getElementById('tooltip2')
+          const availHeight = window.screen.availHeight
+          const availWidth = window.screen.availWidth
+          if (object) {
+            // console.log(object)
+            el.innerHTML = `<div id="tooltips">
+                              <div id="topTooltip">
+                                <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                                <button class="delete" onclick="delTooltip()"></button>
+                              </div>
+                              <h2>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+                              </h2> 
+                              <svg id="barchart2"></svg>
+                            </div>`
+            el.style.display = 'block'
+            el.style.opacity = 0.9
+            isSecond = true
+            console.log(isSecond)
+            generateTooltipChart(object, date)
+          }
+          else {
+            el.style.opacity = 0.0
+            el.innerHTML = `<div></div>`
+          }
+        }
+        else if (chartCount === 2)
+        {
+          selectedItems[0] = object
+          selectedItems[1] = null
+          renderLayer()
+          chartCount = 1
+          const el = document.getElementById('tooltip')
+          const availHeight = window.screen.availHeight
+          const availWidth = window.screen.availWidth
+          if (object) {
+            // console.log(object)
+            el.innerHTML = `<div id="tooltips">
+                              <div id="topTooltip">
+                                <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
+                                <button class="delete" onclick="delTooltip()"></button>
+                              </div>
+                              <h2>
+                                ${object.position.join(', ')} <br/>
+                                ${object.points[0].source.date_time} <br/>
+                                Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
+                              </h2> 
+                              <svg id="barchart"></svg>
+                            </div>`
+            el.style.display = 'block'
+            el.style.opacity = 0.9
+            isSecond = false
+            firstObject = object
+            generateTooltipChart(object, date)
+          }
+          else {
+            el.style.opacity = 0.0
+            el.innerHTML = `<div></div>`
+          }
+          const el2 = document.getElementById('tooltip2')
+          el2.style.opacity = 0.0
+          el2.innerHTML = `<div></div>`
+        }
+      }),
       
-    },
-    onClick: (({object, x, y}) => {
-      if (chartCount === 0)
-      {
-        const highlight = document.createElement("div")
-        highlight.className = "box has-text-centered"
-        highlight.style.width = '4%'
-        highlight.style.height = '1%'
-        highlight.style.position = 'absolute'
-        highlight.style.background = 'white'
-        highlight.style.display = 'block'
-        highlight.style.opacity = 1
-        highlight.style.left = x + 'px'
-        highlight.style.top = y + 'px'
-        const numberText = document.createTextNode('Clicked')
-        highlight.appendChild(numberText)
-        const charts = document.getElementById("charts")
-        document.body.insertBefore(highlight, charts)
-        highlightedObjectIndex = object.index
-        console.log(highlightedObjectIndex)
-        console.log(object)
-        selectedItems[0] = object 
-        console.log(selectedItems)
-        chartCount = 1
-        const el = document.getElementById('tooltip')
-        const availHeight = window.screen.availHeight
-        const availWidth = window.screen.availWidth
-        if (object) {
-          // console.log(object)
-          // using elevation value for aggregation metrics
-          el.innerHTML = `<div id="tooltips">
-                            <div id="topTooltip">
-                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
-                              <button class="delete" onclick="delTooltip()"></button>
-                            </div>
-                            <h2>
-                              ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
-                            </h2>  
-                            <svg id="barchart"></svg>
-                          </div>`
-          el.style.display = 'block'
-          el.style.opacity = 0.9
-          firstObject = object;
-          generateTooltipChart(object, date)
+    }),
+    // selectedItems[0] ? new IconLayer({
+    //   id: 'icon-first',
+    //   data: [{coordinates:  selectedItems[0].position }],
+    //   iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+    //   iconMapping: ICON_MAPPING,
+    //   // pickable: true,
+    //   getIcon: d => 'marker', 
+    //   sizeScale: 15,
+    //   getSize: 3,
+    //   getColor: [152, 251, 152],
+    //   getPosition: d => {
+    //     console.log(d)
+    //     return d.coordinates},
+    //   updateTriggers: {
+    //     selectedItems
+    //   }
 
-          
-          
-        }
-        else {
-          el.style.opacity = 0.0
-          el.innerHTML = `<div></div>`
-        }
+    // }) : null,
+    // selectedItems[1] ? new IconLayer({
+    //   id: 'icon-second',
+    //   data: [{ coordinates: selectedItems[1].position }],
+    //   // pickable: true,
+    //   iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
+    //   getIcon: d => 'marker', 
+    //   iconMapping: ICON_MAPPING,
+    //   sizeScale: 15,
+    //   getSize: 3,
+    //   getPosition: d => {
+    //     console.log(d)
+    //     return d.coordinates},
+    //   getColor: [135, 206, 250],
+    //   updateTriggers: {
+    //     selectedItems
+    //   }
+    // }): null,
+    selectedItems[0] ? new ScatterplotLayer({
+      id: 'circle-first',
+      data: [{ coordinates: selectedItems[0].position }],
+      getRadius: 30,
+      getPosition: d => {
+        console.log(d)
+        return d.coordinates},
+      getFillColor: [1, 50, 32],
+      updateTriggers: {
+        selectedItems
       }
-      else if (chartCount === 1) 
-      {
-        highlightedObjectIndex = object.index
-        selectedItems[1] = object
-        chartCount = 2
-        const highlight = document.createElement("div")
-        highlight.className = "box has-text-centered"
-        highlight.style.width = '4%'
-        highlight.style.height = '1%'
-        highlight.style.position = 'absolute'
-        highlight.style.background = 'white'
-        highlight.style.display = 'block'
-        highlight.style.opacity = 1
-        highlight.style.left = x + 'px'
-        highlight.style.top = y + 'px'
-        const numberText = document.createTextNode('Clicked')
-        highlight.appendChild(numberText)
-        const charts = document.getElementById("charts")
-        document.body.insertBefore(highlight, charts)
-        const el = document.getElementById('tooltip2')
-        const availHeight = window.screen.availHeight
-        const availWidth = window.screen.availWidth
-        if (object) {
-          // console.log(object)
-          el.innerHTML = `<div id="tooltips">
-                            <div id="topTooltip">
-                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
-                              <button class="delete" onclick="delTooltip()"></button>
-                            </div>
-                            <h2>
-                              ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
-                            </h2> 
-                            <svg id="barchart2"></svg>
-                          </div>`
-          el.style.display = 'block'
-          el.style.opacity = 0.9
-          isSecond = true
-          console.log(isSecond)
-          generateTooltipChart(object, date)
-        }
-        else {
-          el.style.opacity = 0.0
-          el.innerHTML = `<div></div>`
-        }
+    }): null,
+    selectedItems[1] ? new ScatterplotLayer({
+      id: 'circle-second',
+      data: [{ coordinates: selectedItems[1].position }],
+      getRadius: 30,
+      getPosition: d => {
+        console.log(d)
+        return d.coordinates},
+      getFillColor: [26, 85, 186],
+      updateTriggers: {
+        selectedItems
       }
-      else if (chartCount === 2)
-      {
-        highlightedObjectIndex = object.index
-        selectedItems[0] = object
-        selectedItems[1] = null
-        const highlight = document.createElement("div")
-        highlight.className = "box has-text-centered"
-        highlight.style.width = '4%'
-        highlight.style.height = '1%'
-        highlight.style.position = 'absolute'
-        highlight.style.background = 'white'
-        highlight.style.display = 'block'
-        highlight.style.opacity = 1
-        highlight.style.left = x + 'px'
-        highlight.style.top = y + 'px'
-        const numberText = document.createTextNode('Clicked')
-        highlight.appendChild(numberText)
-        const charts = document.getElementById("charts")
-        document.body.insertBefore(highlight, charts)
-        chartCount = 1
-        const el = document.getElementById('tooltip')
-        const availHeight = window.screen.availHeight
-        const availWidth = window.screen.availWidth
-        if (object) {
-          // console.log(object)
-          el.innerHTML = `<div id="tooltips">
-                            <div id="topTooltip">
-                              <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
-                              <button class="delete" onclick="delTooltip()"></button>
-                            </div>
-                            <h2>
-                              ${object.position.join(', ')} <br/>
-                              ${object.points[0].source.date_time} <br/>
-                              Pedestrian Count from ${startHour}:00 to ${endHour}:00: <strong>${object.elevationValue}</strong> Pedestrians
-                            </h2> 
-                            <svg id="barchart"></svg>
-                          </div>`
-          el.style.display = 'block'
-          el.style.opacity = 0.9
-          isSecond = false
-          firstObject = object
-          generateTooltipChart(object, date)
-        }
-        else {
-          el.style.opacity = 0.0
-          el.innerHTML = `<div></div>`
-        }
-        const el2 = document.getElementById('tooltip2')
-        el2.style.opacity = 0.0
-        el2.innerHTML = `<div></div>`
-      }
-    })
-  })
-
+    }): null,
+  ]
   
 
   deckgl.setProps({
-    layers: [hexLayer]
+    layers: [layers]
   })
   console.log(deck)
 }

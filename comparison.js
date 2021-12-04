@@ -4,6 +4,7 @@ let endHour
 const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
 const normal_day_data = d3.csv('data/may_2nd_2019.csv')
 let yMax
+let selectedItems = [null]
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
   tooltip.parentNode.style.opacity = 0.0
@@ -179,7 +180,7 @@ let normalTooltipChart = (sensorId) => {
   })   
 }
 
-const {DeckGL, HexagonLayer, ColumnLayer}  = deck;
+const {DeckGL, HexagonLayer, ColumnLayer, ScatterplotLayer}  = deck;
 
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
@@ -232,175 +233,205 @@ const deckgl2 = new DeckGL({
 renderLayer()
 
 function renderLayer () {
-  const hexLayer_weather = new HexagonLayer({
-    data: extreme_weather_data,
-    id: 'melbourne-pedestrian-density',
-    pickable: true,
-    getColorValue: d => {
-      return +d[0].hourly_counts.replace(/,/g,'')
-    },
+  const extremeWeatherLayers = [
+    new HexagonLayer({
+      data: extreme_weather_data,
+      id: 'melbourne-pedestrian-density',
+      pickable: true,
+      getColorValue: d => {
+        return +d[0].hourly_counts.replace(/,/g,'')
+      },
 
-    getElevationValue: d => {
-      // console.log(d)
-      // console.log(d[0].hourly_counts.replace(/,/g,''))
-      return d.reduce(
-        (accumulator, currentValue) => {
-          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
-        }, 0
-      )
-    },
-    extruded: false,
-    autoHighlight: true,
-    getPosition: (d, i) => {
-      if (+d.time >= startHour && +d.time < endHour ) {
-      // console.log(d.time)
-      return [+d.longitude, +d.latitude]
+      getElevationValue: d => {
+        // console.log(d)
+        // console.log(d[0].hourly_counts.replace(/,/g,''))
+        return d.reduce(
+          (accumulator, currentValue) => {
+            return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+          }, 0
+        )
+      },
+      extruded: false,
+      autoHighlight: true,
+      getPosition: (d, i) => {
+        if (+d.time >= startHour && +d.time < endHour ) {
+        // console.log(d.time)
+        return [+d.longitude, +d.latitude]
+        }
+        else return []
+      },
+      opacity: 1,
+      radius: 50,
+      coverage: 1,
+      upperPercentile: 90,
+      updateTriggers: {
+        //getPosition: date,
+        getPosition: startHour,
+        getPosition: endHour,
+        //getElevationValue: date, 
+        getElevationValue: startHour,
+        getElevationValue: endHour,
+        //getColorValue: date,
+        getColorValue: startHour,
+        getColorValue: endHour
+      },
+      onClick: (({object, x, y}) => {
+        selectedItems[0] = object
+        renderLayer()
+        const el = document.getElementById('charts')
+        if (object) {
+          // console.log(object)
+          el.style.height = document.documentElement.clientHeight / 5
+          el.innerHTML = `<div id="tooltips">
+                            <div id="topTooltip">
+                              <h2>Extreme Day Clicked</h2> 
+                              <button class="delete" onclick="delTooltip()"></button>
+                            </div>
+                          
+                            <h2>
+                                ${object.points[0].source.sensor_description} <br/>
+                                ${object.position.join(', ')} <br/>
+                            </h2> 
+                            <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
+                            <br>
+                            <svg id="barchart2"></svg>
+                            <br>
+                            <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                            <br>
+                            <svg id="barchart"></svg>
+                            <br>
+                          </div>`
+          // el.style.display = 'block'
+          el.style.width = document.documentElement.clientWidth / 3
+          el.style.opacity = 0.9
+          // el.style.left = x + 'px'
+          // el.style.top = y/3 + 'px'
+          createCharts(object.points[0].source.sensor_id)
+        }
+        else {
+          el.style.opacity = 0.0
+          el.innerHTML = `<div></div>`
+        }
+      })
+    }),
+    selectedItems[0] ? new ScatterplotLayer({
+      id: 'normal-circle',
+      data: [{ coordinates: selectedItems[0].position }],
+      getRadius: 30,
+      getPosition: d => {
+        console.log(d)
+        return d.coordinates},
+      getFillColor: [1, 50, 32],
+      updateTriggers: {
+        selectedItems
       }
-      else return []
-    },
-    opacity: 1,
-    radius: 50,
-    coverage: 1,
-    upperPercentile: 90,
-    updateTriggers: {
-      //getPosition: date,
-      getPosition: startHour,
-      getPosition: endHour,
-      //getElevationValue: date, 
-      getElevationValue: startHour,
-      getElevationValue: endHour,
-      //getColorValue: date,
-      getColorValue: startHour,
-      getColorValue: endHour
-    },
-    onClick: (({object, x, y}) => {
-      const el = document.getElementById('charts')
-      if (object) {
-        // console.log(object)
-        el.style.height = document.documentElement.clientHeight / 5
-        el.innerHTML = `<div id="tooltips">
-                          <div id="topTooltip">
-                            <h2>Extreme Day Clicked</h2> 
-                            <button class="delete" onclick="delTooltip()"></button>
-                          </div>
-                         
-                          <h2>
-                              ${object.points[0].source.sensor_description} <br/>
-                              ${object.position.join(', ')} <br/>
-                          </h2> 
-                          <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart2"></svg>
-                          <br>
-                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart"></svg>
-                          <br>
-                        </div>`
-        // el.style.display = 'block'
-        el.style.width = document.documentElement.clientWidth / 3
-        el.style.opacity = 0.9
-        // el.style.left = x + 'px'
-        // el.style.top = y/3 + 'px'
-        createCharts(object.points[0].source.sensor_id)
-      }
-      else {
-        el.style.opacity = 0.0
-        el.innerHTML = `<div></div>`
-      }
-    })
-  })
-
+    }): null,
+  ]
 
   deckgl.setProps({
-    layers: [hexLayer_weather]
+    layers: [extremeWeatherLayers]
   })
 
-  const hexLayer_normal= new HexagonLayer({
-    data: normal_day_data,
-    id: 'melbourne-pedestrian-density',
-    pickable: true,
-    getColorValue: d => {
-      return d.reduce(
-        (accumulator, currentValue) => {
-          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
-        }, 0
-      )
-    },
+  const normalWeatherLayers =[
+    new HexagonLayer({
+      data: normal_day_data,
+      id: 'melbourne-pedestrian-density',
+      pickable: true,
+      getColorValue: d => {
+        return d.reduce(
+          (accumulator, currentValue) => {
+            return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+          }, 0
+        )
+      },
 
-    getElevationValue: d => {
-      // console.log(d)
-      // console.log(d[0].hourly_counts.replace(/,/g,''))
-      return d.reduce(
-        (accumulator, currentValue) => {
-          return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
-        }, 0
-      )
-    },
-    extruded: false,
-    autoHighlight: true,
-    getPosition: (d, i) => {
-      if ((+d.time >= +startHour && +d.time < +endHour)) {
-      // console.log(d.time)
-      return [+d.longitude, +d.latitude]
-      }
-      else return []
-    },
-    opacity: 1,
-    radius: 50,
-    coverage: 1,
-    upperPercentile: 90,
-    updateTriggers: {
-      //getPosition: date,
-      getPosition: startHour,
-      getPosition: endHour,
-      //getElevationValue: date, 
-      getElevationValue: startHour,
-      getElevationValue: endHour,
-      //getColorValue: date,
-      getColorValue: startHour,
-      getColorValue: endHour
-    },
-    onClick: (({object, x, y}) => {
-      const el = document.getElementById('charts')
-      if (object) {
-        // console.log(object)
-        el.innerHTML = `<div id="tooltips">
-                          <div id="topTooltip">
-                            <h2>Normal Day Clicked</h2> 
-                            <button class="delete" onclick="delTooltip()"></button>
-                          </div>
-                        
-                          <h2>
-                              ${object.points[0].source.sensor_description} <br/>
-                              ${object.position.join(', ')} <br/>
-                          </h2> 
-                          <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart2"></svg>
-                          <br>
-                          <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
-                          <br>
-                          <svg id="barchart"></svg>
-                          <br>
-                        </div>`
-        // el.style.display = 'block'
-        el.style.opacity = 0.9
-        // el.style.left = x + 'px'
-        // el.style.top = y/3 + 'px'
+      getElevationValue: d => {
+        // console.log(d)
+        // console.log(d[0].hourly_counts.replace(/,/g,''))
+        return d.reduce(
+          (accumulator, currentValue) => {
+            return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
+          }, 0
+        )
+      },
+      extruded: false,
+      autoHighlight: true,
+      getPosition: (d, i) => {
+        if ((+d.time >= +startHour && +d.time < +endHour)) {
+        // console.log(d.time)
+        return [+d.longitude, +d.latitude]
+        }
+        else return []
+      },
+      opacity: 1,
+      radius: 50,
+      coverage: 1,
+      upperPercentile: 90,
+      updateTriggers: {
+        //getPosition: date,
+        getPosition: startHour,
+        getPosition: endHour,
+        //getElevationValue: date, 
+        getElevationValue: startHour,
+        getElevationValue: endHour,
+        //getColorValue: date,
+        getColorValue: startHour,
+        getColorValue: endHour
+      },
+      onClick: (({object, x, y}) => {
+        selectedItems[0] = object
+        const el = document.getElementById('charts')
+        if (object) {
+          // console.log(object)
+          el.innerHTML = `<div id="tooltips">
+                            <div id="topTooltip">
+                              <h2>Normal Day Clicked</h2> 
+                              <button class="delete" onclick="delTooltip()"></button>
+                            </div>
+                          
+                            <h2>
+                                ${object.points[0].source.sensor_description} <br/>
+                                ${object.position.join(', ')} <br/>
+                            </h2> 
+                            <strong>Extreme day for ${object.points[0].source.sensor_description}</strong>
+                            <br>
+                            <svg id="barchart2"></svg>
+                            <br>
+                            <strong>Normal day for ${object.points[0].source.sensor_description}</strong>
+                            <br>
+                            <svg id="barchart"></svg>
+                            <br>
+                          </div>`
+          // el.style.display = 'block'
+          el.style.opacity = 0.9
+          // el.style.left = x + 'px'
+          // el.style.top = y/3 + 'px'
 
-        createCharts(object.points[0].source.sensor_id)
+          createCharts(object.points[0].source.sensor_id)
+        }
+        else {
+          el.style.opacity = 0.0
+          el.innerHTML = `<div></div>`
+        }
+      })
+    }),
+    selectedItems[0] ? new ScatterplotLayer({
+      id: 'normal-circle',
+      data: [{ coordinates: selectedItems[0].position }],
+      getRadius: 30,
+      getPosition: d => {
+        console.log(d)
+        return d.coordinates},
+      getFillColor: [1, 50, 32],
+      updateTriggers: {
+        selectedItems
       }
-      else {
-        el.style.opacity = 0.0
-        el.innerHTML = `<div></div>`
-      }
-    })
-  })
+    }): null,
+  ]  
 
 
   deckgl2.setProps({
-    layers: [hexLayer_normal]
+    layers: [normalWeatherLayers]
   })
 }
 
