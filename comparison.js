@@ -401,10 +401,7 @@ function renderLayer () {
                             <svg id="barchart"></svg>
                             <br>
                           </div>`
-          // el.style.display = 'block'
           el.style.opacity = 0.9
-          // el.style.left = x + 'px'
-          // el.style.top = y/3 + 'px'
 
           createCharts(object.points[0].source.sensor_id)
         }
@@ -419,7 +416,6 @@ function renderLayer () {
       data: [{ coordinates: selectedItems[0].position }],
       getRadius: 30,
       getPosition: d => {
-        console.log(d)
         return d.coordinates},
       getFillColor: SELECT_COLOR.rgb,
       updateTriggers: {
