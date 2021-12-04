@@ -197,10 +197,14 @@
                 You can click on a hexagon and a tooltip will appear on the left of the screen showing the street name, coordinates
                 of that street sensor, the date, the pedestrian count for the time range, and a barchart that shows the pedestrain 
                 count for each hour of the day. The x-axis presents the time with the labels 0-23 where <strong>0 = midnight-1am, 1 = 1am-2am, 2 = 2am-3am, ..., and 23 = 11pm-midnight </strong>
-                If you click on another hexagon, that hexagon's tooltip will show below the tooltip you first clicked (figure 4).
+                If you click on another hexagon, that hexagon's tooltip will show below the tooltip you first clicked
+                Each hexagon you click and its corresponding tooltip will have the same color to let you know when tooltip corresponds
+                to which hexagon. For example you can see in the figure below that the two hexagons I clicked have a colored circle
+                and that color is the border of the bars in the barchart for that hexagon. Y-axes for the barcharts will be resized 
+                according to scale in the comparison(figure 4).
 
                 <figure>
-                  <img src="Tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <img src="Main_vis_tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
                   <figcaption>Figure 4: Tooltip on Visual</figcaption>
                 </figure>
               </p>
@@ -208,8 +212,8 @@
               <p class="is-size-3">Here we summarize all the features of how the visualization works.
               </p>
               <div style="text-align: center;">
-                <video id="video" width="500" controls autoplay style="right: 500px;">
-                  <source src="visual recording.mov" type="video/mp4">
+                <video id="video" width="500" controls style="right: 500px;">
+                  <source src="Visual_Recording.mov" type="video/mp4">
                 </video>
               </div><br><br><br><br>
 
@@ -246,10 +250,11 @@
               <p class="is-size-3"> 
                 The tooltip popup is the same as the main visualization except that when you click a hexagon in either
                 visual it will show the barchart of that hexagon you click as well as the bar chart of the equivalent hexagon
-                in the other visual, if it exists (figure 6).
+                in the other visual, if it exists. Each selected hexagon will have a colored circle on top of it 
+                to show that it was clicked (figure 6).
                 
                 <figure>
-                  <img src="comparison_tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
+                  <img src="Comparison_tooltip.png"  width="500" height="333" style ="position:relative; left:0px">
                   <figcaption>Figure 6: Natural Disaster Tooltip</figcaption>
                 </figure>
 
