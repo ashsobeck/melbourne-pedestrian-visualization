@@ -15,6 +15,14 @@ let selectedItems = [null, null]
 const ICON_MAPPING = {
   marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
 };
+const FIRST_COLOR = {
+  rgb: [1, 50, 32],
+  hex: "#013220"
+}
+const SECOND_COLOR = {
+  rgb: [26, 85, 186],
+  hex: "#1a55ba"
+}
 //this function gets the date from the filter box, the date is in the format 2012-12-01
 //Year, Month, Day
 const delTooltip = () => {
@@ -66,6 +74,7 @@ let generateTooltipChart = (object, date) => {
       
     }
     let svgId = chartCount === 1 ? "#barchart" : "#barchart2"
+    let strokeColor = chartCount === 1 ? FIRST_COLOR.hex : SECOND_COLOR.hex
     
     let svg = d3.select(svgId)
       .style('width', dimensions.width + 10)
@@ -91,6 +100,8 @@ let generateTooltipChart = (object, date) => {
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('fill', "steelblue")
+      .attr('stroke-width', 2)
+      .attr('stroke', strokeColor)
     
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
@@ -406,7 +417,7 @@ function renderLayer () {
       getPosition: d => {
         console.log(d)
         return d.coordinates},
-      getFillColor: [1, 50, 32],
+      getFillColor: FIRST_COLOR.rgb,
       updateTriggers: {
         selectedItems
       }
@@ -418,7 +429,7 @@ function renderLayer () {
       getPosition: d => {
         console.log(d)
         return d.coordinates},
-      getFillColor: [26, 85, 186],
+      getFillColor: SECOND_COLOR.rgb,
       updateTriggers: {
         selectedItems
       }

@@ -5,6 +5,10 @@ const extreme_weather_data = d3.csv('data/Nov_21_2016_extreme_weather.csv')
 const normal_day_data = d3.csv('data/may_2nd_2019.csv')
 let yMax
 let selectedItems = [null]
+const SELECT_COLOR = {
+  rgb: [1, 50, 32],
+  hex: "#013220"
+}
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
   tooltip.parentNode.style.opacity = 0.0
@@ -83,6 +87,9 @@ let extremeTooltipChart = (sensorId) => {
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('fill', "#F59B00")
+      .attr('stroke-width', 2)
+      .attr('stroke', SELECT_COLOR.hex)
+
 
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
@@ -152,6 +159,8 @@ let normalTooltipChart = (sensorId) => {
       .attr('width', xScale.bandwidth())
       .attr('height', d => dimensions.height - dimensions.margin.bottom - yScale(+d.hourly_counts.replace(/,/g,'')))
       .attr('fill', "steelblue")
+      .attr('stroke-width', 2)
+      .attr('stroke', SELECT_COLOR.hex)
 
     let xAxisgen = d3.axisBottom().scale(xScale)
     let yAxisgen = d3.axisLeft().scale(yScale)
@@ -422,7 +431,7 @@ function renderLayer () {
       getPosition: d => {
         console.log(d)
         return d.coordinates},
-      getFillColor: [1, 50, 32],
+      getFillColor: SELECT_COLOR.rgb,
       updateTriggers: {
         selectedItems
       }
