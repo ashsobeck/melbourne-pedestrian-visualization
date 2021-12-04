@@ -20,7 +20,6 @@ function filter_data() {
 
   startHour = document.getElementById("hour1").value;
   endHour = document.getElementById('hour2').value
-  //date = document.getElementById("date").value;
 
   renderLayer()
   console.log(startHour, endHour)
@@ -215,7 +214,6 @@ const deckgl = new DeckGL({
   },
 
   getTooltip: ({object}) => {
-    //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
     Count From ${startHour}:00 to ${endHour}:00 : ${object.elevationValue} Pedestrians`
@@ -235,7 +233,6 @@ const deckgl2 = new DeckGL({
     pitch: 0,
   },
   getTooltip: ({object}) => {
-    //console.log(object)
     return object && `${object.points[0].source.sensor_description}
     ${object.position.join(', ')} 
     Count From ${startHour}:00 to ${endHour}:00 : ${object.elevationValue} Pedestrians`
@@ -257,8 +254,6 @@ function renderLayer () {
       },
 
       getElevationValue: d => {
-        // console.log(d)
-        // console.log(d[0].hourly_counts.replace(/,/g,''))
         return d.reduce(
           (accumulator, currentValue) => {
             return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
@@ -269,7 +264,6 @@ function renderLayer () {
       autoHighlight: true,
       getPosition: (d, i) => {
         if (+d.time >= startHour && +d.time < endHour ) {
-        // console.log(d.time)
         return [+d.longitude, +d.latitude]
         }
         else return []
@@ -279,13 +273,10 @@ function renderLayer () {
       coverage: 1,
       upperPercentile: 90,
       updateTriggers: {
-        //getPosition: date,
         getPosition: startHour,
         getPosition: endHour,
-        //getElevationValue: date, 
         getElevationValue: startHour,
         getElevationValue: endHour,
-        //getColorValue: date,
         getColorValue: startHour,
         getColorValue: endHour
       },
@@ -294,7 +285,6 @@ function renderLayer () {
         renderLayer()
         const el = document.getElementById('charts')
         if (object) {
-          // console.log(object)
           el.style.height = document.documentElement.clientHeight / 5
           el.innerHTML = `<div id="tooltips">
                             <div id="topTooltip">
@@ -315,11 +305,8 @@ function renderLayer () {
                             <svg id="barchart"></svg>
                             <br>
                           </div>`
-          // el.style.display = 'block'
           el.style.width = document.documentElement.clientWidth / 3
           el.style.opacity = 0.9
-          // el.style.left = x + 'px'
-          // el.style.top = y/3 + 'px'
           createCharts(object.points[0].source.sensor_id)
         }
         else {
@@ -335,7 +322,7 @@ function renderLayer () {
       getPosition: d => {
         console.log(d)
         return d.coordinates},
-      getFillColor: [1, 50, 32],
+      getFillColor: SELECT_COLOR.rgb,
       updateTriggers: {
         selectedItems
       }
@@ -360,8 +347,6 @@ function renderLayer () {
       },
 
       getElevationValue: d => {
-        // console.log(d)
-        // console.log(d[0].hourly_counts.replace(/,/g,''))
         return d.reduce(
           (accumulator, currentValue) => {
             return currentValue ? accumulator + (+currentValue.hourly_counts.replace(/,/g,'')) : accumulator
@@ -372,7 +357,6 @@ function renderLayer () {
       autoHighlight: true,
       getPosition: (d, i) => {
         if ((+d.time >= +startHour && +d.time < +endHour)) {
-        // console.log(d.time)
         return [+d.longitude, +d.latitude]
         }
         else return []
