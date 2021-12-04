@@ -16,8 +16,8 @@ const ICON_MAPPING = {
   marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
 };
 const FIRST_COLOR = {
-  rgb: [1, 50, 32],
-  hex: "#013220"
+  rgb: [172, 114, 172],
+  hex: "#ac72ac"
 }
 const SECOND_COLOR = {
   rgb: [26, 85, 186],
@@ -186,14 +186,6 @@ const {DeckGL, HexagonLayer, IconLayer, ScatterplotLayer} = deck;
 let colorScale = d3.scaleLinear()
   .domain([0, 300])
   .range(d3.schemeCategory10)
-// const COLOR_RANGE = [
-//   [1, 152, 189],
-//   [73, 227, 206],
-//   [216, 254, 181],
-//   [254, 237, 177],
-//   [254, 173, 84],
-//   [209, 55, 78]
-// ];
 const deckgl = new DeckGL({
   mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
   initialViewState: {
@@ -275,7 +267,6 @@ function renderLayer () {
           const availHeight = window.screen.availHeight
           const availWidth = window.screen.availWidth
           if (object) {
-            // console.log(object)
             // using elevation value for aggregation metrics
             el.innerHTML = `<div id="tooltips">
                               <div id="topTooltip">
@@ -311,7 +302,6 @@ function renderLayer () {
           const availHeight = window.screen.availHeight
           const availWidth = window.screen.availWidth
           if (object) {
-            // console.log(object)
             el.innerHTML = `<div id="tooltips">
                               <div id="topTooltip">
                                 <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
@@ -345,7 +335,6 @@ function renderLayer () {
           const availHeight = window.screen.availHeight
           const availWidth = window.screen.availWidth
           if (object) {
-            // console.log(object)
             el.innerHTML = `<div id="tooltips">
                               <div id="topTooltip">
                                 <h2><strong>${object.points[0].source.sensor_description}</strong></h2> 
@@ -375,41 +364,6 @@ function renderLayer () {
       }),
       
     }),
-    // selectedItems[0] ? new IconLayer({
-    //   id: 'icon-first',
-    //   data: [{coordinates:  selectedItems[0].position }],
-    //   iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
-    //   iconMapping: ICON_MAPPING,
-    //   // pickable: true,
-    //   getIcon: d => 'marker', 
-    //   sizeScale: 15,
-    //   getSize: 3,
-    //   getColor: [152, 251, 152],
-    //   getPosition: d => {
-    //     console.log(d)
-    //     return d.coordinates},
-    //   updateTriggers: {
-    //     selectedItems
-    //   }
-
-    // }) : null,
-    // selectedItems[1] ? new IconLayer({
-    //   id: 'icon-second',
-    //   data: [{ coordinates: selectedItems[1].position }],
-    //   // pickable: true,
-    //   iconAtlas: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/icon-atlas.png',
-    //   getIcon: d => 'marker', 
-    //   iconMapping: ICON_MAPPING,
-    //   sizeScale: 15,
-    //   getSize: 3,
-    //   getPosition: d => {
-    //     console.log(d)
-    //     return d.coordinates},
-    //   getColor: [135, 206, 250],
-    //   updateTriggers: {
-    //     selectedItems
-    //   }
-    // }): null,
     selectedItems[0] ? new ScatterplotLayer({
       id: 'circle-first',
       data: [{ coordinates: selectedItems[0].position }],

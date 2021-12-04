@@ -6,8 +6,8 @@ const normal_day_data = d3.csv('data/may_2nd_2019.csv')
 let yMax
 let selectedItems = [null]
 const SELECT_COLOR = {
-  rgb: [1, 50, 32],
-  hex: "#013220"
+  rgb: [172, 114, 172],
+  hex: "#ac72ac"
 }
 const delTooltip = () => {
   const tooltip = document.getElementById('tooltips')
@@ -33,7 +33,12 @@ const createCharts = (sensorId) => {
       extremeDayMax = d3.max(data.filter(p => (+p.sensor_id == +sensorId)),  d => +d.hourly_counts.replace(/,/g,''))
       normalDayMax = d3.max(dataset.filter(p => (+p.sensor_id == +sensorId)),  d => +d.hourly_counts.replace(/,/g,''))
       console.log(extremeDayMax, normalDayMax)
-      yMax = extremeDayMax > normalDayMax ? extremeDayMax : normalDayMax
+      if (extremeDayMax && !normalDayMax)
+        yMax = extremeDayMax
+      else if (!extremeDayMax && normalDayMax)
+        yMax = normalDayMax
+      else
+        yMax = extremeDayMax > normalDayMax ? extremeDayMax : normalDayMax
       extremeTooltipChart(sensorId)
       normalTooltipChart(sensorId)
     })
@@ -389,6 +394,7 @@ function renderLayer () {
       },
       onClick: (({object, x, y}) => {
         selectedItems[0] = object
+        renderLayer()
         const el = document.getElementById('charts')
         if (object) {
           // console.log(object)
