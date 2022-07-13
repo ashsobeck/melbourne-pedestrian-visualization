@@ -13,5 +13,3 @@ Our website is located [here](https://ashsobeck.github.io/melbourne-pedestrian-v
 # Resources
 https://medium.com/vis-gl/start-scripting-with-deck-gl-c9036d7a6011
 
-# Mapbox Access Token
-sk.eyJ1IjoicmdhcmNpMyIsImEiOiJja3Y5cno1aHY4eDF1Mm90OXRzZWducjlhIn0.2OoaB2F3suhadhUfh2LBNQ
